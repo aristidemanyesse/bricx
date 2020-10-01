@@ -81,9 +81,9 @@
                                     </td>
                                     <td><i class="fa fa-user"></i> <?= $perte->employe->name() ?></td>
                                     <td>
-                                        <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                                            <button onclick="annulerPerte(<?= $perte->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-close text-red"></i></button>
-                                        <?php } ?>
+                                        <?php if ($employe->isAutoriser("modifier-supprimer") && $perte->etat_id != Home\ETAT::ANNULEE) { ?>
+                                        <button onclick="annuler('perteressource', <?= $perte->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                    <?php } ?>
                                     </td>
                                 </tr>
                             <?php  } ?>

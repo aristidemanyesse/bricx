@@ -108,6 +108,10 @@
                                     <a href="<?= $this->url("fiches", "master", "bonlivraison", $tricycle->id) ?>" target="_blank" class="btn  btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                     
                                     <button data-toggle="modal" data-target="#modal-paye-tricycle<?= $tricycle->id ?>" class="btn btn-primary btn-sm"><i class="fa fa-money"></i> Payer le tricycle</button>
+
+                                    <?php if ($employe->isAutoriser("modifier-supprimer") && $tricycle->etat_id != Home\ETAT::ANNULEE) { ?>
+                                        <button onclick="annuler('tricycle', <?= $tricycle->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php  } ?>
@@ -158,6 +162,10 @@
                                 </td>
                                 <td>
                                     <a href="<?= $this->url("fiches", "master", "bonlivraison", $tricycle->id) ?>" target="_blank" class="btn  btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+
+                                    <?php if ($employe->isAutoriser("modifier-supprimer") && $tricycle->etat_id != Home\ETAT::ANNULEE) { ?>
+                                        <button onclick="annuler('tricycle', <?= $tricycle->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php  } ?>

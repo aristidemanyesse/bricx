@@ -110,9 +110,7 @@
                                         </td>
                                         <td>
                                             <a href="<?= $this->url("fiches", "master", "bonlivraison", $transfert->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
-                                            <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                                                <button onclick="annulervente(<?= $transfert->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-close text-red"></i></button>
-                                            <?php } ?>
+                                          
                                         </td>
                                     </tr>
                                 <?php  } ?>

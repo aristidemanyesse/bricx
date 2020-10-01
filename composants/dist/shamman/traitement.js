@@ -48,6 +48,33 @@
         }
 
 
+
+        annuler = function(table, id){
+            url = "../../composants/dist/shamman/traitement.php";
+            alerty.confirm("Voulez-vous vraiment annuler cet element ?", {
+                title: "Annulation // suppression",
+                cancelLabel : "Non",
+                okLabel : "OUI, annuler",
+            }, function(){
+                alerty.prompt("Entrer votre mot de passe pour confirmer l'opération !", {
+                    title: 'Récupération du mot de passe !',
+                    inputType : "password",
+                    cancelLabel : "Annuler",
+                    okLabel : "Valider"
+                }, function(password){
+                    Loader.start();
+                    $.post(url, {action:"annuler", table:table, id:id, password:password}, (data)=>{
+                        if (data.status) {
+                            window.location.reload()
+                        }else{
+                            Alerter.error('Erreur !', data.message);
+                        }
+                    },"json");
+                })
+            })
+        }
+
+
         changeActive = function(table, id){
             url = "../../composants/dist/shamman/traitement.php";
             $.post(url, {action:"changeActive", table:table, id:id}, (data)=>{

@@ -71,7 +71,7 @@
                                             <span class="text-uppercase gras">Livraison de commande</span><br>
                                             <span><?= $livraison->reference ?></span>
                                         </td>
-                                         <td>
+                                        <td>
                                             <h6 class="text-uppercase"><?= $livraison->chauffeur() ?></h6>
                                             <h5 class="text-uppercase mp0"><?= $livraison->vehicule() ?></h5>
                                         </td>
@@ -79,7 +79,7 @@
                                             <h6 class="text-uppercase text-muted" style="margin: 0">Zone de livraison :  <?= $livraison->zonelivraison->name() ?></h6>
                                             <small><?= depuis($livraison->created) ?></small>
                                         </td>
-                                         <td>
+                                        <td>
                                             <h5 class="text-uppercase"><?= $livraison->groupecommande->client->name() ?></h5>
                                         </td>
                                         <td class="border-right">
@@ -117,9 +117,10 @@
                                             <?php if ($livraison->etat_id == Home\ETAT::ENCOURS) { ?>
                                                 <button onclick="terminer(<?= $livraison->id ?>)" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Terminer</button>
                                             <?php } ?>
-                                            <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                                                <button onclick="annulervente(<?= $livraison->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-close text-red"></i></button>
-                                            <?php } ?>
+                                            
+                                            <?php if ($employe->isAutoriser("modifier-supprimer") && $livraison->etat_id != Home\ETAT::ANNULEE) { ?>
+                                        <button onclick="annuler('livraison', <?= $livraison->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                    <?php } ?>
                                         </td>
                                     </tr>
                                 <?php  } ?>
@@ -146,7 +147,7 @@
                                             <h6 class="text-uppercase text-muted mp0">Zone de livraison :  <?= $livraison->zonelivraison->name() ?></h6>
                                             <small>Validé <?= depuis($livraison->datelivraison) ?></small>
                                         </td>
-                                         <td>
+                                        <td>
                                             <h5 class="text-uppercase"><?= $livraison->groupecommande->client->name() ?></h5>
                                         </td>
                                         <td class="border-right">
@@ -156,7 +157,7 @@
                                                         <th></th>
                                                         <?php foreach ($livraison->lignelivraisons as $key => $ligne) { 
                                                             $ligne->actualise(); ?>
-                                                              <th class="text-center" style="padding: 2px">
+                                                            <th class="text-center" style="padding: 2px">
                                                                 <img style="height: 20px" src="<?= $this->stockage("images", "produits", $ligne->produit->image) ?>" >
                                                                 <span class="small"><?= $ligne->produit->name() ?></span>
                                                             </th>
@@ -193,9 +194,11 @@
                                         </td>
                                         <td>
                                             <a href="<?= $this->url("fiches", "master", "bonlivraison", $livraison->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
-                                            <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                                                <button onclick="annulervente(<?= $livraison->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-close text-red"></i></button>
+                                            
+                                            <?php if ($employe->isAutoriser("modifier-supprimer") && $livraison->etat_id != Home\ETAT::ANNULEE) { ?>
+                                                <button onclick="annuler('livraison', <?= $livraison->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
                                             <?php } ?>
+
                                         </td>
                                     </tr>
                                 <?php  } ?>

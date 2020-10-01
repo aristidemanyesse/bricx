@@ -60,7 +60,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             <?php foreach ($encours as $key => $achat) {
+                               <?php foreach ($encours as $key => $achat) {
                                 $achat->actualise(); 
                                 $lots = $achat->fourni("ligneachatstock");
                                 ?>
@@ -92,19 +92,20 @@
                                             <tbody>
                                                 <tr class="no">
                                                     <?php foreach ($achat->ligneachatstocks as $key => $ligne) { ?>
-                                                       <td class="text-center gras <?= ($achat->etat_id == Home\ETAT::VALIDEE)?'text-primary':'' ?>"><?= $ligne->quantite_recu ?></td>
-                                                   <?php   } ?>
-                                               </tr>
-                                           </tbody>
-                                       </table>
-                                   </td>
-                                   <td>
+                                                     <td class="text-center gras <?= ($achat->etat_id == Home\ETAT::VALIDEE)?'text-primary':'' ?>"><?= $ligne->quantite_recu ?></td>
+                                                 <?php   } ?>
+                                             </tr>
+                                         </tbody>
+                                     </table>
+                                 </td>
+                                 <td>
                                     <a href="<?= $this->url("fiches", "master", "achatstock", $achat->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
-                                    <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                                        <button onclick="annuler(<?= $achat->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-close text-red"></i></button>
-                                    <?php } ?>
+                                    
                                     <button onclick="terminer(<?= $achat->id ?>)" class="btn btn-white btn-sm text-green"><i class="fa fa-check"></i> Valider</button>
 
+                                    <?php if ($employe->isAutoriser("modifier-supprimer") && $achat->etat_id != Home\ETAT::ANNULEE) { ?>
+                                        <button onclick="annuler('achatstock', <?= $achat->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php  } ?>
@@ -141,14 +142,18 @@
                                         <tbody>
                                             <tr class="no">
                                                 <?php foreach ($achat->ligneachatstocks as $key => $ligne) { ?>
-                                                   <td class="text-center gras <?= ($achat->etat_id == Home\ETAT::VALIDEE)?'text-primary':'' ?>"><?= $ligne->quantite_recu ?></td>
-                                               <?php   } ?>
-                                           </tr>
-                                       </tbody>
-                                   </table>
-                               </td>
-                               <td>
+                                                 <td class="text-center gras <?= ($achat->etat_id == Home\ETAT::VALIDEE)?'text-primary':'' ?>"><?= $ligne->quantite_recu ?></td>
+                                             <?php   } ?>
+                                         </tr>
+                                     </tbody>
+                                 </table>
+                             </td>
+                             <td>
                                 <a href="<?= $this->url("fiches", "master", "achatstock", $achat->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+
+                                <?php if ($employe->isAutoriser("modifier-supprimer") && $achat->etat_id != Home\ETAT::ANNULEE) { ?>
+                                    <button onclick="annuler('achatstock', <?= $achat->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php  } ?>

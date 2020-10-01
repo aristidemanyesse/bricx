@@ -76,6 +76,36 @@ if ($action === "enable") {
 
 
 
+
+//annulation d'un element
+if ($action === "annuler") {
+	$datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);
+	if (count($datas) > 0) {
+		$employe = $datas[0];
+		$employe->actualise();
+		if ($employe->checkPassword($password)) {
+			$class = TABLE::fullyClassName($table);
+			if (class_exists($class)) {
+				$element = new $class();
+				$element->setId($id);
+				$element->actualise();
+				$data = $element->annuler();
+			}else{
+				$data->status = false;
+				$data->message = "Erreur lors de la suppression de l'element !";
+			}
+		}else{
+			$data->status = false;
+			$data->message = "Votre mot de passe ne correspond pas !";
+		}
+	}else{
+		$data->status = false;
+		$data->message = "Vous ne pouvez pas effectué cette opération !";
+	}
+	echo json_encode($data);
+}
+
+
 //disponiblité des elements
 if ($action === "changeActive") {
 	$class = TABLE::fullyClassName($table);

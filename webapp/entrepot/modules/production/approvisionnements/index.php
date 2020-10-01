@@ -113,8 +113,9 @@
                                             <?php if ($appro->etat_id == Home\ETAT::ENCOURS) { ?>
                                                 <button onclick="terminer(<?= $appro->id ?>)" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Valider</button>
                                             <?php } ?>
-                                            <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                                                <button onclick="annuler(<?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-close text-red"></i></button>
+                                            
+                                            <?php if ($employe->isAutoriser("modifier-supprimer") && $appro->etat_id != Home\ETAT::ANNULEE) { ?>
+                                                <button onclick="annuler('approvisionnement', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
                                             <?php } ?>
                                         </td>
                                     </tr>
@@ -148,7 +149,7 @@
                                         </td>
                                         <td class="text-uppercase"><a href="<?= $this->url("entrepot", "stock", "fournisseur", $appro->fournisseur->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseur->name() ?></a></td>
                                         <td class="border-right">
-                                         <table class="table table-bordered">
+                                           <table class="table table-bordered">
                                             <thead>
                                                 <tr class="no">
                                                     <?php foreach ($appro->ligneapprovisionnements as $key => $ligne) {
@@ -168,6 +169,10 @@
                                     </td>
                                     <td>
                                         <a href="<?= $this->url("fiches", "master", "bonapprovisionnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+
+                                        <?php if ($employe->isAutoriser("modifier-supprimer") && $appro->etat_id != Home\ETAT::ANNULEE) { ?>
+                                            <button onclick="annuler('approvisionnement', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php  } ?>
