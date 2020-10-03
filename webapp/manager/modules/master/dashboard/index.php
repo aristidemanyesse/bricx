@@ -20,9 +20,13 @@
                 <div class=" border-bottom white-bg dashboard-header">
                     <div class="row">
                         <div class="col-md-3">
-                            <img src="<?= $this->stockage("images", "societe", $params->image) ?>" style="height: 60px;" alt=""><br>
-                            <h2 class="text-uppercase"><?= $params->societe ?></h2>
-                            <small>Tableau de bord général </small>
+                            
+                            <div class="text-center">
+                                <img src="<?= $this->stockage("images", "societe", $params->image) ?>" style="height: 60px;" alt=""><br>
+                                <h2 class="text-uppercase"><?= $params->societe ?></h2>
+                                <small>Tableau de bord général </small>
+                            </div>
+
                             <ul class="list-group clear-list m-t">
                                 <li class="list-group-item fist-item">
                                     Commandes en cours <span class="label label-success float-right"><?= start0(count($groupes__)); ?></span> 
@@ -101,36 +105,36 @@
 
             var sparklineCharts = function(){
 
-               $("#sparkline2").sparkline([24, 43, 43, 55, 44, 62, 44, 72], {
-                   type: 'line',
-                   width: '100%',
-                   height: '60',
-                   lineColor: '#1ab394',
-                   fillColor: "#ffffff"
-               });
+             $("#sparkline2").sparkline([24, 43, 43, 55, 44, 62, 44, 72], {
+                 type: 'line',
+                 width: '100%',
+                 height: '60',
+                 lineColor: '#1ab394',
+                 fillColor: "#ffffff"
+             });
 
-           };
+         };
 
-           var sparkResize;
+         var sparkResize;
 
-           $(window).resize(function(e) {
+         $(window).resize(function(e) {
             clearTimeout(sparkResize);
             sparkResize = setTimeout(sparklineCharts, 500);
         });
 
-           sparklineCharts();
+         sparklineCharts();
 
 
 
 
-           var data1 = [<?php foreach ($stats as $key => $lot) { ?>[gd(<?= $lot->year ?>, <?= $lot->month ?>, <?= $lot->day ?>), <?= $lot->direct ?>], <?php } ?> ];
+         var data1 = [<?php foreach ($stats as $key => $lot) { ?>[gd(<?= $lot->year ?>, <?= $lot->month ?>, <?= $lot->day ?>), <?= $lot->direct ?>], <?php } ?> ];
 
-           var data2 = [<?php foreach ($stats as $key => $lot) { ?>[gd(<?= $lot->year ?>, <?= $lot->month ?>, <?= $lot->day ?>), <?= $lot->prospection ?>], <?php } ?> ];
+         var data2 = [<?php foreach ($stats as $key => $lot) { ?>[gd(<?= $lot->year ?>, <?= $lot->month ?>, <?= $lot->day ?>), <?= $lot->prospection ?>], <?php } ?> ];
 
-           var data3 = [<?php foreach ($stats as $key => $lot) { ?>[gd(<?= $lot->year ?>, <?= $lot->month ?>, <?= $lot->day ?>), <?= $lot->cave ?>], <?php } ?> ];
+         var data3 = [<?php foreach ($stats as $key => $lot) { ?>[gd(<?= $lot->year ?>, <?= $lot->month ?>, <?= $lot->day ?>), <?= $lot->cave ?>], <?php } ?> ];
 
-           var dataset = [
-           {
+         var dataset = [
+         {
             label: "Vente directe",
             data: data1,
             color: "#1ab394",

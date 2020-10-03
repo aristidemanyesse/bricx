@@ -37,10 +37,6 @@
                         <div class="float-right social-action dropdown">
                             <button data-toggle="dropdown" onclick="session('commande-encours', <?= $commande->id ?>)" class="dropdown-toggle btn-white cursor">Options</button>
                             <ul class="dropdown-menu">
-                                <li class="text-orange" onclick="newlivraison(<?= $commande->id  ?>)"><a style="padding: 3px" href="#"><i class="fa fa-truck"></i> Faire une livraison</a></li>
-                                <li class="text-green" onclick="fairenewcommande(<?= $commande->id ?>)"><a style="padding: 3px" href="#"><i class="fa fa-plus"></i> Lui ajouter commande</a></li>
-                                <li class="" onclick="changement(<?= $commande->id ?>)"><a style="padding: 3px" href="#"><i class="fa fa-history"></i> convertir les produits</a></li>
-                                <li class="border"></li>
                                 <li class="text-green" onclick="fichecommande(<?= $commande->id  ?>)"><a style="padding: 3px" href="#"><i class="fa fa-eye"></i> Voir les détails</a></li>
                             </ul>
                         </div>
