@@ -14,7 +14,7 @@ class VEHICULE extends TABLE
 	const TRICYCLE = 2;
 
 	public $immatriculation;
-	public $etatvehicule_id = ETATVEHICULE::RAS;
+	public $disponibilite_id = DISPONIBILITE::RAS;
 	public $modele;
 	public $image = "default.jpg";
 

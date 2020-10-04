@@ -84,8 +84,8 @@ $item->setProtected(1);
 $item->save();
 
 
-$datas = ["master", "manager", "boutique", "entrepot", "config",
- "production", "ventes", "stock", "caisse", "rapports",
+$datas = ["master", "manager", "boutique", "entrepot", "chantier", "config",
+ "production", "ventes", "stock", "caisse", "rapports", "files",
   "modifier-supprimer", "roles", "mycompte"];
 foreach ($datas as $key => $value) {
 	$item = new ROLE();
@@ -183,6 +183,32 @@ $item->save();
 
 $item = new ETAT();
 $item->name = "Validé";
+$item->class = "success";
+$item->setProtected(1);
+$item->save();
+
+
+
+$item = new ETATCHANTIER();
+$item->name = "Annulé";
+$item->class = "danger";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATCHANTIER();
+$item->name = "En cours";
+$item->class = "info";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATCHANTIER();
+$item->name = "stoppé";
+$item->class = "warning";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATCHANTIER();
+$item->name = "terminé";
 $item->class = "success";
 $item->setProtected(1);
 $item->save();

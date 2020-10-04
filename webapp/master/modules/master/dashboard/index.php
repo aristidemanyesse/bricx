@@ -35,173 +35,195 @@
                         </nav>
                     </div>
 
-                    <br>
+
                     <div class="wrapper-content">
-                      <div class="animated fadeInRightBig">
+                        <div class="animated fadeInRightBig">
 
-                        <div class=" border-bottom white-bg dashboard-header">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="text-center" style="margin-top: 15%;">
-                                        <img src="<?= $this->stockage("images", "societe", $params->image) ?>" style="width: 70%;" alt=""><br>
-                                        <h2 class="text-uppercase"><?= $params->societe ?></h2><br>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 border-left">
-                                    <div class="row text-center">
-                                        <div class="col-sm-4 border-left border-bottom">
-                                            <div class="p-lg">
-                                                <i class="fa fa-hospital-o fa-4x text-orange"></i>
-                                                <h1 class="m-xs"><?= start0(count(Home\AGENCE::getAll()))  ?></h1>
-                                                <h3 class="no-margins text-uppercase gras">Agences</h3>
-                                                <small><?= $params->societe ?></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-left border-bottom">
-                                            <div class="p-lg">
-                                                <i class="fa fa-bank fa-4x text-green"></i>
-                                                <h1 class="m-xs"><?= start0(count(Home\AGENCE::getAll()))  ?></h1>
-                                                <h3 class="no-margins text-uppercase gras">Entrepôts</h3>
-                                                <small><?= $params->societe ?></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-left border-bottom">
-                                            <div class="p-lg">
-                                                <i class="fa fa-cube fa-4x text-orange"></i>
-                                                <h1 class="m-xs"><?= start0(count(Home\PRODUIT::findBy(["isActive ="=>Home\TABLE::OUI])))  ?></h1>
-                                                <h3 class="no-margins text-uppercase gras">Produits</h3>
-                                                <small><?= $params->societe ?></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-left">
-                                            <div class="p-lg">
-                                                <i class="fa fa-users fa-4x text-green"></i>
-                                                <h1 class="m-xs"><?= start0(count(Home\CLIENT::getAll()))  ?></h1>
-                                                <h3 class="no-margins text-uppercase gras">CLients</h3>
-                                                <small><?= $params->societe ?></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-left">
-                                            <div class="p-lg">
-                                                <i class="fa fa-bicycle fa-4x text-orange"></i>
-                                                <h1 class="m-xs"><?= start0(count(Home\VEHICULE::getAll() ) - 2)  ?></h1>
-                                                <h3 class="no-margins text-uppercase gras">Véhicules de livraisons </h3>
-                                                <small><?= $params->societe ?></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-left">
-                                            <div class="p-lg">
-                                                <i class="fa fa-male fa-4x text-green"></i>
-                                                <h1 class="m-xs"><?= start0(count(Home\EMPLOYE::getAll()))  ?></h1>
-                                                <h3 class="no-margins text-uppercase gras">Utilisateurs</h3>
-                                                <small><?= $params->societe ?></small>
-                                            </div>
+                            <div class=" border-bottom white-bg dashboard-header">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="text-center" style="margin-top: 15%;">
+                                            <img src="<?= $this->stockage("images", "societe", $params->image) ?>" style="width: 70%;" alt=""><br>
+                                            <h2 class="text-uppercase"><?= $params->societe ?></h2><br>
                                         </div>
                                     </div>
+                                    <div class="col-md-9 border-left">
+                                        <div class="row text-center">
+                                            <div class="col-sm-4 border-left border-bottom">
+                                                <div class="p-xs">
+                                                    <i class="fa fa-hospital-o fa-4x text-orange"></i>
+                                                    <h1 class="m-xs"><?= start0(count(Home\AGENCE::getAll()))  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">Agences</h4>
+                                                    <small><?= $params->societe ?></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 border-left border-bottom">
+                                                <div class="p-xs">
+                                                    <i class="fa fa-bank fa-4x text-green"></i>
+                                                    <h1 class="m-xs"><?= start0(count(Home\AGENCE::getAll()))  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">Entrepôts</h4>
+                                                    <small><?= $params->societe ?></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 border-left border-bottom">
+                                                <div class="p-xs">
+                                                    <i class="fa fa-cube fa-4x text-orange"></i>
+                                                    <h1 class="m-xs"><?= start0(count(Home\PRODUIT::findBy(["isActive ="=>Home\TABLE::OUI])))  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">Produits</h4>
+                                                    <small><?= $params->societe ?></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 border-left">
+                                                <div class="p-xs">
+                                                    <i class="fa fa-users fa-4x text-green"></i>
+                                                    <h1 class="m-xs"><?= start0(count(Home\CLIENT::getAll()))  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">CLients</h4>
+                                                    <small><?= $params->societe ?></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 border-left">
+                                                <div class="p-xs">
+                                                    <i class="fa fa-bicycle fa-4x text-orange"></i>
+                                                    <h1 class="m-xs"><?= start0(count(Home\VEHICULE::getAll() ) - 2)  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">Véhicules de livraisons </h4>
+                                                    <small><?= $params->societe ?></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 border-left">
+                                                <div class="p-xs">
+                                                    <i class="fa fa-male fa-4x text-green"></i>
+                                                    <h1 class="m-xs"><?= start0(count(Home\EMPLOYE::getAll()))  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">Utilisateurs</h4>
+                                                    <small><?= $params->societe ?></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div><br>
+
+
+                            <div class="row justify-content-center">
+                                <?php if ($employe->isAutoriser("entrepot") && $employe->agence_id != null) { ?>
+                                    <div class="col-lg-3">
+                                        <a href="<?= $this->url("entrepot", "master", "dashboard")  ?>">
+                                            <div class="ibox">
+                                                <div class="ibox-content">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <h5 class="text-uppercase">A la briquetrie</h5>
+                                                            <h4 class="no-margins text-orange">La fabrique</h4>
+                                                        </div>
+                                                        <div class="col-5 text-right">
+                                                            <i class="fa fa-steam fa-4x text-green"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+
+                                <?php  if ($employe->isAutoriser("boutique") && $employe->agence_id != null) { ?>
+                                    <div class="col-lg-3">
+                                        <a href="<?= $this->url("boutique", "master", "dashboard")  ?>">
+                                            <div class="ibox">
+                                                <div class="ibox-content">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <h5 class="text-uppercase">A la briquetrie</h5>
+                                                            <h4 class="no-margins text-orange">La boutique</h4>
+                                                        </div>
+                                                        <div class="col-5 text-right">
+                                                            <i class="fa fa-hospital-o fa-4x text-green"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+
+                                <?php if ($employe->isAutoriser("chantier") && $employe->agence_id != null) { ?>
+                                    <div class="col-lg-3">
+                                        <a href="<?= $this->url("chantier", "master", "chantiers")  ?>">
+                                            <div class="ibox">
+                                                <div class="ibox-content">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <h5 class="text-uppercase">Construction</h5>
+                                                            <h4 class="no-margins text-orange">Mes chantiers</h4>
+                                                        </div>
+                                                        <div class="col-5 text-right">
+                                                            <i class="fa fa-steam fa-4x text-green"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
                             </div>
-                        </div><br><br>
 
 
-                        <div class="row justify-content-center">
-                            <?php if ($employe->isAutoriser("entrepot") && $employe->agence_id != null) { ?>
-                                <div class="col-lg-3">
-                                    <a href="<?= $this->url("entrepot", "master", "dashboard")  ?>">
-                                        <div class="ibox">
-                                            <div class="ibox-content">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <h5 class="text-uppercase">Aller à</h5>
-                                                        <h4 class="no-margins text-orange">La fabrique</h4>
-                                                    </div>
-                                                    <div class="col-5 text-right">
-                                                        <i class="fa fa-steam fa-4x text-green"></i>
+
+                            <div class="row justify-content-center">
+
+                                <?php if ($employe->isAutoriser("manager")) { ?>
+                                    <div class="col-lg-3">
+                                        <a href="<?= $this->url("manager", "master", "dashboard")  ?>">
+                                            <div class="ibox">
+                                                <div class="ibox-content">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <h5 class="text-uppercase">A la briquetrie</h5>
+                                                            <h4 class="no-margins text-dark">Gestion générale</h4>
+                                                        </div>
+                                                        <div class="col-5 text-right">
+                                                            <i class="fa fa-pied-piper-alt fa-4x text-warning"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php } ?>
+                                        </a>
+                                    </div>
+                                <?php } ?>
 
-                            <?php  if ($employe->isAutoriser("boutique") && $employe->agence_id != null) { ?>
-                                <div class="col-lg-3">
-                                    <a href="<?= $this->url("boutique", "master", "dashboard")  ?>">
-                                        <div class="ibox">
-                                            <div class="ibox-content">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <h5 class="text-uppercase">Aller à</h5>
-                                                        <h4 class="no-margins text-orange">La boutique</h4>
-                                                    </div>
-                                                    <div class="col-5 text-right">
-                                                        <i class="fa fa-hospital-o fa-4x text-green"></i>
+                                <?php if ($employe->isAutoriser("config")) { ?>
+                                    <div class="col-lg-3">
+                                        <a href="<?= $this->url("config", "master", "dashboard")  ?>">
+                                            <div class="ibox">
+                                                <div class="ibox-content">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <h5 class="text-uppercase">Configuration</h5>
+                                                            <h4 class="no-margins text-dark">Config technique</h4>
+                                                        </div>
+                                                        <div class="col-5 text-right">
+                                                            <i class="fa fa-gears fa-4x text-danger" style="color: #ddd"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php } ?>
-
-                            <?php if ($employe->isAutoriser("manager")) { ?>
-                                <div class="col-lg-3">
-                                    <a href="<?= $this->url("manager", "master", "dashboard")  ?>">
-                                        <div class="ibox">
-                                            <div class="ibox-content">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <h5 class="text-uppercase">Aller à l'Espace Manager</h5>
-                                                        <h3 class="no-margins text-dark">Admin générale</h3>
-                                                    </div>
-                                                    <div class="col-5 text-right">
-                                                        <i class="fa fa-pied-piper-alt fa-4x text-warning"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php } ?>
-
-                            <?php if ($employe->isAutoriser("config")) { ?>
-                                <div class="col-lg-3">
-                                    <a href="<?= $this->url("config", "master", "dashboard")  ?>">
-                                        <div class="ibox">
-                                            <div class="ibox-content">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <h5 class="text-uppercase">Espace Admin & Config</h5>
-                                                        <h3 class="no-margins text-dark">Config technique</h3>
-                                                    </div>
-                                                    <div class="col-5 text-right">
-                                                        <i class="fa fa-gears fa-4x text-danger" style="color: #ddd"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php } ?>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+                            </div>
 
                         </div>
-
                     </div>
+
+                    <?php include($this->rootPath("webapp/master/elements/templates/footer.php")); ?>
+
+
                 </div>
-
-                <br>
-
-                <?php include($this->rootPath("webapp/master/elements/templates/footer.php")); ?>
-
-
             </div>
-        </div>
 
 
-        <?php include($this->rootPath("webapp/master/elements/templates/script.php")); ?>
+            <?php include($this->rootPath("webapp/master/elements/templates/script.php")); ?>
 
-    </body>
+        </body>
 
 
 
-    </html>
+        </html>

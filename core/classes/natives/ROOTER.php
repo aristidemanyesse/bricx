@@ -26,7 +26,7 @@ class ROOTER extends PATH
 
 
     const SECTION_SIMPLE = ["main", "fiches"];
-    const SECTION_ADMIN = ["manager", "master", "boutique", "entrepot", "config"];
+    const SECTION_ADMIN = ["manager", "master", "boutique", "entrepot", "config", "chantier"];
     const SECTION_STOCKAGE = ["images", "documents"];
 
 
