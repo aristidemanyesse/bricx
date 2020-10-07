@@ -26,10 +26,10 @@
             </li>
 
             <?php 
-                $groupes__ = Home\GROUPECOMMANDE::encours();
-                $livraisons__ = Home\LIVRAISON::encours();
-                $approvisionnements__ = Home\APPROVISIONNEMENT::encours();
-                $achatstock__ = Home\ACHATSTOCK::encours();
+            $groupes__ = Home\GROUPECOMMANDE::encours();
+            $livraisons__ = Home\LIVRAISON::encours();
+            $approvisionnements__ = Home\APPROVISIONNEMENT::encours();
+            $achatstock__ = Home\ACHATSTOCK::encours();
             ?>
             <ul class="nav metismenu" id="side-menu">
                 <li class="" id="dashboard">
@@ -53,6 +53,13 @@
                     </li>
                     <li class="" id="achatstock">
                         <a href="<?= $this->url($this->section, "production", "achatstock") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Achat de stocks </span> <?php if (count($achatstock__) > 0) { ?> <span class="label label-warning float-right"><?= count($achatstock__) ?></span> <?php } ?></a>
+                    </li>
+                    <li >
+                        <a href="#"><i class="fa fa-share"></i> <span class="nav-label">Envois sur chantier</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="envoiproduits"><a href="<?= $this->url($this->section, "production", "envoiproduits") ?>">Envoi de briques</a></li>
+                            <li id="envoiressources"><a href="<?= $this->url($this->section, "production", "envoiressources") ?>">Envoi de ressources</a></li>
+                        </ul>
                     </li>
                     <li >
                         <a href="#"><i class="fa fa-trash"></i> <span class="nav-label">Les pertes</span><span class="fa arrow"></span></a>
@@ -93,6 +100,6 @@
 
 <style type="text/css">
     li.dropdown-divider{
-     !important;
- }
+       !important;
+   }
 </style>
