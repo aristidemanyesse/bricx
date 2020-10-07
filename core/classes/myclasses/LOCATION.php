@@ -141,11 +141,11 @@ class LIVRAISON extends TABLE
 				$this->groupecommande->save();
 
 				if ($this->chauffeur_id > 0) {
-					$this->chauffeur->etatchauffeur_id = ETATCHAUFFEUR::RAS;
+					$this->chauffeur->disponibilite_id = DISPONIBILITE::LIBRE;
 					$this->chauffeur->save();
 				}
 
-				$this->vehicule->etat_id = ETATVEHICULE::RAS;
+				$this->vehicule->etat_id = DISPONIBILITE::LIBRE;
 				$this->vehicule->save();
 			}
 		}else{
@@ -167,11 +167,11 @@ class LIVRAISON extends TABLE
 			if ($data->status) {
 				$this->actualise();
 				if ($this->chauffeur_id > 0) {
-					$this->chauffeur->etatchauffeur_id = ETATCHAUFFEUR::RAS;
+					$this->chauffeur->disponibilite_id = DISPONIBILITE::LIBRE;
 					$this->chauffeur->save();
 				}
 
-				$this->vehicule->etatvehicule_id = ETATVEHICULE::RAS;
+				$this->vehicule->disponibilite_id = DISPONIBILITE::LIBRE;
 				$this->vehicule->save();
 
 				$this->groupecommande->etat_id = ETAT::ENCOURS;

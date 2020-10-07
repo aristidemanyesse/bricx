@@ -23,7 +23,7 @@ class CHAUFFEUR extends PERSONNE
 	public $salaire = 0;
 	public $image = "default.png";
 	
-	public $etatchauffeur_id = ETATCHAUFFEUR::RAS;
+	public $disponibilite_id = DISPONIBILITE::LIBRE;
 
 
 
@@ -69,9 +69,9 @@ class CHAUFFEUR extends PERSONNE
 	public static function etat(){
 		foreach (static::getAll() as $key => $chauffeur) {
 			$datas = $chauffeur->fourni("livraison", ["etat_id ="=>ETAT::ENCOURS]);
-			$chauffeur->etatchauffeur_id = ETATCHAUFFEUR::RAS;
+			$chauffeur->disponibilite_id = DISPONIBILITE::LIBRE;
 			if (count($datas) > 0) {
-				$chauffeur->etatchauffeur_id = ETATCHAUFFEUR::MISSION;
+				$chauffeur->disponibilite_id = ETATCHAUFFEUR::MISSION;
 			}
 			$chauffeur->save();
 		}

@@ -14,7 +14,7 @@ class VEHICULE extends TABLE
 	const TRICYCLE = 2;
 
 	public $immatriculation;
-	public $etatvehicule_id = ETATVEHICULE::RAS;
+	public $disponibilite_id = DISPONIBILITE::LIBRE;
 	public $modele;
 	public $image = "default.jpg";
 
@@ -70,15 +70,15 @@ class VEHICULE extends TABLE
 
 
 	public static function ras(){
-		return static::findBy(["etatvehicule_id ="=> ETATVEHICULE::RAS]);
+		return static::findBy(["disponibilite_id ="=> DISPONIBILITE::LIBRE]);
 	}
 
 	public static function mission(){
-		return static::findBy(["etatvehicule_id ="=> ETATVEHICULE::MISSION, 'visibility ='=>1]);
+		return static::findBy(["disponibilite_id ="=> ETATVEHICULE::MISSION, 'visibility ='=>1]);
 	}
 
 	public static function entretien(){
-		return array_merge(static::findBy(["etatvehicule_id ="=> ETATVEHICULE::ENTRETIEN]), static::findBy(["etatvehicule_id ="=> ETATVEHICULE::PANNE]));
+		return array_merge(static::findBy(["disponibilite_id ="=> ETATVEHICULE::ENTRETIEN]), static::findBy(["disponibilite_id ="=> ETATVEHICULE::PANNE]));
 	}
 
 
