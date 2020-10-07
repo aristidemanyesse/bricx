@@ -85,7 +85,6 @@ class ROOTER extends PATH
             if ($data->status == true) {
 
                 if ($mycompte->expired >= dateAjoute()) {
-                    $exercicecomptable = EXERCICECOMPTABLE::encours();
 
                     $datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);
                     if (count($datas) >0) {

@@ -1259,7 +1259,7 @@ CREATE TABLE `typeproduit` (
 
 CREATE TABLE `vehicule` (
   `id` int(11) NOT NULL,
-  `etatvehicule_id` int(11) NOT NULL DEFAULT '0',
+  `disponibilite_id` int(11) NOT NULL DEFAULT '0',
   `immatriculation` varchar(20) COLLATE utf8_bin NOT NULL,
   `modele` varchar(200) COLLATE utf8_bin NOT NULL,
   `image` text COLLATE utf8_bin,

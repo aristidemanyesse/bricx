@@ -520,7 +520,7 @@ if ($action == "newproduit") {
 							// 	$datas = VEHICULE::findBy(["id="=>$vehicule_id]);
 							// 	if (count($datas) > 0) {
 							// 		$vehicule = $datas[0];
-							// 		$vehicule->etatvehicule_id = ETATVEHICULE::MISSION;
+							// 		$vehicule->disponibilite_id = ETATVEHICULE::MISSION;
 							// 		$vehicule->save();
 							// 	}
 

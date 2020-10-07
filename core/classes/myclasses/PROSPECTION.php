@@ -168,11 +168,11 @@ class PROSPECTION extends TABLE
 					$this->groupecommande->save();
 
 					// if ($this->chauffeur_id > 0) {
-					// 	$this->chauffeur->etatchauffeur_id = ETATCHAUFFEUR::RAS;
+					// 	$this->chauffeur->disponibilite_id = DISPONIBILITE::LIBRE;
 					// 	$this->chauffeur->save();
 					// }
 
-					// $this->vehicule->etat_id = ETATVEHICULE::RAS;
+					// $this->vehicule->etat_id = DISPONIBILITE::LIBRE;
 					// $this->vehicule->save();
 				}
 				if ($this->typeprospection_id == TYPEPROSPECTION::PROSPECTION) {
