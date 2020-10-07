@@ -15,6 +15,7 @@ class MOUVEMENT extends TABLE
 	public $montant;
 	public $typemouvement_id;
 	public $comptebanque_id;
+	public $budgetchantier_id;
 	public $etat_id = ETAT::VALIDEE;
 	public $comment;
 	public $modepayement_id ;
@@ -38,16 +39,17 @@ class MOUVEMENT extends TABLE
 					$item = $datas[0];
 					$item->actualise();
 					$banque = $item->comptebanque;
+					$datas = COMPTEBANQUE::findBy(["id ="=>$this->comptebanque_id]);
 				}else{
-					$datas = AGENCE::findBy(["id ="=>getSession("agence_connecte_id")]);
+					$datas = CHANTIER::findBy(["id ="=>getSession("chantier_connecte_id")]);
 					if (count($datas) > 0) {
 						$item = $datas[0];
 						$item->actualise();
-						$banque = $item->comptebanque;
+						$banque = $item->budgetchantier;
+						$datas = BUDGETCHANTIER::findBy(["id ="=>$this->budgetchantier_id]);
 					}
 				}
 
-				$datas = COMPTEBANQUE::findBy(["id ="=>$this->comptebanque_id]);
 				if (count($datas) == 1) {
 					$banque = $datas[0];
 					if (intval($this->montant) > 0) {

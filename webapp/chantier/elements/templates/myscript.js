@@ -2,7 +2,7 @@
 
     	$("#formProductionJour").submit(function(event) {
     		Loader.start();
-    		var url = "../../webapp/boutique/elements/templates/traitement.php";
+    		var url = "../../webapp/chantier/elements/templates/traitement.php";
     		var formdata = new FormData($(this)[0]);
     		// var val = $(this).find("select[name=manoeuvre_id]").val();
     		// formdata.append('manoeuvres', val);
@@ -17,18 +17,6 @@
     		return false;
     	});
 
-
-        voirPrixParZone = function(){    
-            Loader.start();    
-            var  url = "../../webapp/boutique/elements/templates/traitement.php";
-            $.post(url, {action:"voirPrixParZone"}, (data)=>{
-                $("body #modal-prixparzone").remove();
-                $("body").append(data);
-                $("body #modal-prixparzone").modal("show");
-                $("select.select2").select2();
-                Loader.stop();    
-            },"html");
-        }
 
 
         $("body").on("keyup", "#search", function() {

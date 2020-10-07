@@ -29,7 +29,7 @@ class BUDGETCHANTIER extends TABLE
 			}
 		}else{
 			$data->status = false;
-			$data->message = "Veuillez renseigner le nom du produit !";
+			$data->message = "Veuillez renseigner le nom !";
 		}
 		return $data;
 	}
@@ -43,7 +43,7 @@ class BUDGETCHANTIER extends TABLE
 			$mouvement = new MOUVEMENT();
 			$mouvement->name = "Augmentation du budget alloué au chantiet";
 			$mouvement->typemouvement_id = TYPEMOUVEMENT::DEPOT;
-			$mouvement->comptebanque_id = $this->id;
+			$mouvement->budgetchantier_id = $this->id;
 			$mouvement->montant = $montant;
 			$mouvement->comment = $comment;
 			$data = $mouvement->enregistre();
@@ -64,7 +64,7 @@ class BUDGETCHANTIER extends TABLE
 				$mouvement = new MOUVEMENT();
 				$mouvement->name = "Diminution du budget alloué au chantiet";
 				$mouvement->typemouvement_id = TYPEMOUVEMENT::RETRAIT;
-				$mouvement->comptebanque_id = $this->id;
+				$mouvement->budgetchantier_id = $this->id;
 				$mouvement->montant = $montant;
 				$mouvement->comment = $comment;
 				$data = $mouvement->enregistre();
@@ -83,7 +83,7 @@ class BUDGETCHANTIER extends TABLE
 
 
 	public function getIn(string $date1, string $date2){
-		$requette = "SELECT SUM(montant) as montant FROM mouvement WHERE mouvement.typemouvement_id = ? AND mouvement.comptebanque_id = ? AND mouvement.valide = 1 AND DATE(mouvement.created) >= ? AND DATE(mouvement.created) <= ?";
+		$requette = "SELECT SUM(montant) as montant FROM mouvement WHERE mouvement.typemouvement_id = ? AND mouvement.budgetchantier_id = ? AND mouvement.valide = 1 AND DATE(mouvement.created) >= ? AND DATE(mouvement.created) <= ?";
 		$item = MOUVEMENT::execute($requette, [TYPEMOUVEMENT::DEPOT, $this->id, $date1, $date2]);
 		if (count($item) < 1) {$item = [new MOUVEMENT()]; }
 		return $item[0]->montant;
@@ -91,7 +91,7 @@ class BUDGETCHANTIER extends TABLE
 
 
 	public function getOut(string $date1, string $date2){
-		$requette = "SELECT SUM(montant) as montant FROM mouvement WHERE mouvement.typemouvement_id = ? AND mouvement.comptebanque_id = ? AND mouvement.valide = 1 AND DATE(mouvement.created) >= ? AND DATE(mouvement.created) <= ?";
+		$requette = "SELECT SUM(montant) as montant FROM mouvement WHERE mouvement.typemouvement_id = ? AND mouvement.budgetchantier_id = ? AND mouvement.valide = 1 AND DATE(mouvement.created) >= ? AND DATE(mouvement.created) <= ?";
 		$item = MOUVEMENT::execute($requette, [TYPEMOUVEMENT::RETRAIT, $this->id, $date1, $date2]);
 		if (count($item) < 1) {$item = [new MOUVEMENT()]; }
 		return $item[0]->montant;
@@ -106,7 +106,7 @@ class BUDGETCHANTIER extends TABLE
 			$date2 = dateAjoute(+1);
 		}
 		$total = $this->getIn($date1, $date2) - $this->getOut($date1, $date2);
-		return $total + $this->initial;
+		return $total + $this->solde;
 	}
 
 

@@ -3,12 +3,12 @@
 namespace Home;
 
 if ($this->id != null) {
-	$datas = APPROVISIONNEMENT::findBy(["id ="=> $this->id, 'etat_id !='=>ETAT::ANNULEE]);
+	$datas = APPROCHANTIERRESSOURCE::findBy(["id ="=> $this->id, 'etat_id !='=>ETAT::ANNULEE]);
 	if (count($datas) > 0) {
 		$appro = $datas[0];
 		$appro->actualise();
 
-		$appro->fourni("ligneapprovisionnement");
+		$appro->fourni("ligneapprochantierressource");
 
 		$title = "BRICX | Bon d'approvisionnement ";
 		

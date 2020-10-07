@@ -41,7 +41,7 @@
                             <div>
                                 <label>Le fournisseur <span style="color: red">*</span> </label>                                
                                 <div class="input-group">
-                                    <?php Native\BINDING::html("select", "fournisseur"); ?>
+                                    <?php Native\BINDING::html("select", "fournisseurchantier"); ?>
                                 </div>
                             </div><br>
                             <div>

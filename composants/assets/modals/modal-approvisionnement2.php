@@ -19,7 +19,7 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tbody class="commande">
-                                        <?php foreach ($appro->ligneapprovisionnements as $key => $ligne) {
+                                        <?php foreach ($appro->ligneapprochantierressources as $key => $ligne) {
                                             $ligne->actualise(); ?>
                                             <tr class="border-0 border-bottom " id="ligne<?= $ligne->id ?>" data-id="<?= $ligne->ressource->id ?>">
                                                 <td >

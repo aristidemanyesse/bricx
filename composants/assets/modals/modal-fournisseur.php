@@ -7,7 +7,7 @@
                 <h4 class="modal-title">Formulaire des fournisseurs de ressource</h4>
                 <small class="font-bold">Renseigner ces champs pour enregistrer les informations</small>
             </div>
-            <form method="POST" class="formShamman" classname="fournisseur">
+            <form method="POST" class="formShamman" classname="fournisseurchantier">
                 <div class="modal-body">
 
                     <div class="row">

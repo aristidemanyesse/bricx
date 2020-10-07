@@ -23,7 +23,7 @@ class CHAUFFEUR extends PERSONNE
 	public $salaire = 0;
 	public $image = "default.png";
 	
-	public $disponibilite_id = DISPONIBILITE::RAS;
+	public $disponibilite_id = DISPONIBILITE::LIBRE;
 
 
 

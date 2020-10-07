@@ -3,6 +3,7 @@ namespace Native;
 use Native\SHAMMAN;
 use Home\ROLE;
 use Home\EMPLOYE;
+use Home\CHANTIER;
 use Home\AGENCE;
 use Home\PRODUCTION;
 use Home\EXERCICECOMPTABLE;
@@ -115,6 +116,14 @@ class ROOTER extends PATH
                                                     $this->render();
                                                     return false;
                                                 }
+
+
+                                                if (in_array($this->section, ["chantier"])) {
+                                                    $chantier = new CHANTIER;
+                                                    $chantier->id = getSession("chantier_connecte_id");
+                                                    $chantier->actualise();
+                                                }
+
 
                                                 if (!in_array($this->section, ["manager", "config"])) {
                                                     if ($employe->agence_id != null ) {

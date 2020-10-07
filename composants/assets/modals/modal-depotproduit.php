@@ -1,5 +1,5 @@
 
-<div class="modal inmodal fade" id="modal-miseenboutique" style="z-index: 9999999999">
+<div class="modal inmodal fade" id="modal-depotproduit" style="z-index: 9999999999">
     <div class="modal-dialog modal-xll">
         <div class="modal-content">
             <div class="modal-header">
@@ -23,16 +23,10 @@
                                 </table>
                             </div><hr>
 
-                            <div class="row">
-                                <?php foreach (Home\TYPEPRODUIT::findBy(["isActive ="=>Home\TABLE::OUI]) as $key => $type) { ?>
-                                    <div class="col text-center border-right">
-                                        <h5 class="text-uppercase gras text-center"><?= $type->name()  ?></h5>
-                                        <?php foreach ($type->fourni("typeproduit_parfum", ["isActive ="=>Home\TABLE::OUI]) as $key => $pro) {
-                                            $pro->actualise(); ?>
-                                            <button class="btn btn-white btn-xs newproduit3 btn-block cursor" data-id="<?= $pro->id ?>"><?= $pro->name(); ?></button>
-                                        <?php }  ?>
-                                    </div>
-                                <?php } ?>
+                            <div class="text-center">
+                                <?php foreach (Home\PRODUIT::isActives() as $key => $produit) { ?>
+                                    <button class="btn btn-white dim newproduit btn-sm" data-id="<?= $produit->id ?>" ><?= $produit->name(); ?></button>
+                                <?php }  ?>
                             </div>
                         </div>
                     </div>
@@ -45,7 +39,7 @@
                         <div class="ibox-content"  style="background-color: #fafafa">
                             <form id="formMiseenboutique">
                                 <div>
-                                    <label>Boutique de destination <span style="color: red">*</span> </label>
+                                    <label>Chantier de destination <span style="color: red">*</span> </label>
                                     <div class="input-group">
                                         <?php Native\BINDING::html("select", "boutique"); ?>
                                     </div>
@@ -74,7 +68,7 @@
 
                             </form>
                             <hr/>
-                            <button onclick="miseenboutique()" class="btn btn-primary btn-block dim"><i class="fa fa-check"></i> Valider la sortie</button>
+                            <button onclick="depotchantier()" class="btn btn-primary btn-block dim"><i class="fa fa-check"></i> Valider la sortie</button>
                         </div>
                     </div>
 

@@ -16,36 +16,75 @@ class CHANTIER extends TABLE
 	public $autorisation;
 	public $started;
 	public $finished;
+	public $previsionnel;
 	public $comment;
 	public $budgetchantier_id;
-	public $etatchantier_id;
+	public $etatchantier_id =  ETATCHANTIER::ENCOURS;
+
+	public $client_name;
+	public $contact;
+	public $email;
+
+	public $montant;
+
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->name != "") {
-			$data = $this->save();
-			if ($data->status) {
+			if ($this->started <= $this->finished) {
+				$data = $this->save();
+				if ($data->status) {
 
-				foreach (PRODUIT::getAll() as $key => $prod) {
-					$ligne = new INITIALPRODUITAGENCE();
+					foreach (PRODUIT::getAll() as $key => $prod) {
+						$ligne = new INITIALPRODUITCHANTIER();
 						$ligne->produit_id = $prod->id;
-						$ligne->agence_id = $this->id;
+						$ligne->chantier_id = $this->id;
 						$ligne->quantite = 0;
 						$ligne->enregistre();
-				}
+					}
+
+					foreach (RESSOURCE::getAll() as $key => $prod) {
+						$ligne = new INITIALRESSOURCECHANTIER();
+						$ligne->ressource_id = $prod->id;
+						$ligne->chantier_id = $this->id;
+						$ligne->quantite = 0;
+						$ligne->enregistre();
+					}
+
+					foreach (MATERIEL::getAll() as $key => $prod) {
+						$ligne = new INITIALMATERIELCHANTIER();
+						$ligne->materiel_id = $prod->id;
+						$ligne->chantier_id = $this->id;
+						$ligne->quantite = 0;
+						$ligne->enregistre();
+					}
+
+					$compte = new BUDGETCHANTIER;
+					$compte->name = "Compte budget de ".$this->name();
+					$data = $compte->enregistre();
+					if ($data->status) {
+						$this->budgetchantier_id = $data->lastid;
+						$this->save();
+					}
 
 
-				$compte = new BUDGETCHANTIER;
-				$compte->name = "Compte de ".$this->name();
-				$data = $compte->enregistre();
-				if ($data->status) {
-					$this->budgetchantier_id = $data->lastid;
-					$this->save();
+					$client = new CLIENTCHANTIER;
+					$client->name = $this->client_name;
+					$client->email = $this->email;
+					$client->contact = $this->contact;
+					$data = $client->enregistre();
+					if ($data->status) {
+						$this->clientchantier_id = $data->lastid;
+						$this->save();
+					}
 				}
+			}else{
+				$data->status = false;
+				$data->message = "Vérifiez la date de debut et de fin estimée du chantier !";
 			}
 		}else{
 			$data->status = false;
-			$data->message = "Veuillez renseigner le nom de la boutique !";
+			$data->message = "Veuillez donner un nom à ce nouveau chantier !";
 		}
 		return $data;
 	}

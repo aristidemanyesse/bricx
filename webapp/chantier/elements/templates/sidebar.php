@@ -36,7 +36,7 @@
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
                 <li class="" id="clients">
-                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-users"></i> <span class="nav-label">Planning construction</span></a>
+                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-sitemap"></i> <span class="nav-label">Planning construction</span></a>
                 </li>
                 <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
 
@@ -54,51 +54,54 @@
 
                 <?php if ($employe->isAutoriser("production")) { ?>
                     <li class="groupe">
-                        <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">Dépôts</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de briques</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="approressource"><a href="<?= $this->url($this->section, "stock", "approressource") ?>">Dépôts de ressources</a></li>
-                            <li id="approemballage"><a href="<?= $this->url($this->section, "stock", "approemballage") ?>">Dépôts de briques</a></li>
+                            <li id="stockproduit"><a href="<?= $this->url($this->section, "production", "stockproduit") ?>">Stock actuel</a></li>
+                            <li id="productions"><a href="<?= $this->url($this->section, "production", "productions") ?>">Production de briques</a></li>
+                            <li id="depotproduit"><a href="<?= $this->url($this->section, "production", "depotproduit") ?>">Dépôts de briques</a></li>
+                            <li id="approproduit"><a href="<?= $this->url($this->section, "production", "approproduit") ?>">Achat de briques</a></li>
+                            <li id="useproduit"><a href="<?= $this->url($this->section, "production", "useproduit") ?>">Utilisation de briques</a></li>
+                            <li id="perteproduit"><a href="<?= $this->url($this->section, "production", "perteproduit") ?>">les pertes</a></li>
                         </ul>
                     </li>
+
+
                     <li class="groupe">
-                        <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">Approvisionnements</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de ressources</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="approressource"><a href="<?= $this->url($this->section, "stock", "approressource") ?>">Appro de ressources</a></li>
-                            <li id="approemballage"><a href="<?= $this->url($this->section, "stock", "approemballage") ?>">Appro de briques</a></li>
+                            <li id="stockressource"><a href="<?= $this->url($this->section, "production", "stockressource") ?>">Stock actuel</a></li>
+                            <li id="depotressource"><a href="<?= $this->url($this->section, "production", "depotressource") ?>">Dépôts de ressources</a></li>
+                            <li id="approressource"><a href="<?= $this->url($this->section, "production", "approressource") ?>">Achat de ressources</a></li>
+                            <li id="useressource"><a href="<?= $this->url($this->section, "production", "useressource") ?>">Utilis. de ressources</a></li>
+                            <li id="perteressource"><a href="<?= $this->url($this->section, "production", "perteressource") ?>">les pertes</a></li>
                         </ul>
                     </li>
+
+
                     <li class="groupe">
-                        <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Stocks actuels</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de Materiels</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="ressources"><a href="<?= $this->url($this->section, "stock", "ressources") ?>">Stock de ressources</a></li>
-                            <li id="emballages"><a href="<?= $this->url($this->section, "stock", "emballages") ?>">Stock d'emballages</a></li>
-                        </ul>
-                    </li>
-                    <li class="groupe">
-                        <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">Sorties</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li id="approressource"><a href="<?= $this->url($this->section, "stock", "approressource") ?>">Sorties de ressources</a></li>
-                            <li id="approemballage"><a href="<?= $this->url($this->section, "stock", "approemballage") ?>">Sorties de briques</a></li>
-                        </ul>
-                    </li>
-                    <li class="groupe">
-                        <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Pertes enregistrées</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li id="ressources"><a href="<?= $this->url($this->section, "stock", "ressources") ?>">perte de ressources</a></li>
-                            <li id="emballages"><a href="<?= $this->url($this->section, "stock", "emballages") ?>">perte de briques</a></li>
-                            <li id="emballages"><a href="<?= $this->url($this->section, "stock", "emballages") ?>">perte de materiels</a></li>
+                            <li id="approressource"><a href="<?= $this->url($this->section, "production", "approressource") ?>">Materiels engagés</a></li>
+                            <li id="approemballage"><a href="<?= $this->url($this->section, "production", "approemballage") ?>">Dépôts de materiels</a></li>
+                            <li id="approemballage"><a href="<?= $this->url($this->section, "production", "approemballage") ?>">Achat de materiels</a></li>
+                            <li id="emballages"><a href="<?= $this->url($this->section, "production", "emballages") ?>">les pertes</a></li>
                         </ul>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
+
+                    <li class="" id="fournisseurs">
+                        <a href="<?= $this->url($this->section, "production", "fournisseurs") ?>"><i class="fa fa-user"></i> <span class="nav-label">Les fournisseurs</span> </a>
+                    </li>
+                    <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000;* "></li>
                 <?php } ?>
 
 
                 <?php if ($employe->isAutoriser("files")) { ?>
-                    <li class="" id="rapportjour">
-                        <a href="<?= $this->url($this->section, "rapports", "rapportjour") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Images du chantier</span></a>
+                    <li class="" id="images">
+                        <a href="<?= $this->url($this->section, "files", "images") ?>"><i class="fa fa-image"></i> <span class="nav-label">Images du chantier</span></a>
                     </li>
-                    <li class="" id="rapportjour">
-                        <a href="<?= $this->url($this->section, "rapports", "rapportjour") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Documents du chantier</span></a>
+                    <li class="" id="documents">
+                        <a href="<?= $this->url($this->section, "files", "documents") ?>"><i class="fa fa-file-pdf-o"></i> <span class="nav-label">Documents du chantier</span></a>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
                 <?php } ?>
