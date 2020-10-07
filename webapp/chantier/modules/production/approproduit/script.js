@@ -25,10 +25,10 @@ $(function(){
 
 
     //nouvel approvisionnement
-    $(".newressource").click(function(event) {
-        var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
+    $(".newproduit").click(function(event) {
+        var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
         var id = $(this).attr("data-id");
-        $.post(url, {action:"newressource", id:id}, (data)=>{
+        $.post(url, {action:"newproduit", id:id}, (data)=>{
             $("tbody.approvisionnement").append(data);
             $("button[data-id ="+id+"]").hide(200);
             calcul()
@@ -37,7 +37,7 @@ $(function(){
 
 
     supprimeRessource = function(id){
-        var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
+        var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
         $.post(url, {action:"supprimeRessource", id:id}, (data)=>{
             $("tbody.approvisionnement tr#ligne"+id).hide(400).remove();
             $("button[data-id ="+id+"]").show(200);
@@ -47,7 +47,7 @@ $(function(){
 
 
     calcul = function(){
-        var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
+        var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
         var formdata = new FormData($("#formApprovisionnement")[0]);
         var tableau = new Array();
         $("#modal-approvisionnement .approvisionnement tr, #modal-approvisionnement_ .approvisionnement tr").each(function(index, el) {
@@ -91,7 +91,7 @@ $(function(){
                     okLabel : "OUI, confirmer",
                 }, function(){
                     Loader.start();
-                    var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
+                    var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
                     formdata.append('action', "validerApprovisionnement");
                     $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
                         if (data.status) {
@@ -104,7 +104,7 @@ $(function(){
                 })
             }else{
                 Loader.start();
-                var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
+                var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
                 formdata.append('action', "validerApprovisionnement");
                 $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
                     if (data.status) {
@@ -126,7 +126,7 @@ $(function(){
             cancelLabel : "Non",
             okLabel : "OUI, annuler",
         }, function(){
-            var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
+            var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
             alerty.prompt("Entrer votre mot de passe pour confirmer l'opération !", {
                 title: 'Récupération du mot de passe !',
                 inputType : "password",
@@ -159,27 +159,27 @@ $(function(){
 
 
     $(".formValiderApprovisionnement").submit(function(event) {
-       Loader.start();
-       var url = "../../webapp/entrepot/modules/stock/approressource/ajax.php";
-       var formdata = new FormData($(this)[0]);
-       var tableau = new Array();
-       $(this).find("table tr").each(function(index, el) {
-        var id = $(this).attr('data-id');
-        var val = $(this).find('input').val();
-        var item = id+"-"+val;
-        tableau.push(item);
+        Loader.start();
+        var url = "../../webapp/chantier/modules/production/approproduit/ajax.php";
+        var formdata = new FormData($(this)[0]);
+        var tableau = new Array();
+        $(this).find("table tr").each(function(index, el) {
+            var id = $(this).attr('data-id');
+            var val = $(this).find('input').val();
+            var item = id+"-"+val;
+            tableau.push(item);
+        });
+        formdata.append('tableau', tableau);
+        formdata.append('action', "validerAppro");
+        $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+            if (data.status) {
+                window.location.reload()
+            }else{
+                Alerter.error('Erreur !', data.message);
+            }
+        }, 'json');
+        return false;
     });
-       formdata.append('tableau', tableau);
-       formdata.append('action', "validerAppro");
-       $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
-        if (data.status) {
-            window.location.reload()
-        }else{
-            Alerter.error('Erreur !', data.message);
-        }
-    }, 'json');
-       return false;
-   });
 
 
 })

@@ -11,29 +11,28 @@ extract($_POST);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-if ($action == "newressource") {
+if ($action == "newproduit") {
 	$params = PARAMS::findLastId();
 	$rooter = new ROOTER;
-	$ressources = [];
-	if (getSession("ressources") != null) {
-		$ressources = getSession("ressources"); 
+	$produits = [];
+	if (getSession("produits") != null) {
+		$produits = getSession("produits"); 
 	}
-	if (!in_array($id, $ressources)) {
-		$ressources[] = $id;
-		$datas = RESSOURCE::findBy(["id ="=> $id]);
+	if (!in_array($id, $produits)) {
+		$produits[] = $id;
+		$datas = PRODUIT::findBy(["id ="=> $id]);
 		if (count($datas) == 1) {
-			$ressource = $datas[0]; ?>
+			$produit = $datas[0]; ?>
 			<tr class="border-0 border-bottom " id="ligne<?= $id ?>" data-id="<?= $id ?>">
 				<td><i class="fa fa-close text-red cursor" onclick="supprimeRessource(<?= $id ?>)" style="font-size: 18px;"></i></td>
 				<td class="text-left">
-					<h4 class="mp0 text-uppercase"><?= $ressource->name() ?></h4>
-					<small><?= $ressource->unite ?></small>
+					<h4 class="mp0 text-uppercase"><?= $produit->name() ?></h4>
+					<small><?= $produit->comment ?></small>
 				</td>
 				<td width="90">
 					<label>Quantité</label>
 					<input type="text" number name="quantite" class="form-control text-center gras" value="1" style="padding: 3px">
 				</td>
-				<td class="gras"><br><br><?= $ressource->abbr ?></td>
 				<td width="120">
 					<label>Prix d'achat</label>
 					<input type="text" number name="prix" class="form-control text-center gras prix" value="1" style="padding: 3px">
@@ -43,19 +42,19 @@ if ($action == "newressource") {
 			<?php
 		}
 	}
-	session("ressources", $ressources);
+	session("produits", $produits);
 }
 
 
 if ($action == "supprimeRessource") {
-	$ressources = [];
-	if (getSession("ressources") != null) {
-		$ressources = getSession("ressources"); 
-		foreach ($ressources as $key => $value) {
+	$produits = [];
+	if (getSession("produits") != null) {
+		$produits = getSession("produits"); 
+		foreach ($produits as $key => $value) {
 			if ($value == $id) {
-				unset($ressources[$key]);
+				unset($produits[$key]);
 			}
-			session("ressources", $ressources);
+			session("produits", $produits);
 		}
 	}
 }
@@ -65,8 +64,8 @@ if ($action == "calcul") {
 	$params = PARAMS::findLastId();
 	$rooter = new ROOTER;
 	$total = 0;
-	$ressources = explode(",", $tableau);
-	foreach ($ressources as $key => $value) {
+	$produits = explode(",", $tableau);
+	foreach ($produits as $key => $value) {
 		$lot = explode("-", $value);
 		$id = $lot[0];
 		$qte = 0;
@@ -74,21 +73,20 @@ if ($action == "calcul") {
 			$qte = $lot[1];
 		};
 		$prix = end($lot);
-		$datas = RESSOURCE::findBy(["id ="=> $id]);
+		$datas = PRODUIT::findBy(["id ="=> $id]);
 		if (count($datas) == 1) {
-			$ressource = $datas[0];
+			$produit = $datas[0];
 			$total += $prix; ?>
 			<tr class="border-0 border-bottom " id="ligne<?= $id ?>" data-id="<?= $id ?>">
 				<td><i class="fa fa-close text-red cursor" onclick="supprimeRessource(<?= $id ?>)" style="font-size: 18px;"></i></td>
 				<td class="text-left">
-					<h4 class="mp0 text-uppercase"><?= $ressource->name() ?></h4>
-					<small><?= $ressource->unite ?></small>
+					<h4 class="mp0 text-uppercase"><?= $produit->name() ?></h4>
+					<small><?= $produit->comment ?></small>
 				</td>
 				<td width="90">
 					<label>Quantité</label>
 					<input type="text" number name="quantite" class="form-control text-center gras" value="<?= $qte ?>" style="padding: 3px">
 				</td>
-				<td class="gras"><br><br><?= $ressource->abbr  ?></td>
 				<td width="120">
 					<label>Prix d'achat</label>
 					<input type="text" number name="prix" class="form-control text-center gras prix" value="<?= $prix ?>" style="padding: 3px">
@@ -115,13 +113,13 @@ if ($action == "total") {
 
 
 if ($action == "validerApprovisionnement") {
-	$datas = FOURNISSEUR::findBy(["id ="=>$fournisseur_id]);
+	$datas = FOURNISSEURCHANTIER::findBy(["id ="=>$fournisseurchantier_id]);
 	if (count($datas) == 1) {
 		$fournisseur = $datas[0];
 
-		$ressources = explode(",", $tableau);
-		if (count($ressources) > 0) {
-			$tests = $ressources;
+		$produits = explode(",", $tableau);
+		if (count($produits) > 0) {
+			$tests = $produits;
 			foreach ($tests as $key => $value) {
 				$lot = explode("-", $value);
 				$id = $lot[0];
@@ -135,19 +133,19 @@ if ($action == "validerApprovisionnement") {
 				}
 			}
 
-			$approvisionnement = new APPROVISIONNEMENT();
+			$approvisionnement = new APPROCHANTIERPRODUIT();
 			$approvisionnement->hydrater($_POST);
 			if (count($tests) == 0) {
-				$datas = ENTREPOT::findBy(["id ="=>getSession("entrepot_connecte_id")]);
+				$datas = CHANTIER::findBy(["id ="=>getSession("chantier_connecte_id")]);
 				if (count($datas) == 1) {
-					$entrepot = $datas[0];
-					$entrepot->actualise();
+					$chantier = $datas[0];
+					$chantier->actualise();
 
 					if ($modepayement_id == MODEPAYEMENT::PRELEVEMENT_ACOMPTE ) {
 						$avance = 0;
 					}
 
-					if ($entrepot->comptebanque->solde() >= ($transport + $avance)) {
+					if ($chantier->budgetchantier->solde() >= ($transport + $avance)) {
 						$total = getSession("total");
 						$data->status = true;
 						$data->lastid = null;
@@ -159,16 +157,16 @@ if ($action == "validerApprovisionnement") {
 								}else{
 									$fournisseur->dette($total - intval($avance));
 
-									$payement = new REGLEMENTFOURNISSEUR();
+									$payement = new REGLEMENTFOURNISSEURCHANTIER();
 									$payement->hydrater($_POST);
 									$payement->montant = $avance;
-									$payement->fournisseur_id = $fournisseur_id;
+									$payement->fournisseurchantier_id = $fournisseur_id;
 									$data = $payement->enregistre();
 								}
 								if ($data->status) {
 
 									if ($modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE ) {
-										$approvisionnement->reglementfournisseur_id = $data->lastid;
+										$approvisionnement->reglementfournisseurchantier_id = $data->lastid;
 									}
 									if ($data->status) {
 
@@ -179,17 +177,17 @@ if ($action == "validerApprovisionnement") {
 										$approvisionnement->reste = $total - $approvisionnement->avance;
 										$data = $approvisionnement->enregistre();
 										if ($data->status) {
-											foreach ($ressources as $key => $value) {
+											foreach ($produits as $key => $value) {
 												$lot = explode("-", $value);
 												$id = $lot[0];
 												$qte = $lot[1];
 												$prix = end($lot);
-												$datas = RESSOURCE::findBy(["id ="=> $id]);
+												$datas = PRODUIT::findBy(["id ="=> $id]);
 												if (count($datas) == 1) {
-													$ressource = $datas[0];
-													$lignecommande = new LIGNEAPPROVISIONNEMENT;
-													$lignecommande->approvisionnement_id = $approvisionnement->id;
-													$lignecommande->ressource_id = $id;
+													$produit = $datas[0];
+													$lignecommande = new LIGNEAPPROCHANTIERPRODUIT;
+													$lignecommande->approchantierproduit_id = $approvisionnement->id;
+													$lignecommande->produit_id = $id;
 													$lignecommande->quantite = $qte;
 													$lignecommande->price =  $prix;
 													$lignecommande->enregistre();	
@@ -198,7 +196,7 @@ if ($action == "validerApprovisionnement") {
 
 											if ($modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE && $total > 0) {
 												$payement->comment = "Réglement de la facture d'approvisionnement N°".$approvisionnement->reference;
-												$payement->approvisionnement_id = $approvisionnement->id;
+												$payement->approchantierproduit_id = $approvisionnement->id;
 												$data = $payement->save();
 											}
 
@@ -230,11 +228,11 @@ if ($action == "validerApprovisionnement") {
 				}
 			}else{
 				$data->status = false;
-				$data->message = "Veuillez selectionner des ressources et leur quantité pour passer la commande !";
+				$data->message = "Veuillez selectionner des produits et leur quantité pour passer la commande !";
 			}
 		}else{
 			$data->status = false;
-			$data->message = "Veuillez selectionner des ressources et leur quantité pour passer la commande !";
+			$data->message = "Veuillez selectionner des produits et leur quantité pour passer la commande !";
 		}
 	}else{
 		$data->status = false;
@@ -246,51 +244,22 @@ if ($action == "validerApprovisionnement") {
 
 
 
-
-if ($action == "annuler") {
-	$datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);
-	if (count($datas) > 0) {
-		$employe = $datas[0];
-		$employe->actualise();
-		if ($employe->checkPassword($password)) {
-			$datas = APPROVISIONNEMENT::findBy(["id ="=>$id]);
-			if (count($datas) == 1) {
-				$approvisionnement = $datas[0];
-				$data = $approvisionnement->annuler();
-			}else{
-				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'opération! Veuillez recommencer";
-			}
-		}else{
-			$data->status = false;
-			$data->message = "Votre mot de passe ne correspond pas !";
-		}
-	}else{
-		$data->status = false;
-		$data->message = "Vous ne pouvez pas effectué cette opération !";
-	}
-	echo json_encode($data);
-}
-
-
-
-
 if ($action == "validerAppro") {
 	$id = getSession("approvisionnement_id");
-	$datas = APPROVISIONNEMENT::findBy(["id ="=>$id]);
+	$datas = APPROCHANTIERPRODUIT::findBy(["id ="=>$id]);
 	if (count($datas) > 0) {
 		$appro = $datas[0];
-		$appro->fourni("ligneapprovisionnement");
+		$appro->fourni("ligneapprochantierproduit");
 
-		$ressources = explode(",", $tableau);
-		if (count($ressources) > 0) {
-			$tests = $ressources;
+		$produits = explode(",", $tableau);
+		if (count($produits) > 0) {
+			$tests = $produits;
 			foreach ($tests as $key => $value) {
 				$lot = explode("-", $value);
 				$id = $lot[0];
 				$qte = end($lot);
-				foreach ($appro->ligneapprovisionnements as $key => $lgn) {
-					if (($lgn->ressource_id == $id) && ($lgn->quantite >= $qte)) {
+				foreach ($appro->ligneapprochantierproduits as $key => $lgn) {
+					if (($lgn->produit_id == $id) && ($lgn->quantite >= $qte)) {
 						unset($tests[$key]);
 					}
 				}
@@ -299,12 +268,12 @@ if ($action == "validerAppro") {
 				$appro->hydrater($_POST);
 				$data = $appro->terminer();
 				if ($data->status) {
-					foreach ($ressources as $key => $value) {
+					foreach ($produits as $key => $value) {
 						$lot = explode("-", $value);
 						$id = $lot[0];
 						$qte = end($lot);
-						foreach ($appro->ligneapprovisionnements as $key => $lgn) {
-							if ($lgn->ressource_id == $id) {
+						foreach ($appro->ligneapprochantierproduits as $key => $lgn) {
+							if ($lgn->produit_id == $id) {
 								$lgn->quantite_recu = $qte;
 								$lgn->save();
 								break;

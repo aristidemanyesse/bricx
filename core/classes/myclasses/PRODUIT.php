@@ -37,7 +37,7 @@ class PRODUIT extends TABLE
 
 				foreach (AGENCE::getAll() as $key => $exi) {
 					$ligne = new INITIALPRODUITAGENCE();
-					$ligne->agence_id = $exi->id;
+					$ligne->chantier_id = $exi->id;
 					$ligne->produit_id = $this->id;
 					$ligne->quantite = 0;
 					$ligne->enregistre();
@@ -77,10 +77,10 @@ class PRODUIT extends TABLE
 
 
 
-	public static function totalProduit($date1, $date2, int $agence_id=null, int $produit_id=null){
+	public static function totalProduit($date1, $date2, int $chantier_id=null, int $produit_id=null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
 		}
 		if ($produit_id != null) {
 			$paras.= "AND produit_id = $produit_id ";
@@ -91,162 +91,108 @@ class PRODUIT extends TABLE
 	}
 
 
-	public static function totalVendu($date1, $date2, int $agence_id=null, int $produit_id=null){
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		if ($produit_id != null) {
-			$paras.= "AND produit_id = $produit_id ";
-		}
-		$paras.= " AND livraison.created BETWEEN '$date1' AND '$date2'";
-		$requette = "SELECT lignelivraison.* FROM lignelivraison, livraison, produit WHERE lignelivraison.livraison_id = livraison.id AND lignelivraison.produit_id = produit.id  $paras";
-		$datas = LIGNELIVRAISON::execute($requette, []);
-		return comptage($datas, "quantite", "somme");
-	}
-
-
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public function stock(string $date1, string $date2, int $agence_id = null){
-		$total = $this->livrable($date1, $date2, $agence_id) + $this->attente($agence_id);
+	public function stock(string $date1, string $date2, int $chantier_id = null){
+		$total = $this->livrable($date1, $date2, $chantier_id) + $this->attente($chantier_id);
 		return $total;
 	}
 
 
 
-	public function production(string $date1, string $date2, int $agence_id = null){
+	public function production(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
 		}
-		$requette = "SELECT SUM(quantite) as quantite  FROM ligneproduction, production WHERE ligneproduction.produit_id = ?  AND ligneproduction.production_id = production.id AND production.etat_id != ?  AND production.ladate >= ? AND production.ladate <= ? $paras ";
-		$item = LIGNEPRODUCTION::execute($requette, [$this->id, ETAT::ANNULEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNEPRODUCTION()]; }
+		$requette = "SELECT SUM(quantite) as quantite  FROM ligneproductionchantier, productionchantier WHERE ligneproductionchantier.produit_id = ?  AND ligneproductionchantier.productionchantier_id = productionchantier.id AND productionchantier.etat_id != ?  AND productionchantier.ladate >= ? AND productionchantier.ladate <= ? $paras ";
+		$item = LIGNEPRODUCTIONCHANTIER::execute($requette, [$this->id, ETAT::ANNULEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEPRODUCTIONCHANTIER()]; }
 		return $item[0]->quantite;
 	}
 
 
-	public function achat(string $date1 ="2020-05-01", string $date2, int $agence_id = null){
-		$requette = "SELECT SUM(quantite_recu) as quantite  FROM ligneachatstock, achatstock WHERE ligneachatstock.produit_id = ? AND ligneachatstock.achatstock_id = achatstock.id AND achatstock.etat_id = ? AND DATE(achatstock.created) >= ? AND DATE(achatstock.created) <= ? ";
-		$item = LIGNEACHATSTOCK::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNEACHATSTOCK()]; }
+	public function achat(string $date1, string $date2, int $chantier_id = null){
+		$paras = "";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
+		}
+		$requette = "SELECT SUM(quantite_recu) as quantite  FROM ligneapprochantierproduit, approchantierproduit WHERE ligneapprochantierproduit.produit_id = ? AND ligneapprochantierproduit.approchantierproduit_id = approchantierproduit.id AND approchantierproduit.etat_id = ? AND DATE(approchantierproduit.created) >= ? AND DATE(approchantierproduit.created) <= ? $paras ";
+		$item = LIGNEAPPROCHANTIERPRODUIT::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEAPPROCHANTIERPRODUIT()]; }
 		return $item[0]->quantite;
 	}
 
 
-	public function livraison(string $date1, string $date2, int $agence_id = null){
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		$requette = "SELECT SUM(quantite) as quantite  FROM lignelivraison, livraison WHERE lignelivraison.produit_id = ?  AND lignelivraison.livraison_id = livraison.id AND livraison.etat_id IN (?,?) AND DATE(livraison.created) >= ? AND DATE(livraison.created) <= ? $paras ";
-		$item = LIGNELIVRAISON::execute($requette, [$this->id, ETAT::VALIDEE, ETAT::ENCOURS, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNELIVRAISON()]; }
-		return $item[0]->quantite;
+	public function perte(string $date1, string $date2, int $chantier_id = null){
+		return $this->perteRangement($date1, $date2, $chantier_id) + $this->perteAutre($date1, $date2, $chantier_id);
 	}
 
 
-	public function surplus(int $agence_id = null){
+	public function perteRangement(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
 		}
-		$requette = "SELECT SUM(surplus) as surplus  FROM lignelivraison, livraison WHERE lignelivraison.produit_id = ?  AND lignelivraison.livraison_id = livraison.id AND livraison.etat_id = ? $paras ";
-		$item = LIGNELIVRAISON::execute($requette, [$this->id, ETAT::ENCOURS]);
-		if (count($item) < 1) {$item = [new LIGNELIVRAISON()]; }
-		return $item[0]->surplus;
-	}
-
-
-	public function perte(string $date1, string $date2, int $agence_id = null){
-		return $this->perteLivraison($date1, $date2, $agence_id) + $this->perteRangement($date1, $date2, $agence_id) + $this->perteAutre($date1, $date2, $agence_id);
-	}
-
-	public function perteLivraison(string $date1, string $date2, int $agence_id = null){
-		$total = 0;
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		$requette = "SELECT SUM(perte - quantite + quantite_livree) as perte  FROM lignelivraison, livraison WHERE lignelivraison.produit_id = ?  AND lignelivraison.livraison_id = livraison.id AND livraison.etat_id = ?  AND DATE(livraison.created) >= ? AND DATE(livraison.created) <= ? $paras ";
-		$item = LIGNELIVRAISON::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNELIVRAISON()]; }
-		$total += $item[0]->perte;
-
-		$requette = "SELECT SUM(quantite) as quantite  FROM perteproduit WHERE perteproduit.produit_id = ? AND perteproduit.etat_id = ? AND perteproduit.typeperte_id = ?  AND DATE(perteproduit.created) >= ? AND DATE(perteproduit.created) <= ? $paras ";
-		$item = PERTEPRODUIT::execute($requette, [$this->id, ETAT::VALIDEE, TYPEPERTE::CHARGEMENT, $date1, $date2]);
-		if (count($item) < 1) {$item = [new PERTEPRODUIT()]; }
-		$total += $item[0]->quantite;
-		return $total;
-	}
-
-
-	public function perteRangement(string $date1, string $date2, int $agence_id = null){
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		$requette = "SELECT SUM(perte) as perte  FROM ligneproduction, production WHERE ligneproduction.produit_id = ?  AND ligneproduction.production_id = production.id AND production.etat_id = ?  AND production.ladate >= ? AND production.ladate <= ? $paras ";
-		$item = LIGNEPRODUCTION::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNEPRODUCTION()]; }
+		$requette = "SELECT SUM(perte) as perte  FROM ligneproductionchantier, productionchantier WHERE ligneproductionchantier.produit_id = ?  AND ligneproductionchantier.productionchantier_id = productionchantier.id AND productionchantier.etat_id = ?  AND productionchantier.ladate >= ? AND productionchantier.ladate <= ? $paras ";
+		$item = LIGNEPRODUCTIONCHANTIER::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEPRODUCTIONCHANTIER()]; }
 		return $item[0]->perte;
 	}
 
-	public function perteAutre(string $date1, string $date2, int $agence_id = null){
+
+	public function perteAutre(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
 		}
-		$requette = "SELECT SUM(quantite) as quantite  FROM perteproduit WHERE perteproduit.produit_id = ? AND perteproduit.etat_id = ? AND perteproduit.typeperte_id != ?  AND DATE(perteproduit.created) >= ? AND DATE(perteproduit.created) <= ? $paras ";
-		$item = PERTEPRODUIT::execute($requette, [$this->id, ETAT::VALIDEE, TYPEPERTE::CHARGEMENT, $date1, $date2]);
-		if (count($item) < 1) {$item = [new PERTEPRODUIT()]; }
+		$requette = "SELECT SUM(quantite) as quantite  FROM pertechantierproduit WHERE pertechantierproduit.produit_id = ? AND pertechantierproduit.etat_id = ? AND pertechantierproduit.typeperte_id != ?  AND DATE(pertechantierproduit.created) >= ? AND DATE(pertechantierproduit.created) <= ? $paras ";
+		$item = PERTECHANTIERPRODUIT::execute($requette, [$this->id, ETAT::VALIDEE, TYPEPERTE::CHARGEMENT, $date1, $date2]);
+		if (count($item) < 1) {$item = [new PERTECHANTIERPRODUIT()]; }
 		return $item[0]->quantite;
 	}
 
 
 
-	public function attente(int $agence_id = null){
+	public function attente(int $chantier_id = null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
 		}
-		$requette = "SELECT SUM(quantite) as quantite  FROM ligneproduction, production WHERE ligneproduction.produit_id = ? AND ligneproduction.production_id = production.id AND production.etat_id = ?  $paras ";
-		$item = LIGNEPRODUCTION::execute($requette, [$this->id, ETAT::PARTIEL]);
-		if (count($item) < 1) {$item = [new LIGNEPRODUCTION()]; }
+		$requette = "SELECT SUM(quantite) as quantite  FROM ligneproductionchantier, productionchantier WHERE ligneproductionchantier.produit_id = ? AND ligneproductionchantier.productionchantier_id = productionchantier.id AND productionchantier.etat_id = ?  $paras ";
+		$item = LIGNEPRODUCTIONCHANTIER::execute($requette, [$this->id, ETAT::PARTIEL]);
+		if (count($item) < 1) {$item = [new LIGNEPRODUCTIONCHANTIER()]; }
 		return $item[0]->quantite;
 	}
 
 
-	public function livrable(string $date1, string $date2, int $agence_id = null){
-		if ($agence_id != null) {
-			$item = $this->fourni("initialproduitagence", ["agence_id ="=>$agence_id])[0];
+	public function livrable(string $date1, string $date2, int $chantier_id = null){
+		if ($chantier_id != null) {
+			$item = $this->fourni("initialproduitchantier", ["chantier_id ="=>$chantier_id])[0];
 			$quantite = $item->quantite;
 		}else{
-			$item = $this->fourni("initialproduitagence");
+			$item = $this->fourni("initialproduitchantier");
 			$quantite = comptage($item, "quantite", "somme");
 		}
-		$total = $this->production($date1, $date2, $agence_id) + $this->achat($date1, $date2, $agence_id) - $this->livraison($date1, $date2, $agence_id) - $this->perte($date1, $date2, $agence_id) + $quantite - $this->surplus($agence_id) - $this->attente($agence_id);
+		$total = $this->production($date1, $date2, $chantier_id) + $this->achat($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $quantite - $this->attente($chantier_id);
 		return $total;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	public function enAgence(string $date1, string $date2, int $agence_id = null){
-		return $this->livrable($date1, $date2, $agence_id) + $this->attente($agence_id);
+	public function enAgence(string $date1, string $date2, int $chantier_id = null){
+		return $this->livrable($date1, $date2, $chantier_id) + $this->attente($chantier_id);
 	}
-
 
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	public function commandee(int $agence_id = null){
+	public function commandee(int $chantier_id = null){
 		$total = 0;
-		$datas = GROUPECOMMANDE::findBy(["etat_id ="=>ETAT::ENCOURS, "agence_id ="=> $agence_id]);
+		$datas = GROUPECOMMANDE::findBy(["etat_id ="=>ETAT::ENCOURS, "chantier_id ="=> $chantier_id]);
 		foreach ($datas as $key => $comm) {
 			$total += $comm->reste($this->id);
 		}
@@ -255,11 +201,11 @@ class PRODUIT extends TABLE
 
 
 
-	public static function rupture(int $agence_id = null){
+	public static function rupture(int $chantier_id = null){
 		$params = PARAMS::findLastId();
 		$datas = static::isActives();
 		foreach ($datas as $key => $item) {
-			if ($item->enAgence(PARAMS::DATE_DEFAULT, dateAjoute(1), $agence_id) > $params->ruptureStock) {
+			if ($item->enAgence(PARAMS::DATE_DEFAULT, dateAjoute(1), $chantier_id) > $params->ruptureStock) {
 				unset($datas[$key]);
 			}
 		}

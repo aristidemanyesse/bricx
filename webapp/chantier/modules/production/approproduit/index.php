@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 
-<?php include($this->rootPath("webapp/entrepot/elements/templates/head.php")); ?>
+<?php include($this->rootPath("webapp/chantier/elements/templates/head.php")); ?>
 
 
 <body class="fixed-sidebar">
 
     <div id="wrapper">
 
-        <?php include($this->rootPath("webapp/entrepot/elements/templates/sidebar.php")); ?>  
+        <?php include($this->rootPath("webapp/chantier/elements/templates/sidebar.php")); ?>  
 
         <div id="page-wrapper" class="gray-bg">
 
-          <?php include($this->rootPath("webapp/entrepot/elements/templates/header.php")); ?>  
+          <?php include($this->rootPath("webapp/chantier/elements/templates/header.php")); ?>  
 
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-9">
                 <h2 class="text-uppercase text-warning gras">Les approvisionnements en cours</h2>
             </div>
             <div class="col-sm-3">
-                <button style="margin-top: 5%" data-toggle='modal' data-target="#modal-approvisionnement" class="btn btn-warning dim"><i class="fa fa-plus"></i> Approvisionnement de briques</button>
+                <button style="margin-top: 5%" data-toggle='modal' data-target="#modal-approvisionnement" class="btn btn-warning dim"><i class="fa fa-plus"></i> Appro de produits</button>
             </div>
         </div>
 
@@ -52,6 +52,7 @@
 
                                     <th data-toggle="true">Status</th>
                                     <th>Reference</th>
+                                    <th>Entrepôt</th>
                                     <th>Enregistré par</th>
                                     <th>Montant</th>
                                     <th>Reste à payer</th>
@@ -63,7 +64,7 @@
                             <tbody>
                                 <?php foreach ($encours as $key => $appro) {
                                     $appro->actualise(); 
-                                    $lots = $appro->fourni("ligneapproproduit");
+                                    $lots = $appro->fourni("ligneapprochantierproduit");
                                     ?>
                                     <tr style="border-bottom: 2px solid black">
                                         <td class="project-status">
@@ -72,6 +73,9 @@
                                         <td>
                                             <span class="text-uppercase gras">Appro N°<?= $appro->reference ?></span><br>
                                             <small><?= depuis($appro->created) ?></small>
+                                        </td>
+                                        <td>
+                                            <h6 class="text-uppercase text-muted gras" style="margin: 0"><?= $appro->chantier->name() ?></h6>
                                         </td>
                                         <td><i class="fa fa-user"></i> <?= $appro->employe->name() ?></td>
                                         <td>
@@ -84,21 +88,21 @@
                                                 <span class="gras text-orange"><?= money($appro->reste()) ?> <?= $params->devise  ?></span>
                                             </h4>
                                         </td>
-                                        <td class="text-uppercase"><a href="<?= $this->url("entrepot", "stock", "fournisseur", $appro->fournisseur->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseur->name() ?></a></td>
+                                        <td class="text-uppercase"><a href="<?= $this->url("chantier", "stock", "fournisseur", $appro->fournisseurchantier->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseurchantier->name() ?></a></td>
                                         <td class="border-right">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr class="no">
-                                                        <?php foreach ($appro->ligneapproproduits as $key => $ligne) {
+                                                        <?php foreach ($appro->ligneapprochantierproduits as $key => $ligne) {
                                                             $ligne->actualise(); ?>
-                                                            <th class="text-center gras"><span class="small"><?= $ligne->ressource->name() ?></span></th>
+                                                            <th class="text-center gras"><span class="small"><?= $ligne->produit->name() ?></span></th>
                                                         <?php } ?>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <?php foreach ($lots as $key => $ligne) { ?>
-                                                            <td class="text-center"><?= start0($ligne->quantite) ?> <?= $ligne->ressource->abbr ?></td>
+                                                            <td class="text-center"><?= start0($ligne->quantite) ?></td>
                                                         <?php } ?>
                                                     </tr>
                                                 </tbody>  
@@ -110,15 +114,15 @@
                                                 <button onclick="terminer(<?= $appro->id ?>)" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Valider</button>
                                             <?php } ?>
                                             <?php if ($employe->isAutoriser("modifier-supprimer") && $appro->etat_id != Home\ETAT::ANNULEE) { ?>
-                                            <button onclick="annuler('approemballage', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
-                                        <?php } ?>
+                                                <button onclick="annuler('approproduit', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php  } ?>
                                 <tr />
                                 <?php foreach ($datas as $key => $appro) {
                                     $appro->actualise(); 
-                                    $lots = $appro->fourni("ligneapproproduit");
+                                    $lots = $appro->fourni("ligneapprochantierproduit");
                                     ?>
                                     <tr style="border-bottom: 2px solid black">
                                         <td class="project-status">
@@ -128,7 +132,10 @@
                                             <span class="text-uppercase gras">Appro N°<?= $appro->reference ?></span><br>
                                             <small><?= depuis($appro->created) ?></small>
                                         </td>
-                                        <td><i class="fa fa-user"></i> <?= $appro->fournisseur->name() ?></td>
+                                        <td>
+                                            <h6 class="text-uppercase text-muted gras" style="margin: 0"><?= $appro->chantier->name() ?></h6>
+                                        </td>
+                                        <td><i class="fa fa-user"></i> <?= $appro->fournisseurchantier->name() ?></td>
                                         <td>
                                             <h4>
                                                 <span class="gras text-orange"><?= money($appro->montant) ?> <?= $params->devise  ?></span>
@@ -139,71 +146,71 @@
                                                 <span class="gras text-orange"><?= money($appro->reste()) ?> <?= $params->devise  ?></span>
                                             </h4>
                                         </td>
-                                        <td class="text-uppercase"><a href="<?= $this->url("entrepot", "stock", "fournisseur", $appro->fournisseur->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseur->name() ?></a></td>
+                                        <td class="text-uppercase"><a href="<?= $this->url("chantier", "stock", "fournisseur", $appro->fournisseurchantier->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseurchantier->name() ?></a></td>
                                         <td class="border-right">
-                                         <table class="table table-bordered">
-                                            <thead>
-                                                <tr class="no">
-                                                    <?php foreach ($appro->ligneapproproduits as $key => $ligne) {
-                                                        $ligne->actualise(); ?>
-                                                        <th class="text-center gras"><span class="small"><?= $ligne->ressource->name() ?></span></th>
-                                                    <?php } ?>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <?php foreach ($lots as $key => $ligne) { ?>
-                                                        <td class="text-center"><?= start0($ligne->quantite) ?> <?= $ligne->ressource->abbr ?></td>
-                                                    <?php } ?>
-                                                </tr>
-                                            </tbody>  
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <a href="<?= $this->url("fiches", "master", "bonapprovisionnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="no">
+                                                        <?php foreach ($appro->ligneapprochantierproduits as $key => $ligne) {
+                                                            $ligne->actualise(); ?>
+                                                            <th class="text-center gras"><span class="small"><?= $ligne->produit->name() ?></span></th>
+                                                        <?php } ?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <?php foreach ($lots as $key => $ligne) { ?>
+                                                            <td class="text-center"><?= start0($ligne->quantite) ?></td>
+                                                        <?php } ?>
+                                                    </tr>
+                                                </tbody>  
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <a href="<?= $this->url("fiches", "master", "bonapprovisionnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
 
-                                        <?php if ($employe->isAutoriser("modifier-supprimer") && $appro->etat_id != Home\ETAT::ANNULEE) { ?>
-                                            <button onclick="annuler('approemballage', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
-                                        <?php } ?>
+                                            <?php if ($employe->isAutoriser("modifier-supprimer") && $appro->etat_id != Home\ETAT::ANNULEE) { ?>
+                                                <button onclick="annuler('approproduit', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php  } ?>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination float-right"></ul>
                                     </td>
                                 </tr>
-                            <?php  } ?>
+                            </tfoot>
+                        </table>
 
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <ul class="pagination float-right"></ul>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <?php }else{ ?>
+                        <h1 style="margin: 6% auto;" class="text-center text-muted"><i class="fa fa-folder-open-o fa-3x"></i> <br> Aucun approvisionnement pour le moment</h1>
+                    <?php } ?>
 
-                <?php }else{ ?>
-                    <h1 style="margin: 6% auto;" class="text-center text-muted"><i class="fa fa-folder-open-o fa-3x"></i> <br> Aucun approvisionnement pour le moment</h1>
-                <?php } ?>
-
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <?php include($this->rootPath("webapp/entrepot/elements/templates/footer.php")); ?>
-    <?php include($this->rootPath("composants/assets/modals/modal-approvisionnement.php")); ?> 
+        <?php include($this->rootPath("webapp/chantier/elements/templates/footer.php")); ?>
+        <?php include($this->rootPath("composants/assets/modals/modal-approvisionnement1.php")); ?> 
 
 
 
-    <?php 
-    foreach ($encours as $key => $appro) {
+        <?php 
+        foreach ($encours as $key => $appro) {
             include($this->rootPath("composants/assets/modals/modal-approvisionnement2.php"));
-    } 
-    ?>
+        } 
+        ?>
 
+    </div>
 </div>
-</div>
 
 
-<?php include($this->rootPath("webapp/entrepot/elements/templates/script.php")); ?>
+<?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
 <script type="text/javascript" src="<?= $this->relativePath("../client/script.js") ?>"></script>
 
 
