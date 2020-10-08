@@ -11,37 +11,37 @@ extract($_POST);
 
 
 
-if ($action == "depotproduit") {
-	$tests = $listeproduits = explode(",", $listeproduits);
+if ($action == "depotressource") {
+	$tests = $listeressources = explode(",", $listeressources);
 	foreach ($tests as $key => $value) {
 		$lot = explode("-", $value);
 		$id = $lot[0];
 		$qte = end($lot);
-		$datas = PRODUIT::findBy(["id ="=> $id]);
+		$datas = RESSOURCE::findBy(["id ="=> $id]);
 		if (count($datas) == 1) {
-			$produit = $datas[0];
-			if ($produit->enAgence(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("agence_connecte_id")) >= $qte) {
+			$ressource = $datas[0];
+			if ($ressource->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("agence_connecte_id")) >= $qte) {
 				unset($tests[$key]);
 			}	
 		}
 	}
 	if (count($tests) == 0) {
-		$depot = new DEPOTPRODUIT();
+		$depot = new DEPOTRESSOURCE();
 		$depot->hydrater($_POST);
 		$depot->etat_id = ETAT::ENCOURS;
 		$data = $depot->enregistre();
 		if ($data->status) {
-			foreach ($listeproduits as $key => $value) {
+			foreach ($listeressources as $key => $value) {
 				$lot = explode("-", $value);
 				$id = $lot[0];
 				$qte = end($lot);
-				$datas = PRODUIT::findBy(["id ="=> $id]);
+				$datas = RESSOURCE::findBy(["id ="=> $id]);
 				if (count($datas) == 1) {
-					$produit = $datas[0];
+					$ressource = $datas[0];
 					if ($qte > 0) {
-						$ligne = new LIGNEDEPOTPRODUIT();
-						$ligne->depotproduit_id = $depot->id;
-						$ligne->produit_id = $produit->id;
+						$ligne = new LIGNEDEPOTRESSOURCE();
+						$ligne->depotressource_id = $depot->id;
+						$ligne->ressource_id = $ressource->id;
 						$ligne->quantite_depart = intval($qte);
 						$data = $ligne->enregistre();
 					}
@@ -51,7 +51,7 @@ if ($action == "depotproduit") {
 		}
 	}else{
 		$data->status = false;
-		$data->message = "Certains des produits sont en quantité insuffisantes pour faire cet envoi !";
+		$data->message = "Certains des ressources sont en quantité insuffisantes pour faire cet envoi !";
 	}
 	echo json_encode($data);
 }
@@ -65,13 +65,13 @@ if ($action == "annulerDepotProduit") {
 		$employe = $datas[0];
 		$employe->actualise();
 		if ($employe->checkPassword($password)) {
-			$datas = DEPOTPRODUIT::findBy(["id ="=>$id]);
+			$datas = DEPOTRESSOURCE::findBy(["id ="=>$id]);
 			if (count($datas) == 1) {
 				$prospection = $datas[0];
 				$data = $prospection->annuler();
 			}else{
 				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'opération! Veuillez recommencer";
+				$data->message = "Une erreur s'est ressourcee lors de l'opération! Veuillez recommencer";
 			}
 		}else{
 			$data->status = false;

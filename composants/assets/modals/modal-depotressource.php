@@ -1,6 +1,6 @@
 
-<div class="modal inmodal fade" id="modal-envoibrique" style="z-index: 9999999999">
-    <div class="modal-dialog modal-xll">
+<div class="modal inmodal fade" id="modal-depotressource" style="z-index: 9999999999">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -12,21 +12,21 @@
                 <div class="col-md-8">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5 class="text-uppercase">Les produits à envoyer</h5>
+                            <h5 class="text-uppercase">Les ressources à envoyer</h5>
                         </div>
                         <div class="ibox-content"><br>
                             <div class="table-responsive">
                                 <table class="table  table-striped">
-                                    <tbody class="commande">
+                                    <tbody class="approvisionnement">
                                         <!-- rempli en Ajax -->
                                     </tbody>
                                 </table>
                             </div><hr>
 
                             <div class=" text-center">
-                                <?php foreach (Home\PRODUIT::isActives() as $key => $item) {
+                                <?php foreach (Home\RESSOURCE::isActives() as $key => $item) {
                                     $item->actualise();  ?>
-                                    <button class="btn btn-white dim newproduit text-capitalize" data-id="<?= $item->id ?>"><i class="fa fa-flask"></i> <?= $item->name(); ?></button>                   
+                                    <button class="btn btn-white dim newressource2 text-capitalize" data-id="<?= $item->id ?>"><i class="fa fa-cubes"></i> <?= $item->name(); ?></button>                   
                                 <?php  } ?>
                             </div>
                         </div>
@@ -47,21 +47,14 @@
                                 </div><br>
 
                                 <div>
-                                    <label>Lieu de livraison <span style="color: red">*</span> </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span><input type="text" name="lieu" class="form-control" required>
-                                    </div>
-                                </div><br>
-
-                                <div>
-                                    <label>Véhicule de la livraison <span style="color: red">*</span> </label>                                
+                                    <label>Véhicule de la livraison <span style="color: red">*</span> </label>                               
                                     <div class="input-group">
                                         <?php Native\BINDING::html("select", "vehicule"); ?>
                                     </div>
                                 </div><br>
 
                                 <div class="chauffeur">
-                                    <label>Chauffeur de la livraison <span style="color: red">*</span> </label>                                
+                                    <label>Chauffeur de la livraison <span style="color: red">*</span> </label>                              
                                     <div class="input-group">
                                         <?php Native\BINDING::html("select", "chauffeur"); ?>
                                     </div><br>
@@ -101,7 +94,7 @@
                                 <input type="hidden" name="agence_id" value="<?= $agence->id ?>">
                             </form>
                             <hr/>
-                            <button onclick="miseenboutique()" class="btn btn-primary btn-block dim"><i class="fa fa-check"></i> Valider la sortie</button>
+                            <button onclick="depotressource()" class="btn btn-primary btn-block dim"><i class="fa fa-check"></i> Valider la sortie</button>
                         </div>
                     </div>
 

@@ -136,6 +136,18 @@ class PRODUIT extends TABLE
 	}
 
 
+	public function depot(string $date1, string $date2, int $agence_id = null){
+		$paras = "";
+		if ($agence_id != null) {
+			$paras.= "AND agence_id = $agence_id ";
+		}
+		$requette = "SELECT SUM(quantite_depart) as quantite  FROM lignedepotproduit, depotproduit WHERE lignedepotproduit.produit_id = ?  AND lignedepotproduit.depotproduit_id = depotproduit.id AND depotproduit.etat_id != ? AND DATE(depotproduit.created) >= ? AND DATE(depotproduit.created) <= ? $paras ";
+		$item = LIGNEDEPOTPRODUIT::execute($requette, [$this->id, ETAT::ANNULEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEDEPOTPRODUIT()]; }
+		return $item[0]->quantite;
+	}
+
+
 	public function livraison(string $date1, string $date2, int $agence_id = null){
 		$paras = "";
 		if ($agence_id != null) {
@@ -227,7 +239,7 @@ class PRODUIT extends TABLE
 			$item = $this->fourni("initialproduitagence");
 			$quantite = comptage($item, "quantite", "somme");
 		}
-		$total = $this->production($date1, $date2, $agence_id) + $this->achat($date1, $date2, $agence_id) - $this->livraison($date1, $date2, $agence_id) - $this->perte($date1, $date2, $agence_id) + $quantite - $this->surplus($agence_id) - $this->attente($agence_id);
+		$total = $this->production($date1, $date2, $agence_id) + $this->achat($date1, $date2, $agence_id) - $this->livraison($date1, $date2, $agence_id) - $this->depot($date1, $date2, $agence_id) - $this->perte($date1, $date2, $agence_id) + $quantite - $this->surplus($agence_id) - $this->attente($agence_id);
 		return $total;
 	}
 

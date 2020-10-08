@@ -50,6 +50,43 @@ if ($action == "newressource") {
 }
 
 
+
+if ($action == "newressource2") {
+	$params = PARAMS::findLastId();
+	$rooter = new ROOTER;
+	$ressources = [];
+	if (getSession("ressources") != null) {
+		$ressources = getSession("ressources"); 
+	}
+	if (!in_array($id, $ressources)) {
+		$ressources[] = $id;
+		$datas = RESSOURCE::findBy(["id ="=> $id]);
+		if (count($datas) == 1) {
+			$ressource = $datas[0]; ?>
+			<tr class="border-0 border-bottom " id="ligne<?= $id ?>" data-id="<?= $id ?>">
+				<td><i class="fa fa-close text-red cursor" onclick="supprimeRessource(<?= $id ?>)" style="font-size: 18px;"></i></td>
+				<td >
+					<img style="width: 40px" src="<?= $rooter->stockage("images", "ressources", $ressource->image) ?>">
+				</td>
+				<td class="text-left">
+					<h4 class="mp0 text-uppercase"><?= $ressource->name() ?></h4>
+					<small><?= $ressource->unite ?></small>
+				</td>
+				<td width="90">
+					<label>Quantité</label>
+					<input type="text" number name="quantite" class="form-control text-center gras" value="1" style="padding: 3px">
+				</td>
+				<td class="gras"><br><br><?= $ressource->abbr ?></td>
+			</tr>
+			<?php
+		}
+	}
+	session("ressources", $ressources);
+}
+
+
+
+
 if ($action == "supprimeRessource") {
 	$ressources = [];
 	if (getSession("ressources") != null) {

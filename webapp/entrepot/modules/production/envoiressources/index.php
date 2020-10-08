@@ -19,7 +19,7 @@
                 <h2 class="text-uppercase text-green gras">Envoi de briques sur chantier</h2>
             </div>
             <div class="col-sm-3">
-                <button style="margin-top: 5%;" type="button" data-toggle=modal data-target='#modal-depotproduit' class="btn btn-primary btn-sm dim float-right"><i class="fa fa-plus"></i> Nouvel envoi </button>
+                <button style="margin-top: 5%;" type="button" data-toggle=modal data-target='#modal-depotressource' class="btn btn-primary btn-sm dim float-right"><i class="fa fa-plus"></i> Nouvel envoi </button>
             </div>
         </div>
 
@@ -61,7 +61,7 @@
                         <tbody>
                          <?php foreach ($encours as $key => $depot) {
                             $depot->actualise(); 
-                            $lots = $depot->fourni("lignedepotproduit");
+                            $lots = $depot->fourni("lignedepotressource");
                             ?>
                             <tr style="border-bottom: 2px solid black">
                                 <td class="project-status">
@@ -85,29 +85,29 @@
                                         <thead>
                                             <tr class="no">
                                                 <th></th>
-                                                <?php foreach ($depot->lignedepotproduits as $key => $ligne) {
+                                                <?php foreach ($depot->lignedepotressources as $key => $ligne) {
                                                     $ligne->actualise(); ?>
-                                                    <th class="text-center" style="padding: 2px"><span class="small"><?= $ligne->produit->name() ?></span></th>
+                                                    <th class="text-center" style="padding: 2px"><span class="small"><?= $ligne->ressource->name() ?></span></th>
                                                 <?php } ?>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td><h4 class="mp0">sorti : </h4></td>
-                                                <?php foreach ($depot->lignedepotproduits as $key => $ligne) { ?>
-                                                    <td class="text-center"><?= start0($ligne->quantite_depart) ?></td>
+                                                <?php foreach ($depot->lignedepotressources as $key => $ligne) { ?>
+                                                    <td class="text-center"><?= start0($ligne->quantite_depart) ?> <?= $ligne->ressource->abbr  ?></td>
                                                 <?php } ?>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </td>
                                 <td>
-                                    <a href="<?= $this->url("fiches", "master", "bondepotproduit", $depot->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                    <a href="<?= $this->url("fiches", "master", "bondepotressource", $depot->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                     <?php if ($depot->etat_id == Home\ETAT::PARTIEL) { ?>
                                         <button onclick="accepter(<?= $depot->id ?>)" class="btn btn-white btn-sm text-green"><i class="fa fa-check"></i> Accepter</button>
                                     <?php } ?>
                                     <?php if ($employe->isAutoriser("modifier-supprimer") && $depot->etat_id != Home\ETAT::ANNULEE) { ?>
-                                        <button onclick="annuler('depotproduit', <?= $depot->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                        <button onclick="annuler('depotressource', <?= $depot->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -115,7 +115,7 @@
                         <tr />
                         <?php foreach ($datas as $key => $depot) {
                             $depot->actualise(); 
-                            $lots = $depot->fourni("lignedepotproduit");
+                            $lots = $depot->fourni("lignedepotressource");
                             ?>
                             <tr style="border-bottom: 2px solid black">
                                 <td class="project-status">
@@ -139,33 +139,33 @@
                                         <thead>
                                             <tr class="no">
                                                 <th></th>
-                                                <?php foreach ($depot->lignedepotproduits as $key => $ligne) {
+                                                <?php foreach ($depot->lignedepotressources as $key => $ligne) {
                                                     $ligne->actualise(); ?>
-                                                    <th class="text-center" style="padding: 2px"><span class="small"><?= $ligne->produit->name() ?></span></th>
+                                                    <th class="text-center" style="padding: 2px"><span class="small"><?= $ligne->ressource->name() ?></span></th>
                                                 <?php } ?>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td><h4 class="mp0">sorti : </h4></td>
-                                                <?php foreach ($depot->lignedepotproduits as $key => $ligne) { ?>
-                                                    <td class="text-center"><?= start0($ligne->quantite_depart) ?></td>
+                                                <?php foreach ($depot->lignedepotressources as $key => $ligne) { ?>
+                                                    <td class="text-center"><?= start0($ligne->quantite_depart) ?> <?= $ligne->ressource->abbr  ?></td>
                                                 <?php } ?>
                                             </tr>
                                             <tr>
                                                 <td><h4 class="mp0">Livré : </h4></td>
-                                                <?php foreach ($depot->lignedepotproduits as $key => $ligne) { ?>
-                                                    <td class="text-center"><?= start0($ligne->quantite) ?></td>
+                                                <?php foreach ($depot->lignedepotressources as $key => $ligne) { ?>
+                                                    <td class="text-center"><?= start0($ligne->quantite) ?> <?= $ligne->ressource->abbr  ?></td>
                                                 <?php } ?>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </td>
                                 <td>
-                                    <a href="<?= $this->url("fiches", "master", "bondepotproduit", $depot->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                    <a href="<?= $this->url("fiches", "master", "bondepotressource", $depot->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
 
                                     <?php if ($employe->isAutoriser("modifier-supprimer") && $depot->etat_id != Home\ETAT::ANNULEE) { ?>
-                                        <button onclick="annuler('depotproduit', <?= $depot->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
+                                        <button onclick="annuler('depotressource', <?= $depot->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -191,7 +191,7 @@
 
 
 <?php include($this->rootPath("webapp/entrepot/elements/templates/footer.php")); ?> 
-<?php include($this->rootPath("composants/assets/modals/modal-depotproduit.php")); ?>
+<?php include($this->rootPath("composants/assets/modals/modal-depotressource.php")); ?>
 
 
 </div>
@@ -199,7 +199,7 @@
 
 
 <?php include($this->rootPath("webapp/entrepot/elements/templates/script.php")); ?>
-<script type="text/javascript" src="<?= $this->rootPath("webapp/boutique/modules/master/client/script.js") ?>"></script>
+<script type="text/javascript" src="<?= $this->rootPath("webapp/entrepot/modules/production/approvisionnements/script.js") ?>"></script>
 
 
 </body>

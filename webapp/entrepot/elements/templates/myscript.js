@@ -42,6 +42,11 @@
         });
 
 
+        $("div.tricycle").hide()
+        $("div.location").hide()
+        $("div.montant_location").hide()
+        $("div.chauffeur").hide()
+        
 
         $("body").on("change", "select[name=vehicule_id]", function(event) {
             //son vehicule

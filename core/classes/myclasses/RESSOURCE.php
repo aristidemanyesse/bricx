@@ -42,7 +42,7 @@ class RESSOURCE extends TABLE
 			}
 		}else{
 			$data->status = false;
-			$data->message = "Veuillez renseigner le nom du produit !";
+			$data->message = "Veuillez renseigner le nom de la ressource !";
 		}
 		return $data;
 	}
@@ -51,7 +51,7 @@ class RESSOURCE extends TABLE
 
 	public function stock(String $date1, String $date2, int $agence_id){
 		$item = $this->fourni("initialressourceagence", ["agence_id ="=>$agence_id])[0];
-		return $this->achat($date1, $date2, $agence_id) - $this->consommee($date1, $date2, $agence_id) - $this->perte($date1, $date2, $agence_id) + $item->quantite;
+		return $this->achat($date1, $date2, $agence_id) - $this->depot($date1, $date2, $agence_id) - $this->consommee($date1, $date2, $agence_id) - $this->perte($date1, $date2, $agence_id) + $item->quantite;
 	}
 
 
@@ -68,6 +68,18 @@ class RESSOURCE extends TABLE
 		return $item[0]->quantite;
 	}
 
+
+
+	public function depot(string $date1, string $date2, int $agence_id = null){
+		$paras = "";
+		if ($agence_id != null) {
+			$paras.= "AND agence_id = $agence_id ";
+		}
+		$requette = "SELECT SUM(quantite_depart) as quantite  FROM lignedepotressource, depotressource WHERE lignedepotressource.ressource_id = ?  AND lignedepotressource.depotressource_id = depotressource.id AND depotressource.etat_id != ? AND DATE(depotressource.created) >= ? AND DATE(depotressource.created) <= ? $paras ";
+		$item = LIGNEDEPOTRESSOURCE::execute($requette, [$this->id, ETAT::ANNULEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEDEPOTRESSOURCE()]; }
+		return $item[0]->quantite;
+	}
 
 
 	public function consommee(string $date1, string $date2, int $agence_id = null){

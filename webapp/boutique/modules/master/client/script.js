@@ -116,6 +116,19 @@ $(function(){
 		});
 
 
+		//nouvelle commande
+		$("body").on("click", ".newproduit2", function(event) {
+			var url = "../../webapp/boutique/modules/master/client/ajax.php";
+			var id = $(this).attr("data-id");
+			var zone = $("select[name=zonelivraison_id]").val();
+			$.post(url, {action:"newproduit2", id:id, zone:zone}, (data)=>{
+				$("tbody.commande").append(data);
+				$("button[data-id ="+id+"]").hide(200);
+				calcul()
+			},"html");
+		});
+
+
 		calcul = function(){
 			var url = "../../webapp/boutique/modules/master/client/ajax.php";
 			var formdata = new FormData($("#formCommande")[0]);

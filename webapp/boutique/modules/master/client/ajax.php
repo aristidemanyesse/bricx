@@ -56,6 +56,37 @@ if ($action == "newproduit") {
 
 
 
+if ($action == "newproduit2") {
+	$params = PARAMS::findLastId();
+	$rooter = new ROOTER;
+	$produits = [];
+	if (getSession("produits") != null) {
+		$produits = getSession("produits"); 
+	}
+	if (!in_array($id, $produits)) {
+		$produits[] = $id;
+		$datas = PRODUIT::findBy(["id ="=> $id]);
+		if (count($datas) == 1) {
+			$produit = $datas[0];
+			?>
+			<tr class="border-0 border-bottom " id="ligne<?= $id ?>" data-id="<?= $id ?>">
+				<td><i class="fa fa-close text-red cursor" onclick="supprimeProduit(<?= $id ?>)" style="font-size: 18px;"></i></td>
+				<td >
+					<img style="width: 40px" src="<?= $rooter->stockage("images", "produits", $produit->image) ?>">
+				</td>
+				<td class="text-left">
+					<h4 class="mp0 text-uppercase"><?= $produit->name() ?></h4>
+					<small><?= $produit->comment ?></small>
+				</td>
+				<td width="100"><input type="text" number class="form-control text-center gras" value="1" style="padding: 3px"></td>
+			</tr>
+			<?php
+		}
+	}
+	session("produits", $produits);
+}
+
+
 if ($action == "calcul") {
 	$montant = 0;
 	$produits = explode(",", $tableau);

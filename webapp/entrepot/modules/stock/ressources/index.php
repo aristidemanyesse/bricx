@@ -91,6 +91,7 @@
                                     <?php foreach ($ressources as $key => $ressource) {
                                         $stock = $ressource->stock(Home\PARAMS::DATE_DEFAULT, $index, $agence->id);
                                         $appro = $ressource->achat($index, $index, $agence->id);
+                                        $envoi = $ressource->depot($index, $index, $agence->id);
                                         $conso = $ressource->consommee($index, $index, $agence->id);
                                         $perte = $ressource->perte($index, $index, $agence->id);
                                         ?>
@@ -103,6 +104,7 @@
                                         data-content="
                                         <span>Appro du jour : <b><?= round($appro, 2) ?> <?= $ressource->abbr ?></b></span><br>
                                         <span>Conso du jour : <b><?= round($conso, 2) ?> <?= $ressource->abbr ?></b></span><br>
+                                        <span>Envoi sur chantier : <b><?= round($envoi, 2) ?> <?= $ressource->abbr ?></b></span><br>
                                         <span>Perte : <b><?= round($perte, 2) ?> <?= $ressource->abbr ?></b></span>
                                         <hr style='margin:1.5%'>
                                         <span>En stock à ce jour : <b><?= round($stock, 2) ?> <?= $ressource->abbr ?></b></span><br> <span>">
