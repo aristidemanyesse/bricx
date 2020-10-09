@@ -142,15 +142,15 @@ if ($action == "get_data") {
 			$data = $datas[0];
 			$data->status = true;
 
-			if ($table == "production") {
-				$data->fourni("ligneproduction");
-				foreach ($data->ligneproductions as $key => $value) {
+			if ($table == "productionchantier") {
+				$data->fourni("ligneproductionchantier");
+				foreach ($data->ligneproductionchantiers as $key => $value) {
 					$prod = "prod-".$value->produit_id;
 					$data->$prod = $value->quantite;
 				}
 
-				$data->fourni("ligneconsommation");
-				foreach ($data->ligneconsommations as $key => $value) {
+				$data->fourni("ligneconsommationchantier");
+				foreach ($data->ligneconsommationchantiers as $key => $value) {
 					$conso = "conso-".$value->ressource_id;
 					$data->$conso = $value->quantite;
 				}

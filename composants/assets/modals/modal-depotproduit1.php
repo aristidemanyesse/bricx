@@ -1,13 +1,13 @@
 
-<div class="modal inmodal fade" id="modal-depotproduit-<?= $mise->id ?>" style="z-index: 1">
+<div class="modal inmodal fade" id="modal-depotproduit-<?= $depot->id ?>" style="z-index: 1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="ibox-content">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <div class="text-center">
-                        <h1 class="title text-uppercase gras text-green">Validation de la mise en boutique </h1>
-                        <small>Veuillez renseigner la quantité de chaque type de produit que vous voulez mettre en boutique !</small>
+                        <h1 class="title text-uppercase gras text-green">Validation de l'envoi de briques </h1>
+                        <small>Veuillez renseigner la quantité de chaque type de produit que vous avez reçu !</small>
                     </div><hr>
 
                     <form id="formValiderDepotProduit" classname="depotproduit">
@@ -15,7 +15,7 @@
                             <div class="col-md-8">
                                 <table class="table  table-striped">
                                     <tbody class="">
-                                        <?php foreach ($mise->lignedepotproduits as $key => $ligne) { ?>
+                                        <?php foreach ($depot->lignedepotproduits as $key => $ligne) { ?>
                                             <tr class="border-0 border-bottom ">
                                                 <td class="text-left">
                                                     <h4 class="mp0 text-uppercase"><?= $ligne->produit->name() ?></h4>
@@ -37,11 +37,11 @@
                                     <br>
                                     <div class="">
                                         <label>Ajouter une note</label>
-                                        <textarea class="form-control" name="comment" value="<?= $mise->comment ?>" rows="4"></textarea>
+                                        <textarea class="form-control" name="comment" value="<?= $depot->comment ?>" rows="4"></textarea>
                                     </div><br><br>
 
                                     <div class="text-center">
-                                        <button class="btn dim btn-primary btn-block" ><i class="fa fa-check"></i> Valider la mise en boutique</button>
+                                        <button class="btn dim btn-primary btn-block" ><i class="fa fa-check"></i> Valider la reception</button>
                                     </div><br>
                                 </div>
 

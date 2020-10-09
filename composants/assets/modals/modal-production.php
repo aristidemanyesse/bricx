@@ -8,7 +8,7 @@
                 <small class="font-bold">Enregistrez les quantités produites de briques</small>
             </div>
             
-            <form id="formProduction" class="formShamman" classname="production">
+            <form id="formProduction" class="formShamman" classname="productionchantier">
                 <div class="ibox">
                     <div class="ibox-content">
                         <div class="row">

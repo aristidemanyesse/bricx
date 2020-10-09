@@ -97,19 +97,13 @@
                                                     <td class="text-center"><?= start0($ligne->quantite_depart) ?></td>
                                                 <?php } ?>
                                             </tr>
-                                            <tr>
-                                                <td><h4 class="mp0">Livré : </h4></td>
-                                                <?php foreach ($depot->lignedepotproduits as $key => $ligne) { ?>
-                                                    <td class="text-center"><?= start0($ligne->quantite) ?></td>
-                                                <?php } ?>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </td>
                                 <td>
                                     <a href="<?= $this->url("fiches", "master", "bondepotproduit", $depot->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                     <?php if ($depot->etat_id == Home\ETAT::ENCOURS) { ?>
-                                        <button onclick="terminer(<?= $mise->id ?>)" class="btn btn-white btn-sm text-green"><i class="fa fa-check"></i> Valider</button>
+                                        <button onclick="terminer(<?= $depot->id ?>)" class="btn btn-white btn-sm text-green"><i class="fa fa-check"></i> Valider</button>
                                     <?php } ?>
                                     <?php if ($employe->isAutoriser("modifier-supprimer") && $depot->etat_id != Home\ETAT::ANNULEE) { ?>
                                         <button onclick="annuler('depotproduit', <?= $depot->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
