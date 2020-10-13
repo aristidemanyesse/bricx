@@ -15,19 +15,17 @@ class LIGNEUSEPRODUIT extends TABLE
 
 	public $useproduit_id;
 	public $produit_id;
-	public $quantite_depart;
 	public $quantite;
 	public $perte = 0;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = DEPOTPRODUIT::findBy(["id ="=>$this->useproduit_id]);
+		$datas = USEPRODUIT::findBy(["id ="=>$this->useproduit_id]);
 		if (count($datas) == 1) {
 			$datas = PRODUIT::findBy(["id ="=>$this->produit_id]);
 			if (count($datas) == 1) {
-				if ($this->quantite_depart >= 0) {
-					$this->quantite = $this->quantite_depart;
+				if ($this->quantite >= 0) {
 					$data = $this->save();
 				}				
 			}else{

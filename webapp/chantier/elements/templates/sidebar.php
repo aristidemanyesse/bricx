@@ -35,8 +35,8 @@
                 <li class="" id="dashboard">
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
-                <li class="" id="clients">
-                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-sitemap"></i> <span class="nav-label">Planning construction</span></a>
+                <li class="" id="planning">
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-sitemap"></i> <span class="nav-label">Planning construction</span></a>
                 </li>
                 <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
 
@@ -81,10 +81,10 @@
                     <li class="groupe">
                         <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de Materiels</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="approressource"><a href="<?= $this->url($this->section, "production", "approressource") ?>">Materiels engagés</a></li>
-                            <li id="approemballage"><a href="<?= $this->url($this->section, "production", "approemballage") ?>">Dépôts de materiels</a></li>
-                            <li id="approemballage"><a href="<?= $this->url($this->section, "production", "approemballage") ?>">Achat de materiels</a></li>
-                            <li id="emballages"><a href="<?= $this->url($this->section, "production", "emballages") ?>">les pertes</a></li>
+                            <li id="stockmateriel"><a href="<?= $this->url($this->section, "production", "stockmateriel") ?>">Materiels engagés</a></li>
+                            <li id="depotmateriel"><a href="<?= $this->url($this->section, "production", "depotmateriel") ?>">Dépôts de materiels</a></li>
+                            <li id="appromateriel"><a href="<?= $this->url($this->section, "production", "appromateriel") ?>">Achat de materiels</a></li>
+                            <li id="pertemateriel"><a href="<?= $this->url($this->section, "production", "pertemateriel") ?>">les pertes</a></li>
                         </ul>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>

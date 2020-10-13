@@ -112,6 +112,18 @@ class PRODUIT extends TABLE
 	}
 
 
+	public function depot(string $date1, string $date2, int $chantier_id = null){
+		$paras = "";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
+		}
+		$requette = "SELECT SUM(quantite) as quantite  FROM lignedepotproduit, depotproduit WHERE lignedepotproduit.produit_id = ?  AND lignedepotproduit.depotproduit_id = depotproduit.id AND depotproduit.etat_id = ? AND DATE(depotproduit.created) >= ? AND DATE(depotproduit.created) <= ? $paras ";
+		$item = LIGNEDEPOTPRODUIT::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEDEPOTPRODUIT()]; }
+		return $item[0]->quantite;
+	}
+
+
 	public function achat(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
 		if ($chantier_id != null) {
@@ -174,31 +186,13 @@ class PRODUIT extends TABLE
 			$item = $this->fourni("initialproduitchantier");
 			$quantite = comptage($item, "quantite", "somme");
 		}
-		$total = $this->production($date1, $date2, $chantier_id) + $this->achat($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $quantite - $this->attente($chantier_id);
+		$total = $this->production($date1, $date2, $chantier_id) + $this->achat($date1, $date2, $chantier_id) + $this->depot($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $quantite - $this->attente($chantier_id);
 		return $total;
-	}
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	public function enAgence(string $date1, string $date2, int $chantier_id = null){
-		return $this->livrable($date1, $date2, $chantier_id) + $this->attente($chantier_id);
 	}
 
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	public function commandee(int $chantier_id = null){
-		$total = 0;
-		$datas = GROUPECOMMANDE::findBy(["etat_id ="=>ETAT::ENCOURS, "chantier_id ="=> $chantier_id]);
-		foreach ($datas as $key => $comm) {
-			$total += $comm->reste($this->id);
-		}
-		return $total;
-	}
-
 
 
 	public static function rupture(int $chantier_id = null){

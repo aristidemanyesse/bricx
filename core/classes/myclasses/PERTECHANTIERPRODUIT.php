@@ -28,10 +28,10 @@ class PERTECHANTIERPRODUIT extends TABLE
 			if (count($datas) == 1) {
 				$datas = PRODUIT::findBy(["id ="=>$this->produit_id]);
 				if (count($datas) == 1) {
-					$ressource = $datas[0];
+					$produit = $datas[0];
 					if ($this->quantite > 0) {
 
-						$stock = $ressource->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("agence_connecte_id"));
+						$stock = $produit->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("chantier_connecte_id"));
 						if ($stock >= $this->quantite) {
 							$this->employe_id = getSession("employe_connecte_id");
 							$this->chantier_id = getSession("chantier_connecte_id");

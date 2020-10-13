@@ -1,7 +1,7 @@
 <?php 
 namespace Home;
 
-$title = "GPV | Toutes les pertes entrepots";
+$title = "GPV | Toutes les pertes de briques sur ce chantier";
 
 unset_session("produits");
 

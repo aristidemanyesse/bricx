@@ -8,7 +8,7 @@
                 <h4 class="modal-title">Enregistrer une perte</h4>
                 <small>Veuillez renseigner les informations pour enregistrer la perte</small>
             </div>
-            <form method="POST" class="formShamman" classname="perteressource">
+            <form method="POST" class="formShamman" classname="pertechantierressource">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-8">

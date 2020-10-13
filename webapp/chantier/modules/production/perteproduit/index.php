@@ -54,7 +54,7 @@
                                 <th>Reference</th>
                                 <th>Brique</th>
                                 <th>Qté</th>
-                                <th>Agence</th>
+                                <th>Chantier</th>
                                 <th>Enregistré par</th>
                                 <th>Action</th>
                             </tr>
@@ -76,7 +76,7 @@
                                     </td>
                                     <td><?= ($perte->quantite) ?> </td>
                                     <td>
-                                        <h6 class="text-uppercase text-muted gras" style="margin: 0"><?= $perte->agence->name() ?></h6>
+                                        <h6 class="text-uppercase text-muted gras" style="margin: 0"><?= $perte->chantier->name() ?></h6>
                                         <small>Emise <?= depuis($perte->created) ?></small>
                                     </td>
                                     <td><i class="fa fa-user"></i> <?= $perte->employe->name() ?></td>
@@ -113,10 +113,9 @@
 </div>
 </div>
 
-<?php include($this->rootPath("composants/assets/modals/modal-pertechantierproduit.php")); ?>
+<?php include($this->rootPath("composants/assets/modals/modal-perteproduit.php")); ?>
 
 <?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
-<script type="text/javascript" src="<?= $this->rootPath("webapp/boutique/modules/master/client/script.js") ?>"></script>
 
 
 </body>

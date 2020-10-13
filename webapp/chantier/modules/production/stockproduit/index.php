@@ -22,9 +22,8 @@
                 <div class="ibox-content">
                     <div class="row text-center">
                         <?php $total = 0; foreach ($produits as $key => $produit) {
-                            $stock = $produit->enAgence(Home\PARAMS::DATE_DEFAULT, dateAjoute(1), $agence->id);
-                            $prix = $stock;
-                            $total += $prix ?>
+                            $stock = $produit->stock(Home\PARAMS::DATE_DEFAULT, dateAjoute(1), $chantier->id);
+                            $prix = $stock; ?>
                             <div class="col-sm-4 col-md-3 border-left border-bottom">
                                 <div class="p-xs">
                                     <i class="fa fa-cube fa-2x text-dark"></i>
@@ -77,9 +76,9 @@
                                         <tr>
                                             <td class="gras "><?= datecourt($index) ?></td>
                                             <?php foreach ($produits as $key => $produit) {
-                                                $stock = $produit->enAgence(Home\PARAMS::DATE_DEFAULT, $index, $chantier->id);
+                                                $stock = $produit->stock(Home\PARAMS::DATE_DEFAULT, $index, $chantier->id);
                                                 $production = $produit->production($index, $index, $chantier->id);
-                                                $depot = $produit->achat($index, $index, $chantier->id);
+                                                $depot = $produit->depot($index, $index, $chantier->id);
                                                 $achat = $produit->achat($index, $index, $chantier->id);
                                                 $use = $produit->achat($index, $index, $chantier->id);
                                                 $perte = $produit->perteAutre($index, $index, $chantier->id);

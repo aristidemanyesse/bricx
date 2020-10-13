@@ -1,6 +1,6 @@
 
 
-<div class="modal inmodal fade" id="modal-perteproduit">
+<div class="modal inmodal fade" id="modal-pertechantierproduit">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header text-red">
@@ -8,7 +8,7 @@
                 <h4 class="modal-title">Enregistrer une perte</h4>
                 <small>Veuillez renseigner les informations pour enregistrer la perte</small>
             </div>
-            <form method="POST" class="formShamman" classname="perteproduit">
+            <form method="POST" class="formShamman" classname="pertechantierproduit">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-8">

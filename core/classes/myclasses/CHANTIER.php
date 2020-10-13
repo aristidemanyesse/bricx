@@ -19,7 +19,7 @@ class CHANTIER extends TABLE
 	public $previsionnel;
 	public $comment;
 	public $budgetchantier_id;
-	public $etatchantier_id =  ETATCHANTIER::ENCOURS;
+	public $etatchantier_id =  ETATCHANTIER::START;
 
 	public $client_name;
 	public $contact;
@@ -67,6 +67,13 @@ class CHANTIER extends TABLE
 						$this->save();
 					}
 
+					$tache = new TACHE();
+					$tache->name = "Contruction du chantier '$this->name' ";
+					$tache->chantier_id = $this->id;
+					$tache->duree = dateDiffe($this->started, $this->finished);
+					$tache->typeduree_id = TYPEDUREE::JOUR;
+					$tache->etatchantier_id = $this->etatchantier_id;
+					$tache->enregistre();
 
 					$client = new CLIENTCHANTIER;
 					$client->name = $this->client_name;
@@ -87,6 +94,33 @@ class CHANTIER extends TABLE
 			$data->message = "Veuillez donner un nom à ce nouveau chantier !";
 		}
 		return $data;
+	}
+
+
+
+	public function affichageTaches(){
+		foreach ($this->getInitalTaches() as $key => $tache) { ?>
+			<ol class="dd-list">
+				<?php $tache->affichageTache(); ?>
+			</ol>
+		<?php } 
+	}
+
+
+	public function retourJsons(){
+		foreach ($this->getInitalTaches() as $key => $tache) { 
+			$tableau = $tache->retourJson();
+		} 
+		return $tableau;
+	}
+
+	public function getInitalTaches(){
+		return $this->fourni("tache", ["tache_id_parent IS "=> NULL], [], ["rang"=>"ASC"]);
+	}
+
+
+	public function tachesEncours(){
+		return $this->fourni("tache", ["etatchantier_id = "=> ETATCHANTIER::ENCOURS], [], ["rang"=>"ASC"]);
 	}
 
 

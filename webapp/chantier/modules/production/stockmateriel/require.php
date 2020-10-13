@@ -1,13 +1,9 @@
 <?php 
 namespace Home;
 
-$produits = PRODUIT::getAll();
+$materiels = $chantier->fourni("INITIALMATERIELCHANTIER");
 
+$title = "BRIXS | Matériels engagés sur ce chantier ";
 
-$title = "BRIXS | Stock de briques en agence ";
-
-
-$productionjour = PRODUCTION::today();
-$productionjour->actualise();
 
 ?>

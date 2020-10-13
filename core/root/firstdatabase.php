@@ -38,6 +38,15 @@ foreach ($datas as $key => $value) {
 }
 
 
+$datas = ["Jours"];
+foreach ($datas as $key => $value) {
+	$item = new TYPEDUREE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
 
 
 $datas = ["Sable", "Ciment", "Terre", "Gravier"];
@@ -192,6 +201,12 @@ $item->save();
 $item = new ETATCHANTIER();
 $item->name = "Annulé";
 $item->class = "danger";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATCHANTIER();
+$item->name = "Pas encore entamé";
+$item->class = "default";
 $item->setProtected(1);
 $item->save();
 

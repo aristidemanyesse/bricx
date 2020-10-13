@@ -36,9 +36,16 @@
 
     <!-- mansory -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/masonary/masonry.pkgd.min.js") ?>"></script>
+    
+    <!-- nestable -->
+    <script src="<?= $this->rootPath("composants/dist/js/plugins/nestable/jquery.nestable.js") ?>"></script>
 
     <!-- blueimp gallery -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/blueimp/jquery.blueimp-gallery.min.js") ?>"></script>
+
+    <!-- anychart -->
+    <script src="<?= $this->rootPath("composants/dist/js/plugins/anychart/anychart-base.min.js") ?>"></script>
+    <script src="<?= $this->rootPath("composants/dist/js/plugins/anychart/anychart-gantt.min.js") ?>"></script>
 
     <!-- datatables -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/dataTables/datatables.min.js") ?>"></script>

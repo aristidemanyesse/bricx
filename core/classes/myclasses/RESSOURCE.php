@@ -56,55 +56,6 @@ class RESSOURCE extends TABLE
 
 
 
-	public function stock(String $date1, String $date2, int $agence_id){
-		$item = $this->fourni("initialressourceagence", ["agence_id ="=>$agence_id])[0];
-		return $this->achat($date1, $date2, $agence_id) - $this->consommee($date1, $date2, $agence_id) - $this->perte($date1, $date2, $agence_id) + $item->quantite;
-	}
-
-
-
-
-	public function achat(string $date1, string $date2, int $agence_id = null){
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		$requette = "SELECT SUM(quantite_recu) as quantite  FROM ligneapprovisionnement, approvisionnement WHERE ligneapprovisionnement.ressource_id = ? AND ligneapprovisionnement.approvisionnement_id = approvisionnement.id AND approvisionnement.etat_id = ? AND DATE(approvisionnement.created) >= ? AND DATE(approvisionnement.created) <= ? $paras ";
-		$item = LIGNEAPPROVISIONNEMENT::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNEAPPROVISIONNEMENT()]; }
-		return $item[0]->quantite;
-	}
-
-
-
-	public function consommee(string $date1, string $date2, int $agence_id = null){
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		$requette = "SELECT SUM(quantite) as quantite  FROM ligneconsommation, production WHERE ligneconsommation.ressource_id =  ? AND ligneconsommation.production_id = production.id AND production.etat_id != ? AND DATE(production.created) >= ? AND DATE(production.created) <= ? $paras ";
-		$item = LIGNECONSOMMATION::execute($requette, [$this->id, ETAT::ANNULEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new LIGNECONSOMMATION()]; }
-		return $item[0]->quantite;
-	}
-
-
-
-	public function perte(string $date1, string $date2, int $agence_id = null){
-		$paras = "";
-		if ($agence_id != null) {
-			$paras.= "AND agence_id = $agence_id ";
-		}
-		$requette = "SELECT SUM(quantite) as quantite  FROM perteressource WHERE perteressource.ressource_id = ? AND  perteressource.etat_id = ? AND DATE(perteressource.created) >= ? AND DATE(perteressource.created) <= ? $paras ";
-		$item = PERTERESSOURCE::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new PERTERESSOURCE()]; }
-		return $item[0]->quantite;
-	}
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public function stockChantier(String $date1, String $date2, int $chantier_id){
 		$item = $this->fourni("initialressourcechantier", ["chantier_id ="=>$chantier_id])[0];

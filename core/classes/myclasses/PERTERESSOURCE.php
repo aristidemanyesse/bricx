@@ -13,7 +13,7 @@ class PERTERESSOURCE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 
-	public $agence_id;
+	public $chantier_id;
 	public $typeperte_id;
 	public $ressource_id;
 	public $quantite;
@@ -31,10 +31,10 @@ class PERTERESSOURCE extends TABLE
 					$ressource = $datas[0];
 					if ($this->quantite > 0) {
 
-						$stock = $ressource->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("agence_connecte_id"));
+						$stock = $ressource->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("chantier_connecte_id"));
 						if ($stock >= $this->quantite) {
 							$this->employe_id = getSession("employe_connecte_id");
-							$this->agence_id = getSession("agence_connecte_id");
+							$this->chantier_id = getSession("chantier_connecte_id");
 							$data = $this->save();
 						}else{
 							$data->status = false;
@@ -60,13 +60,13 @@ class PERTERESSOURCE extends TABLE
 
 
 	public function sentenseCreate(){
-		return $this->sentense = "Nouvelle perte dans ".$this->agence->name();
+		return $this->sentense = "Nouvelle perte de ".$this->ressource->name()." dans ".$this->chantier->name();
 	}
 	public function sentenseUpdate(){
-		return $this->sentense = "Modification des informations de la perte en entrepot $this->id ";
+		return $this->sentense = "Modification des informations de la perte sur le chantier N°$this->id ";
 	}
 	public function sentenseDelete(){
-		return $this->sentense = "Suppression definitive de la perte en entrepot $this->id";
+		return $this->sentense = "Suppression definitive de la perte sur le chantier N°$this->id";
 	}
 
 }

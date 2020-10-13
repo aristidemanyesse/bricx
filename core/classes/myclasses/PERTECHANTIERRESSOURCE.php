@@ -31,7 +31,7 @@ class PERTECHANTIERRESSOURCE extends TABLE
 					$ressource = $datas[0];
 					if ($this->quantite > 0) {
 
-						$stock = $ressource->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("agence_connecte_id"));
+						$stock = $ressource->stockChantier(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("chantier_connecte_id"));
 						if ($stock >= $this->quantite) {
 							$this->employe_id = getSession("employe_connecte_id");
 							$this->chantier_id = getSession("chantier_connecte_id");

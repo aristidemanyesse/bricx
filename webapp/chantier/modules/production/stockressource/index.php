@@ -79,6 +79,7 @@
                                         <?php foreach ($ressources as $key => $ressource) {
                                             $stock = $ressource->stockChantier(Home\PARAMS::DATE_DEFAULT, $index, $chantier->id);
                                             $achat = $ressource->achatChantier($index, $index, $chantier->id);
+                                            $depot = $ressource->depot($index, $index, $chantier->id);
                                             $conso = $ressource->consommeeChantier($index, $index, $chantier->id);
                                             $perte = $ressource->perteChantier($index, $index, $chantier->id);
                                             ?>
@@ -90,7 +91,7 @@
                                             data-html="true"
                                             data-content="
                                             <span>quantité achetée : <b><?= round($achat, 2) ?> </b></span><br>
-                                            <span>quantité déposée : <b><?= round($achat, 2) ?> </b></span><br>
+                                            <span>quantité déposée : <b><?= round($depot, 2) ?> </b></span><br>
                                             <span>quantité utilisée : <b><?= round($conso, 2) ?> </b></span><br>
                                             <span class='text-red'>Perte du jour: <b><?= round($perte, 2) ?> </b></span>
                                             <hr style='margin:1.5%'>
