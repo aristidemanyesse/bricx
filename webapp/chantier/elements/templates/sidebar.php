@@ -53,7 +53,7 @@
 
                 <?php if ($employe->isAutoriser("production")) { ?>
                     <li class="groupe">
-                        <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de briques</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-cube"></i> <span class="nav-label">Suivi de briques</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="stockproduit"><a href="<?= $this->url($this->section, "stock", "stockproduit") ?>">Stock actuel</a></li>
                             <li id="productions"><a href="<?= $this->url($this->section, "production", "productions") ?>">Production de briques</a></li>
@@ -66,7 +66,7 @@
 
 
                     <li class="groupe">
-                        <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de ressources</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Suivi de ressources</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="stockressource"><a href="<?= $this->url($this->section, "stock", "stockressource") ?>">Stock actuel</a></li>
                             <li id="depotressource"><a href="<?= $this->url($this->section, "production", "depotressource") ?>">Dépôts de ressources</a></li>
@@ -92,7 +92,7 @@
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
 
                     <li class="" id="location">
-                        <a href="<?= $this->url($this->section, "location", "location") ?>"><i class="fa fa-user"></i> <span class="nav-label">Locations d'engins</span> </a>
+                        <a href="<?= $this->url($this->section, "location", "location") ?>"><i class="fa fa-truck"></i> <span class="nav-label">Locations d'engins</span> </a>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000;* "></li>
                 <?php } ?>
