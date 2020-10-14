@@ -38,16 +38,6 @@ foreach ($datas as $key => $value) {
 }
 
 
-$datas = ["Jours"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEDUREE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-
-
 
 $datas = ["Sable", "Ciment", "Terre", "Gravier"];
 foreach ($datas as $key => $value) {
@@ -305,6 +295,44 @@ $item->save();
 $item = new CATEGORIEOPERATION();
 $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
 $item->name = "Autre dépense";
+$item->setProtected(1);
+$item->save();
+
+
+
+
+
+
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+$item->name = "Retour de fonds par le fournisseur";
+$item->setProtected(1);
+$item->save();
+
+
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+$item->name = "Autre entrée en caisse";
+$item->setProtected(1);
+$item->save();
+
+
+
+$item = new CATEGORIEOPERATIONCHANTIER();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+$item->name = "Location d'engins pour le chantier";
+$item->setProtected(1);
+$item->save();
+
+$item = new CATEGORIEOPERATIONCHANTIER();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+$item->name = "Paye des manoeuvres";
+$item->setProtected(1);
+$item->save();
+
+$item = new CATEGORIEOPERATIONCHANTIER();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+$item->name = "Autre dépense sur chantier";
 $item->setProtected(1);
 $item->save();
 

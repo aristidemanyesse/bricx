@@ -11,11 +11,11 @@
                         <div class="col-9">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold"><?= $employe->name(); ?></span>
-                                <span class="text-muted text-xs block"><?= $agence->name()  ?></span>
+                                <span class="text-muted text-xs block"><?= $chantier->name()  ?></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="dropdown-item" href="<?= $this->url("main", "access", "locked") ?>">Vérouiller la session</a></li>
-                                <li><a class="dropdown-item" href="#" id="btn-deconnexion" >Déconnexion</a></li>
+                                <li><a class="dropdown-item" href="#" id="btn-deconnexion">Déconnexion</a></li>
                             </ul>
                         </div>
                     </div>
@@ -26,14 +26,13 @@
             </li>
 
             <?php 
-            $groupes__ = Home\GROUPECOMMANDE::encours();
-            $livraisons__ = $agence->fourni("livraison", ["agence_id ="=>$agence->id, "etat_id ="=>Home\ETAT::ENCOURS]);
-            $tricycles__ = $agence->fourni("tricycle", ["etat_id !="=>Home\ETAT::VALIDEE], [], ["created"=>"DESC"]);
+
+            $locations__ = $chantier->fourni("location", ["etat_id ="=>Home\ETAT::ENCOURS]);
 
             ?>
             <ul class="nav metismenu" id="side-menu">
                 <li class="" id="dashboard">
-                    <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
+                    <a href="<?= $this->url($this->section, "master", "dashboard", $chantier->id) ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
                 <li class="" id="planning">
                     <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-sitemap"></i> <span class="nav-label">Planning construction</span></a>
@@ -46,7 +45,7 @@
                         <a href="<?= $this->url($this->section, "outils", "transfertstock") ?>"><i class="fa fa-refresh"></i> <span class="nav-label">Matériels engagés</span> </a>
                     </li>
                     <li class="" id="commandes">
-                        <a href="<?= $this->url($this->section, "outils", "commandes") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Locations d'engins</span> <?php if (count($groupes__) > 0) { ?> <span class="label label-warning float-right"><?= count($groupes__) ?></span> <?php } ?></a>
+                        <a href="<?= $this->url($this->section, "outils", "commandes") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Locations d'engins</span> <?php if (count($locations__) > 0) { ?> <span class="label label-warning float-right"><?= count($locations__) ?></span> <?php } ?></a>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
                 <?php } ?>
@@ -56,12 +55,12 @@
                     <li class="groupe">
                         <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de briques</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="stockproduit"><a href="<?= $this->url($this->section, "production", "stockproduit") ?>">Stock actuel</a></li>
+                            <li id="stockproduit"><a href="<?= $this->url($this->section, "stock", "stockproduit") ?>">Stock actuel</a></li>
                             <li id="productions"><a href="<?= $this->url($this->section, "production", "productions") ?>">Production de briques</a></li>
                             <li id="depotproduit"><a href="<?= $this->url($this->section, "production", "depotproduit") ?>">Dépôts de briques</a></li>
                             <li id="approproduit"><a href="<?= $this->url($this->section, "production", "approproduit") ?>">Achat de briques</a></li>
                             <li id="useproduit"><a href="<?= $this->url($this->section, "production", "useproduit") ?>">Utilisation de briques</a></li>
-                            <li id="perteproduit"><a href="<?= $this->url($this->section, "production", "perteproduit") ?>">les pertes</a></li>
+                            <li id="perteproduit"><a href="<?= $this->url($this->section, "stock", "perteproduit") ?>">les pertes</a></li>
                         </ul>
                     </li>
 
@@ -69,11 +68,11 @@
                     <li class="groupe">
                         <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de ressources</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="stockressource"><a href="<?= $this->url($this->section, "production", "stockressource") ?>">Stock actuel</a></li>
+                            <li id="stockressource"><a href="<?= $this->url($this->section, "stock", "stockressource") ?>">Stock actuel</a></li>
                             <li id="depotressource"><a href="<?= $this->url($this->section, "production", "depotressource") ?>">Dépôts de ressources</a></li>
                             <li id="approressource"><a href="<?= $this->url($this->section, "production", "approressource") ?>">Achat de ressources</a></li>
                             <li id="useressource"><a href="<?= $this->url($this->section, "production", "useressource") ?>">Utilis. de ressources</a></li>
-                            <li id="perteressource"><a href="<?= $this->url($this->section, "production", "perteressource") ?>">les pertes</a></li>
+                            <li id="perteressource"><a href="<?= $this->url($this->section, "stock", "perteressource") ?>">les pertes</a></li>
                         </ul>
                     </li>
 
@@ -81,16 +80,19 @@
                     <li class="groupe">
                         <a href="#"><i class="fa fa-stack-overflow"></i> <span class="nav-label">Suivi de Materiels</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="stockmateriel"><a href="<?= $this->url($this->section, "production", "stockmateriel") ?>">Materiels engagés</a></li>
+                            <li id="stockmateriel"><a href="<?= $this->url($this->section, "stock", "stockmateriel") ?>">Materiels engagés</a></li>
                             <li id="depotmateriel"><a href="<?= $this->url($this->section, "production", "depotmateriel") ?>">Dépôts de materiels</a></li>
                             <li id="appromateriel"><a href="<?= $this->url($this->section, "production", "appromateriel") ?>">Achat de materiels</a></li>
-                            <li id="pertemateriel"><a href="<?= $this->url($this->section, "production", "pertemateriel") ?>">les pertes</a></li>
+                            <li id="pertemateriel"><a href="<?= $this->url($this->section, "stock", "pertemateriel") ?>">les pertes</a></li>
                         </ul>
+                    </li>
+                     <li class="" id="fournisseurs">
+                        <a href="<?= $this->url($this->section, "production", "fournisseurs") ?>"><i class="fa fa-user"></i> <span class="nav-label">Les fournisseurs</span> </a>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000; "></li>
 
-                    <li class="" id="fournisseurs">
-                        <a href="<?= $this->url($this->section, "production", "fournisseurs") ?>"><i class="fa fa-user"></i> <span class="nav-label">Les fournisseurs</span> </a>
+                    <li class="" id="location">
+                        <a href="<?= $this->url($this->section, "location", "location") ?>"><i class="fa fa-user"></i> <span class="nav-label">Locations d'engins</span> </a>
                     </li>
                     <li style="margin: 3% auto"><hr class="mp0" style="background-color: #000;* "></li>
                 <?php } ?>

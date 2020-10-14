@@ -28,17 +28,15 @@
                         </ul>
 
                         <div>
-                            <a id="onglet-master" href="<?= $this->url("master", "master", "dashboard") ?>" class="onglets btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-long-arrow-left"></i> Acceuil</a>
-                            <?php if ($employe->agence_id != null && $employe->isAutoriser("boutique")) { ?>
-                                <a id="onglet-boutique" href="<?= $this->url("boutique", "master", "dashboard") ?>" class="onglets btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-bank"></i> Boutique</a>
-                            <?php } ?>
-                            <?php if ($employe->agence_id != null && $employe->isAutoriser("entrepot")) { ?>
-                                <a id="onglet-entrepot" href="<?= $this->url("entrepot", "master", "dashboard") ?>" class="onglets btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-cubes"></i> Entrepôt</a>
-                            <?php } ?>
+                            <a id="onglet-master" href="<?= $this->url("master", "master", "dashboard") ?>" class="onglets btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-home"></i> Retour</a>
+
+                            <a id="onglet-master" href="<?= $this->url("chantier", "master", "chantiers") ?>" class="onglets btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-long-arrow-left"></i> Retour aux chantiers</a>
+
                             <?php if ($employe->isAutoriser("manager")) { ?>
                                 <a id="onglet-manager" href="<?= $this->url("manager", "master", "dashboard") ?>" class="onglets btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-gears"></i> Manager</a>
                             <?php } ?>
                         </div>
+                        
                         <ul class="nav">
                             <li></li>                            
                         </ul> 

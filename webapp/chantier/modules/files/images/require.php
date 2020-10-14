@@ -1,4 +1,7 @@
 <?php 
+namespace Home;
 
-$title = "BRICX | Espace d'Administration ";
+$images = $chantier->fourni("imagechantier", [], [], ["created"=>"DESC"]);
+
+$title = "BRICX | Images du chantier ";
 ?>

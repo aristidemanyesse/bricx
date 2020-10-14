@@ -12,13 +12,13 @@
 
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
-                            <label>Raison sociale (ou Nom) <span1>*</span1></label>
+                            <label>Raison sociale (ou Nom) </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label>Situation géographique <span1>*</span1></label>
+                            <label>Situation géographique </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="adresse" required>
                             </div>
@@ -33,7 +33,7 @@
 
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
-                            <label>Contact <span1>*</span1></label>
+                            <label>Contact </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="contact" required>
                             </div>

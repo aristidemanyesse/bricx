@@ -8,13 +8,13 @@
             <form method="POST" id="formLogin">
                 <div class="modal-body">
                     <div class="">
-                        <label>Votre nouveau login<span1>*</span1></label>
+                        <label>Votre nouveau login</label>
                         <div class="form-group">
                             <input type="text" class="form-control" name="login" required>
                         </div>
                     </div>
                     <div class="">
-                        <label>Mot de passe pour confirmer le changement <span1>*</span1></label>
+                        <label>Mot de passe pour confirmer le changement </label>
                         <div class="form-group">
                             <input type="password" autocomplete="off" class="form-control" name="password" required>
                         </div>

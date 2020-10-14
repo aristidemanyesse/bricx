@@ -12,19 +12,19 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-4">
-                            <label>Libéllé de la tache <span1>*</span1></label>
+                            <label>Libéllé de la tache </label>
                             <div class="form-group">
                                 <input type="text" number class="form-control" name="name" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Nombre de jours (durée) <span1>*</span1></label>
+                            <label>Nombre de jours (durée) </label>
                             <div class="form-group">
                                 <input type="number" number class="form-control" name="duree" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Etat de la tâche <span1>*</span1></label>
+                            <label>Etat de la tâche </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select", "etatchantier"); ?>
                             </div>
@@ -32,13 +32,13 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label>Tâche parente <span1>*</span1></label>
+                            <label>Tâche parente </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select-tableau", $chantier->fourni("tache"), null, "tache_id_parent"); ?>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label>Description de la tâche <span1>*</span1></label>
+                            <label>Description de la tâche </label>
                             <div class="form-group">
                                 <textarea class="form-control" name="comment" rows="4"></textarea>
                             </div>

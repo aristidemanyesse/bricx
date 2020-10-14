@@ -10,13 +10,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-8">
-                            <label>Type d'opération <span1>*</span1></label>
+                            <label>Type d'opération </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select-tableau", Home\CATEGORIEOPERATION::entree(), null, "categorieoperation_id"); ?>
                             </div>
                         </div> 
                         <div class="col-sm-4">
-                            <label>Montant de l'opération <span1>*</span1></label>
+                            <label>Montant de l'opération </label>
                             <div class="form-group">
                                 <input type="number" number class="form-control" name="montant" required>
                             </div>
@@ -31,7 +31,7 @@
                             </div>
                         </div> 
                         <div class="col-sm-6">
-                            <label>Plus de détails sur l'opération <span1>*</span1></label>
+                            <label>Plus de détails sur l'opération </label>
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" name="comment"></textarea>
                             </div>

@@ -33,6 +33,9 @@
 
     <!-- Data picker -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/datapicker/bootstrap-datepicker.js") ?>"></script>
+    
+    <!-- pdf -->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/pdfjs/pdf.js") ?>"></script>
 
     <!-- mansory -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/masonary/masonry.pkgd.min.js") ?>"></script>

@@ -14,99 +14,39 @@
 
             <?php include($this->rootPath("webapp/chantier/elements/templates/header.php")); ?>  
 
-
             <div class="wrapper wrapper-content">
-                <div class="text-center animated fadeInRightBig">
+                <div class="animated fadeInRightBig">
 
-                   <div class="lightBoxGallery">
-                            <a href="img/gallery/1.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/1s.jpg"></a>
-                            <a href="img/gallery/2.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/2s.jpg"></a>
-                            <a href="img/gallery/3.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/3s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>
-                            <a href="img/gallery/7.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/7s.jpg"></a>
-                            <a href="img/gallery/8.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/8s.jpg"></a>
-                            <a href="img/gallery/9.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/9s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>
-                            <a href="img/gallery/7.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/7s.jpg"></a>
-                            <a href="img/gallery/2.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/2s.jpg"></a>
-                            <a href="img/gallery/3.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/3s.jpg"></a>
-                            <a href="img/gallery/1.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/1s.jpg"></a>
-                            <a href="img/gallery/9.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/9s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/11.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/11s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/1.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/1s.jpg"></a>
-                            <a href="img/gallery/2.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/2s.jpg"></a>
-                            <a href="img/gallery/3.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/3s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>
-                            <a href="img/gallery/7.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/7s.jpg"></a>
-                            <a href="img/gallery/8.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/8s.jpg"></a>
-                            <a href="img/gallery/9.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/9s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/11.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/11s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>
-                            <a href="img/gallery/7.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/7s.jpg"></a>
-                            <a href="img/gallery/2.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/2s.jpg"></a>
-                            <a href="img/gallery/3.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/3s.jpg"></a>
-                            <a href="img/gallery/1.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/1s.jpg"></a>
-                            <a href="img/gallery/9.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/9s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/11.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/11s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/7.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/7s.jpg"></a>
-                            <a href="img/gallery/8.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/8s.jpg"></a>
-                            <a href="img/gallery/9.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/9s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/11.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/11s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>
-                            <a href="img/gallery/12.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/12s.jpg"></a>
-                            <a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>
-                            <a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>
-                            <a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>
-                            <a href="img/gallery/11.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/11s.jpg"></a>
-
-                            <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
-                            <div id="blueimp-gallery" class="blueimp-gallery">
-                                <div class="slides"></div>
-                                <h3 class="title"></h3>
-                                <a class="prev">‹</a>
-                                <a class="next">›</a>
-                                <a class="close">×</a>
-                                <a class="play-pause"></a>
-                                <ol class="indicator"></ol>
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Images du chantier</h5>
+                            <div class="ibox-tools">
+                                <button data-toggle="modal" data-target="#modal-image" class="btn btn-xs btn-default dim" style="margin-top: -5%"><i class="fa fa-plus"></i> AJouter nouvelle image</button>
                             </div>
-
                         </div>
-
+                        <div class="ibox-content">
+                            <div class="lightBoxGallery row">
+                                <?php foreach ($images as $key => $image) { ?>
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                                        <a href="<?= $this->stockage("images", "imageschantiers", $image->image);  ?>" title="<?= $image->name() ?>" data-gallery=""><img class="img-thumbnail" style="width: 100%" src="<?= $this->stockage("images", "imageschantiers", $image->image);  ?>"></a>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
+            </div>
+
+            <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+            <div id="blueimp-gallery" class="blueimp-gallery">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="close">×</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
             </div>
 
 
@@ -119,6 +59,7 @@
 
     <?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
 
+    <?php include($this->rootPath("composants/assets/modals/modal-image.php")); ?>  
 
 </body>
 

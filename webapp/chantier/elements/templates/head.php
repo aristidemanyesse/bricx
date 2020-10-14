@@ -37,6 +37,9 @@
     <!-- FooTable -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/footable/footable.core.css") ?>" rel="stylesheet">
     
+     <!-- FooTable -->
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/blueimp/css/blueimp-gallery.min.css") ?>" rel="stylesheet">
+    
     <!-- FooTable -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/chosen/bootstrap-chosen.css") ?>" rel="stylesheet">
     

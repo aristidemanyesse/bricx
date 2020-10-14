@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-<?php include($this->rootPath("webapp/boutique/elements/templates/head.php")); ?>
+<?php include($this->rootPath("webapp/chantier/elements/templates/head.php")); ?>
 
 
 <body class="fixed-sidebar">
 
     <div id="wrapper">
 
-        <?php include($this->rootPath("webapp/boutique/elements/templates/sidebar.php")); ?>  
+        <?php include($this->rootPath("webapp/chantier/elements/templates/sidebar.php")); ?>  
 
         <div id="page-wrapper" class="gray-bg">
 
-            <?php include($this->rootPath("webapp/boutique/elements/templates/header.php")); ?>  
+            <?php include($this->rootPath("webapp/chantier/elements/templates/header.php")); ?>  
 
 
             <div class="wrapper wrapper-content">
@@ -21,12 +21,12 @@
                         <div class="ibox">
                             <div class="ibox-content">
                                 <div class="row">
-                                    <div class="col-7">
-                                        <h5 class="text-uppercase">Chiffre d'affaire</h5>
-                                        <h2 class="no-margins"><?= money(Home\TRESORERIE::chiffreAffaire($date1, $date2))  ?> </h2>
+                                    <div class="col-9">
+                                        <h5 class="text-uppercase">Budget prévisionnel</h5>
+                                        <h2 class="no-margins"><?= money($chantier->previsionnel)  ?> </h2>
                                     </div>
-                                    <div class="col-5 text-right">
-                                        <i class="fa fa-dollar fa-5x" style="color: #ddd"></i>
+                                    <div class="col-3 text-right">
+                                        <i class="fa fa-home fa-4x" style="color: #ddd"></i>
                                     </div>
                                 </div>
                             </div>
@@ -36,12 +36,12 @@
                         <div class="ibox">
                             <div class="ibox-content">
                                 <div class="row">
-                                    <div class="col-7">
-                                        <h5 class="text-uppercase">Résultat brut</h5>
-                                        <h2 class="no-margins"><?= money($comptebanque->getIn($date1, $date2) - $comptebanque->getOut($date1, $date2)) ?></h2>
+                                    <div class="col-8">
+                                        <h5 class="text-uppercase">Montant réçu</h5>
+                                        <h2 class="no-margins"><?= money($total) ?></h2>
                                     </div>
-                                    <div class="col-5 text-right">
-                                        <i class="fa fa-money fa-5x" style="color: #ddd"></i>
+                                    <div class="col-4 text-right">
+                                        <i class="fa fa-money fa-4x" style="color: #ddd"></i>
                                     </div>
                                 </div>
                             </div>
@@ -49,14 +49,14 @@
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <div class="ibox">
-                            <div class="ibox-content bg-navy">
+                            <div class="ibox-content">
                                 <div class="row">
-                                    <div class="col-7">
-                                        <h5 class="text-uppercase">Dette clientèle</h5>
-                                        <h2 class="no-margins"><?= money(Home\CLIENT::dettes()) ?></h2>
+                                    <div class="col-8">
+                                        <h5 class="text-uppercase">Reste à verser</h5>
+                                        <h2 class="no-margins"><?= money($chantier->previsionnel - $total) ?></h2>
                                     </div>
-                                    <div class="col-5 text-right">
-                                        <i class="fa fa-users fa-5x" style="color: #ddd"></i>
+                                    <div class="col-4 text-right">
+                                        <i class="fa fa-dollar fa-4x" style="color: #ddd"></i>
                                     </div>
                                 </div>
                             </div>
@@ -66,12 +66,12 @@
                         <div class="ibox">
                             <div class="ibox-content bg-red">
                                 <div class="row">
-                                    <div class="col-7">
+                                    <div class="col-9">
                                         <h5 class="text-uppercase">Dette Fournisseur</h5>
-                                        <h2 class="no-margins"><?= money(Home\FOURNISSEUR::dettes($agence->id)) ?></h2>
+                                        <h2 class="no-margins"><?= money(Home\FOURNISSEURCHANTIER::dettes($chantier->id)) ?></h2>
                                     </div>
-                                    <div class="col-5 text-right">
-                                        <i class="fa fa-truck fa-5x "></i>
+                                    <div class="col-3 text-left">
+                                        <i class="fa fa-truck fa-4x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -109,60 +109,56 @@
                                         </div><br>
                                         <div class="row stat-list text-center">
                                             <div class="col-4 ">
-                                                <h3 class="no-margins text-green"><?= money($comptebanque->getIn(dateAjoute(), dateAjoute(1))) ?> <small><?= $params->devise ?></small></h3>
-                                                <small>Entrées du jour</small>
+                                                <h3 class="no-margins text-green"><?= money($budgetchantier->getIn(dateAjoute(), dateAjoute(1))) ?> <small><?= $params->devise ?></small></h3>
+                                                <small>Versements du jour</small>
                                             </div>
                                             <div class="col-4 border-left border-right">
-                                                <h2 class="no-margins gras"><?= money($comptebanque->solde()) ?> <small><?= $params->devise ?></small></h2>
-                                                <small>En caisse actuellement</small>
+                                                <h2 class="no-margins gras"><?= money($budgetchantier->solde()) ?> <small><?= $params->devise ?></small></h2>
+                                                <small>Montant disponible actuellement</small>
                                             </div>
                                             <div class="col-4">
-                                                <h3 class="no-margins text-red"><?= money($comptebanque->getOut(dateAjoute(), dateAjoute(1))) ?> <small><?= $params->devise ?></small></h3>
+                                                <h3 class="no-margins text-red"><?= money($budgetchantier->getOut(dateAjoute(), dateAjoute(1))) ?> <small><?= $params->devise ?></small></h3>
                                                 <small>Dépenses du jour</small>
                                             </div>
                                         </div><hr>
                                         <div class="row" style="font-size: 10px">
                                             <div class="col-sm">
-                                                <button data-toggle="modal" data-target="#modal-entree" class="btn btn-xs btn-primary dim"><i class="fa fa-long-arrow-left"></i> Faire Nouvelle entrée</button>
-                                            </div>
-                                            <div class="col-sm text-center">
-                                                <button data-toggle="modal" data-target="#modal-depense" class="btn btn-xs btn-danger dim"><i class="fa fa-long-arrow-right"></i> Faire Nouvelle dépense</button>
-                                            </div>
-                                            <div class="col-sm text-center">
-                                                <button data-toggle="modal" data-target="#modal-attente" class="btn btn-xs btn-success dim" ><i class="fa fa-eye"></i> Voir les versemments en attente</button>
+                                                <button data-toggle="modal" data-target="#modal-versement" class="btn btn-xs btn-primary dim"><i class="fa fa-plus"></i> Nouvel apport financier</button>
                                             </div>
                                             <div class="col-sm">
                                                 <button data-toggle="modal" data-target="#modal-transfertfond2" class="btn btn-xs btn-warning dim pull-right"><i class="fa fa-refresh"></i> Transferts de caisse</button>
+                                            </div>
+                                            <div class="col-sm text-center">
+                                                <button data-toggle="modal" data-target="#modal-depense" class="btn btn-xs btn-danger dim"><i class="fa fa-minus"></i> Faire Nouvelle dépense</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <ul class="stat-list">
                                             <li>
-                                                <h2 class="no-margins"><?= money(Home\REGLEMENTCLIENT::total($date1 , $date2, $agence->id)) ?> <small><?= $params->devise ?></small></h2>
-                                                <small>Total reglements clients</small>
+                                                <h2 class="no-margins"><?= money(Home\REGLEMENTCLIENT::total($date1 , $date2, $chantier->id)) ?> <small><?= $params->devise ?></small></h2>
+                                                <small>Achat de ressources</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 48%;" class="progress-bar"></div>
                                                 </div>
                                             </li>
                                             <li>
-                                                <h2 class="no-margins "><?= money(Home\OPERATION::entree($date1 , $date2, $agence->id)) ?> <small><?= $params->devise ?></small></h2>
-                                                <small>Autres entrées en caisse</small>
+                                                <h2 class="no-margins "><?= money(0) ?> <small><?= $params->devise ?></small></h2>
+                                                <small>Achat de briques</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 60%;" class="progress-bar"></div>
                                                 </div>
-                                            </li><br>
+                                            </li>
                                             <li>
-                                                <h2 class="no-margins text-danger "><?= money($comptebanque->getOut($date1, $date2) - comptage($transferts , "montant", "somme")) ?> <small><?= $params->devise ?></small></h2>
-                                                <small>Total Charges de fonctionnement</small>
+                                                <h2 class="no-margins text-danger "><?= money($budgetchantier->getOut($date1, $date2) - comptage($mouvements , "montant", "somme")) ?> <small><?= $params->devise ?></small></h2>
+                                                <small>Matériels & locations d'engins</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 22%;" class="progress-bar progress-bar-animated progress-bar-danger"></div>
                                                 </div>
                                             </li>
-                                            
                                             <li>
-                                                <h2 class="no-margins text-warning"><?= money(comptage($transferts , "montant", "somme")) ?> <small><?= $params->devise ?></small></h2>
-                                                <small>Transferts vers autre compte</small>
+                                                <h2 class="no-margins text-warning"><?= money(comptage($mouvements , "montant", "somme")) ?> <small><?= $params->devise ?></small></h2>
+                                                <small>Paye des manoeuvres</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 22%;" class="progress-bar progress-bar-animated progress-bar-warning"></div>
                                                 </div>
@@ -205,7 +201,7 @@
                                                         <td colspan="2">Repport du solde </td>
                                                         <td class="text-center">-</td>
                                                         <td class="text-center">-</td>
-                                                        <td style="background-color: #fafafa" class="text-center"><?= money($repport = $last = $comptebanque->solde(null, dateAjoute1($date1, -1))) ?> <?= $params->devise ?></td>
+                                                        <td style="background-color: #fafafa" class="text-center"><?= money($repport = $last = $budgetchantier->solde(null, dateAjoute1($date1, -1))) ?> <?= $params->devise ?></td>
                                                     </tr>
                                                     <?php foreach ($mouvements as $key => $mouvement) {  ?>
                                                         <tr>
@@ -264,9 +260,10 @@
             </div>
 
 
-            <?php include($this->rootPath("webapp/boutique/elements/templates/footer.php")); ?>
+            <?php include($this->rootPath("webapp/chantier/elements/templates/footer.php")); ?>
 
             <?php include($this->rootPath("composants/assets/modals/modal-entree.php")); ?>  
+            <?php include($this->rootPath("composants/assets/modals/modal-versement.php")); ?>  
             <?php include($this->rootPath("composants/assets/modals/modal-depense.php")); ?>  
             <?php include($this->rootPath("composants/assets/modals/modal-transfertfond2.php")); ?>  
             <?php include($this->rootPath("composants/assets/modals/modal-operation.php")); ?>  
@@ -288,7 +285,7 @@
                <div class="modal-body">
                 <table class="table table-bordered table-hover table-operation">
                     <tbody class="tableau-attente">
-                        <?php foreach (Home\OPERATION::enAttente($agence->id) as $key => $operation) {
+                        <?php foreach (Home\OPERATIONCHANTIER::enAttente($chantier->id) as $key => $operation) {
                             $operation->actualise(); ?>
                             <tr>
                                 <td style="background-color: rgba(<?= hex2rgb($operation->categorieoperation->color) ?>, 0.6);" width="15"><a target="_blank" href="<?= $this->url("fiches", "master", "boncaisse", $operation->id)  ?>"><i class="fa fa-file-text-o fa-2x"></i></a></td>
@@ -317,7 +314,7 @@
 
 
 
-<?php include($this->rootPath("webapp/boutique/elements/templates/script.php")); ?>
+<?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
 
 <script type="text/javascript">
     $(document).ready(function() {

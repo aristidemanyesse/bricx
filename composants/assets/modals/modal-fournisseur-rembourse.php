@@ -8,7 +8,7 @@
             <form method="POST" id="formRembourser">
                 <div class="modal-body">
                     <div class="">
-                        <label>Montant à payer <span1>*</span1></label>
+                        <label>Montant à payer </label>
                         <div class="form-group">
                             <input type="text" value="<?= $fournisseur->acompte ?>" number class="form-control" name="montant" required>
                         </div>

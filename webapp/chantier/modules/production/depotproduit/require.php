@@ -3,7 +3,7 @@ namespace Home;
 
 unset_session("produits");
 
-$title = "GPV | Mise en boutique de la production";
+$title = "BRICX | Mise en boutique de la production";
 
 $encours = $chantier->fourni("depotproduit", [ "etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);;
 

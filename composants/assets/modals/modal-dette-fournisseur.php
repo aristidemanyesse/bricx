@@ -8,7 +8,7 @@
             <form method="POST" id="formDette">
                 <div class="modal-body">
                     <div class="">
-                        <label>Montant pour le reglement <span1>*</span1></label>
+                        <label>Montant pour le reglement </label>
                         <div class="form-group">
                             <input type="text" number class="form-control" name="montant" value="<?= $fournisseur->dette ?>" max="<?= $fournisseur->dette ?>" min="0" required>
                         </div>

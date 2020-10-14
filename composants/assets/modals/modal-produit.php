@@ -11,13 +11,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Nom du produit<span1>*</span1></label>
+                        <label>Nom du produit</label>
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <label>Description du produit<span1>*</span1></label>
+                        <label>Description du produit</label>
                         <div class="form-group">
                             <input type="text" class="form-control" name="comment">
                         </div>

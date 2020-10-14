@@ -8,19 +8,19 @@
             <form method="POST" id="formPassword">
                 <div class="modal-body">
                     <div class="">
-                        <label>Votre mot de passe actuel <span1>*</span1></label>
+                        <label>Votre mot de passe actuel </label>
                         <div class="form-group">
                             <input type="password" autocomplete="off" class="form-control" name="password0" required>
                         </div>
                     </div>
                     <div class="">
-                        <label>Nouveau mot de passe <span1>*</span1></label>
+                        <label>Nouveau mot de passe </label>
                         <div class="form-group">
                             <input type="password" autocomplete="off" class="form-control" name="password" required>
                         </div>
                     </div>
                     <div class="">
-                        <label>Confirmer le mot de passe <span1>*</span1></label>
+                        <label>Confirmer le mot de passe </label>
                         <div class="form-group">
                             <input type="password" autocomplete="off" class="form-control" name="password1" required>
                         </div>

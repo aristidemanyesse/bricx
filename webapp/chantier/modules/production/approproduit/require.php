@@ -3,7 +3,7 @@ namespace Home;
 
 unset_session("produits");
 
-$title = "GPV | Toutes les approvisionnements de produits";
+$title = "BRICX | Toutes les approvisionnements de produits";
 
 
 $encours = $chantier->fourni("approchantierproduit", ["etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);

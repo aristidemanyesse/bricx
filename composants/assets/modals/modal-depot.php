@@ -10,13 +10,13 @@
                 <div class="modal-body">
 
                     <div class="">
-                        <label>Montant de l'opération <span1>*</span1></label>
+                        <label>Montant de l'opération </label>
                         <div class="form-group">
                             <input type="number" number class="form-control" name="montant" required>
                         </div>
                     </div>   
                     <div class="">
-                        <label>Plus de détails sur l'opération <span1>*</span1></label>
+                        <label>Plus de détails sur l'opération </label>
                         <div class="form-group">
                             <textarea class="form-control" rows="4" name="comment"></textarea>
                         </div>

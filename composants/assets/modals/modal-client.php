@@ -10,13 +10,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
-                            <label>Type de client <span1>*</span1></label>
+                            <label>Type de client </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select", "typeclient"); ?>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label>Nom & prénoms de client <span1>*</span1></label>
+                            <label>Nom & prénoms de client </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name" required>
                             </div>

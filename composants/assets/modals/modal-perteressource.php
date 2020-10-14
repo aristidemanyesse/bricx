@@ -12,13 +12,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-8">
-                            <label>Matière première <span1>*</span1></label>
+                            <label>Matière première </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select", "ressource"); ?>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Quantité perdue <span1>*</span1></label>
+                            <label>Quantité perdue </label>
                             <div class="form-group">
                                 <input type="number" step="0.01" number class="form-control" name="quantite" required>
                             </div>
@@ -26,13 +26,13 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label>Cause de la perte <span1>*</span1></label>
+                            <label>Cause de la perte </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select", "typeperte"); ?>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label>Plus de détails <span1>*</span1></label>
+                            <label>Plus de détails </label>
                             <div class="form-group">
                                 <textarea class="form-control" name="comment" rows="4"></textarea>
                             </div>

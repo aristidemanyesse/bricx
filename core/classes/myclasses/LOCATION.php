@@ -3,7 +3,7 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LIVRAISON extends TABLE
+class LOCATION extends TABLE
 {
 
 	public static $tableName = __CLASS__;
@@ -11,7 +11,7 @@ class LIVRAISON extends TABLE
 
 	public $reference;
 	public $groupecommande_id;
-	public $zonelivraison_id;
+	public $chantier_id;
 	public $lieu;
 	public $vehicule_id;
 	public $chauffeur_id = 0;
@@ -38,7 +38,7 @@ class LIVRAISON extends TABLE
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->lieu != "") {
-			$datas = ZONELIVRAISON::findBy(["id ="=>$this->zonelivraison_id]);
+			$datas = ZONELIVRAISON::findBy(["id ="=>$this->chantier_id]);
 			if (count($datas) == 1) {
 				$datas = VEHICULE::findBy(["id ="=>$this->vehicule_id]);
 				if (count($datas) == 1) {

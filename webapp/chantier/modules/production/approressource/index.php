@@ -88,7 +88,7 @@
                                                 <span class="gras text-orange"><?= money($appro->reste()) ?> <?= $params->devise  ?></span>
                                             </h4>
                                         </td>
-                                        <td class="text-uppercase"><a href="<?= $this->url("chantier", "stock", "fournisseur", $appro->fournisseurchantier->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseurchantier->name() ?></a></td>
+                                        <td class="text-uppercase"><a href="<?= $this->url("chantier", "production", "fournisseur", $appro->fournisseurchantier->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseurchantier->name() ?></a></td>
                                         <td class="border-right">
                                             <table class="table table-bordered">
                                                 <thead>
@@ -146,7 +146,7 @@
                                                 <span class="gras text-orange"><?= money($appro->reste()) ?> <?= $params->devise  ?></span>
                                             </h4>
                                         </td>
-                                        <td class="text-uppercase"><a href="<?= $this->url("chantier", "stock", "fournisseur", $appro->fournisseurchantier->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseurchantier->name() ?></a></td>
+                                        <td class="text-uppercase"><a href="<?= $this->url("chantier", "production", "fournisseur", $appro->fournisseurchantier->id)  ?>" ><i class="fa fa-truck"></i> <?= $appro->fournisseurchantier->name() ?></a></td>
                                         <td class="border-right">
                                             <table class="table table-bordered">
                                                 <thead>

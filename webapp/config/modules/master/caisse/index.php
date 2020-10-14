@@ -226,7 +226,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-sm-5">
-                                        <label>Type d'opération <span1>*</span1></label>
+                                        <label>Type d'opération </label>
                                         <div class="form-group">
                                             <?php Native\BINDING::html("select", "typeoperationcaisse") ?>
                                         </div>

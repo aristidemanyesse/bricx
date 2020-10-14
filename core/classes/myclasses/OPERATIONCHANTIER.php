@@ -18,7 +18,7 @@ class OPERATIONCHANTIER extends TABLE
 	public $structure;
 	public $numero;
 	public $employe_id;
-	public $agence_id ;
+	public $chantier_id ;
 	public $etat_id = ETAT::VALIDEE;
 	public $comment;
 	public $date_approbation;
@@ -28,11 +28,11 @@ class OPERATIONCHANTIER extends TABLE
 	public function enregistre(){
 		$data = new RESPONSE;
 		$this->employe_id = getSession("employe_connecte_id");
-		$this->agence_id = getSession("agence_connecte_id");
+		$this->chantier_id = getSession("chantier_connecte_id");
 		
 		$datas = EMPLOYE::findBy(["id ="=>$this->employe_id]);
 		if (count($datas) == 1) {
-			$datas = CATEGORIEOPERATION::findBy(["id ="=>$this->categorieoperation_id]);
+			$datas = CATEGORIEOPERATIONCHANTIER::findBy(["id ="=>$this->categorieoperation_id]);
 			if (count($datas) == 1) {
 				$cat = $datas[0];
 				if ( $cat->typeoperationcaisse_id == TYPEOPERATIONCAISSE::ENTREE || ($cat->typeoperationcaisse_id == TYPEOPERATIONCAISSE::SORTIE && $this->modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE)) {
@@ -47,7 +47,7 @@ class OPERATIONCHANTIER extends TABLE
 					if (intval($this->montant) > 0) {
 						$mouvement = new MOUVEMENT();
 
-						$datas = AGENCE::findBy(["id ="=>getSession("agence_connecte_id")]);
+						$datas = AGENCE::findBy(["id ="=>getSession("chantier_connecte_id")]);
 						if (count($datas) > 0) {
 							$item = $datas[0];
 							$mouvement->comptebanque_id = $item->comptebanque_id;
@@ -132,44 +132,44 @@ class OPERATIONCHANTIER extends TABLE
 
 
 
-	public static function entree(string $date1 = "2020-04-01", string $date2, int $agence_id = null){
+	public static function entree(string $date1 = "2020-04-01", string $date2, int $chantier_id = null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras = "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras = "AND chantier_id = $chantier_id ";
 		}
 		$requette = "SELECT SUM(montant) as montant  FROM operation, categorieoperation WHERE operation.categorieoperation_id = categorieoperation.id AND categorieoperation.typeoperationcaisse_id = ? AND operation.valide = 1 AND DATE(operation.created) >= ? AND DATE(operation.created) <= ? $paras";
-		$item = OPERATION::execute($requette, [TYPEOPERATIONCAISSE::ENTREE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new OPERATION()]; }
+		$item = OPERATIONCHANTIER::execute($requette, [TYPEOPERATIONCAISSE::ENTREE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new OPERATIONCHANTIER()]; }
 		return $item[0]->montant;
 	}
 
 
 
-	public static function sortie(string $date1 = "2020-04-01", string $date2, int $agence_id = null){
+	public static function sortie(string $date1 = "2020-04-01", string $date2, int $chantier_id = null){
 		$paras = "";
-		if ($agence_id != null) {
-			$paras = "AND agence_id = $agence_id ";
+		if ($chantier_id != null) {
+			$paras = "AND chantier_id = $chantier_id ";
 		}
 		$requette = "SELECT SUM(montant) as montant  FROM operation, categorieoperation WHERE operation.categorieoperation_id = categorieoperation.id AND categorieoperation.typeoperationcaisse_id = ? AND operation.valide = 1 AND DATE(operation.created) >= ? AND DATE(operation.created) <= ? $paras";
-		$item = OPERATION::execute($requette, [TYPEOPERATIONCAISSE::SORTIE, $date1, $date2]);
-		if (count($item) < 1) {$item = [new OPERATION()]; }
+		$item = OPERATIONCHANTIER::execute($requette, [TYPEOPERATIONCAISSE::SORTIE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new OPERATIONCHANTIER()]; }
 		return $item[0]->montant;
 	}
 
 
 
 
-	public static function resultat(string $date1 = "2020-04-01", string $date2, int $agence_id = null){
-		return static::entree($date1, $date2, $agence_id) - static::sortie($date1, $date2, $agence_id);
+	public static function resultat(string $date1 = "2020-04-01", string $date2, int $chantier_id = null){
+		return static::entree($date1, $date2, $chantier_id) - static::sortie($date1, $date2, $chantier_id);
 	}
 
 
 
 
 
-	public static function enAttente(int $agence_id = null){
-		if ($agence_id != null) {
-			return static::findBy(["etat_id ="=> ETAT::ENCOURS, "agence_id ="=>$agence_id]);
+	public static function enAttente(int $chantier_id = null){
+		if ($chantier_id != null) {
+			return static::findBy(["etat_id ="=> ETAT::ENCOURS, "chantier_id ="=>$chantier_id]);
 		}else{
 			return static::findBy(["etat_id ="=> ETAT::ENCOURS]);
 		}

@@ -8,7 +8,7 @@
             <form method="POST" id="formRembourser">
                 <div class="modal-body">
                     <div class="">
-                        <label>Montant à débiter sur le compte <span1>*</span1></label>
+                        <label>Montant à débiter sur le compte </label>
                         <div class="form-group">
                             <input type="text" number class="form-control" name="montant" required>
                         </div>

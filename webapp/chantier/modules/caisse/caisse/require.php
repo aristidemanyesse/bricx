@@ -1,15 +1,15 @@
 <?php 
 namespace Home;
 
-$datas = AGENCE::findBy(["id ="=>getSession("agence_connecte_id")]);
+$datas = CHANTIER::findBy(["id ="=>getSession("chantier_connecte_id")]);
 if (count($datas) == 1) {
-	$agence = $datas[0];
-	$agence->actualise();
-	$comptebanque = $agence->comptebanque;
+	$chantier = $datas[0];
+	$chantier->actualise();
+	$budgetchantier = $chantier->budgetchantier;
 
-	$mouvements = $comptebanque->fourni("mouvement", ["DATE(created) >= "=> $date1, "DATE(created) <= "=> $date2]);
+	$mouvements = $budgetchantier->fourni("mouvement", ["DATE(created) >= "=> $date1, "DATE(created) <= "=> $date2, "etat_id !="=>ETAT::ANNULEE]);
+	$total = VERSEMENTCHANTIER::total($date1, $date2, $chantier->id);
 
-	$transferts = TRANSFERTFOND::findBy(["comptebanque_id_source="=>$comptebanque->id, "DATE(created) >= "=> $date1, "DATE(created) <= "=> $date2]);
 
 	$entrees = $depenses = [];
 	foreach ($mouvements as $key => $value) {
@@ -22,9 +22,9 @@ if (count($datas) == 1) {
 	}
 
 
-	$stats = $comptebanque->stats($date1, $date2);
+	$stats = $budgetchantier->stats($date1, $date2);
 
-	$title = "BRIXS | Compte de caisse";
+	$title = "BRIXS | Gestion du budget du chantier";
 }else{
 	header("Location: ../master/dashboard");
 }

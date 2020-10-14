@@ -10,7 +10,7 @@
                 <div class="modal-body">
 
                     <div class="">
-                        <label>Donner un nom au materiel <span1>*</span1></label>
+                        <label>Donner un nom au materiel </label>
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" required>
                         </div>

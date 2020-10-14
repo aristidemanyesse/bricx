@@ -47,7 +47,7 @@
                                     <?= $fournisseur->contact ?>
                                 </td>
                                 <td class="text-right">
-                                    <a href="<?= $this->url("chantier", "stock", "fournisseur", $fournisseur->id)  ?>" class="btn btn-white btn-xs"><i class="fa fa-eye"></i> Voir le compte</a>
+                                    <a href="<?= $this->url("chantier", "production", "fournisseur", $fournisseur->id)  ?>" class="btn btn-white btn-xs"><i class="fa fa-eye"></i> Voir le compte</a>
                                 </td>
                             </tr>
                         <?php } ?>

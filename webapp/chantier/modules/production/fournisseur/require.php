@@ -9,15 +9,22 @@ if ($this->id != null) {
 		$fournisseur = $datas[0];
 		$fournisseur->actualise();
 
-		$encours = $fournisseur->fourni("approchantierressource", ["chantier_id ="=>$chantier->id, "etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$encours1 = $fournisseur->fourni("approchantierressource", ["chantier_id ="=>$chantier->id, "etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$encours2 = $fournisseur->fourni("approchantierproduit", ["chantier_id ="=>$chantier->id, "etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$encours3 = $fournisseur->fourni("approchantiermateriel", ["chantier_id ="=>$chantier->id, "etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$encours = array_merge($encours1, $encours2, $encours3);
 
-		$datas = $fournisseur->fourni("approchantierressource", ["chantier_id ="=>$chantier->id, "etat_id !="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+
+		$datas1 = $fournisseur->fourni("approchantierressource", ["chantier_id ="=>$chantier->id, "etat_id !="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$datas2 = $fournisseur->fourni("approchantierproduit", ["chantier_id ="=>$chantier->id, "etat_id !="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$datas3 = $fournisseur->fourni("approchantiermateriel", ["chantier_id ="=>$chantier->id, "etat_id !="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+		$datas = array_merge($datas1, $datas2, $datas3);
 
 
 		$fluxcaisse = $fournisseur->fourni("reglementfournisseurchantier");
 		usort($fluxcaisse, "comparerDateCreated2");
 
-		$title = "GPV | ".$fournisseur->name();
+		$title = "BRICX | ".$fournisseur->name();
 
 		session("fournisseur_id", $fournisseur->id);
 		

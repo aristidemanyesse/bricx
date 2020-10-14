@@ -12,19 +12,19 @@
 
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
-                            <label>Nom <span1>*</span1></label>
+                            <label>Nom </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label>Adresse<span1>*</span1></label>
+                            <label>Adresse</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="adresse" required>
                             </div>
                         </div>     
                         <div class="col-md-4 col-sm-6">
-                            <label>Adresse email <span1>*</span1></label>
+                            <label>Adresse email </label>
                             <div class="form-group">
                                 <input type="email" class="form-control" name="email">
                             </div>
@@ -34,7 +34,7 @@
                     <div class="row">
                      
                         <div class="col-md-4 col-sm-6">
-                            <label>Contact <span1>*</span1></label>
+                            <label>Contact </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="contact" required>
                             </div>

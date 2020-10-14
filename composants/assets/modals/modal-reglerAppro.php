@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label>Montant reçu <span1>*</span1></label>
+                            <label>Montant reçu </label>
                             <div class="form-group">
                                 <input type="text" number class="form-control" name="montant" value="<?= $appro->reste()  ?>" min=0 max="<?= $appro->reste()  ?>" required>
                             </div>

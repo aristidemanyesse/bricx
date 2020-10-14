@@ -34,21 +34,18 @@ class MOUVEMENT extends TABLE
 			if (count($datas) == 1) {
 				$type = $datas[0];
 
-				$datas = AGENCE::findBy(["id ="=>getSession("agence_connecte_id")]);
-				if (count($datas) > 0) {
-					$item = $datas[0];
-					$item->actualise();
-					$banque = $item->comptebanque;
+				if ($this->budgetchantier_id == null) {
 					$datas = COMPTEBANQUE::findBy(["id ="=>$this->comptebanque_id]);
-				}else{
-					$datas = CHANTIER::findBy(["id ="=>getSession("chantier_connecte_id")]);
 					if (count($datas) > 0) {
-						$item = $datas[0];
-						$item->actualise();
-						$banque = $item->budgetchantier;
-						$datas = BUDGETCHANTIER::findBy(["id ="=>$this->budgetchantier_id]);
+						$banque = $datas[0];
+					}
+				}else{
+					$datas = BUDGETCHANTIER::findBy(["id ="=>$this->budgetchantier_id]);
+					if (count($datas) > 0) {
+						$banque = $datas[0];
 					}
 				}
+
 
 				if (count($datas) == 1) {
 					$banque = $datas[0];

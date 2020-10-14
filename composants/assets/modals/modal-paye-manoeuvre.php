@@ -8,13 +8,13 @@
             <form method="POST" class="formPayeManoeuvre">
                 <div class="modal-body">
                     <div class="">
-                        <label>Montant à payer<span1>*</span1></label>
+                        <label>Montant à payer</label>
                         <div class="form-group">
                             <input type="number" number class="form-control" name="montant" value="<?= $solde  ?>" max="<?= $solde  ?>" required>
                         </div>
                     </div>
                     <div class="">
-                        <label>Mode de payement <span1>*</span1></label>
+                        <label>Mode de payement </label>
                         <div class="form-group">
                             <?php Native\BINDING::html("select", "modepayement"); ?>
                         </div>

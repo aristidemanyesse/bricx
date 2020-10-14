@@ -53,7 +53,7 @@
                                                 <?php foreach ($encours1 as $key => $appro) {
                                                     include($this->rootPath("composants/assets/modals/modal-reglerAppro.php"));
                                                     $appro->actualise();
-                                                    $lots = $appro->fourni("ligneapprovisionnement"); ?>
+                                                    $lots = $appro->fourni("ligneapprochantierressource"); ?>
                                                     <tr style="border-bottom: 2px solid black">
                                                         <td class="project-status">
                                                             <span class="label label-<?= $appro->etat->class ?>"><?= $appro->etat->name() ?></span>
@@ -77,7 +77,7 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr class="no">
-                                                                        <?php foreach ($appro->ligneapprovisionnements as $key => $ligne) {
+                                                                        <?php foreach ($appro->ligneapprochantierressources as $key => $ligne) {
                                                                             $ligne->actualise(); ?>
                                                                             <th class="text-center gras"><span class="small"><?= $ligne->ressource->name() ?></span></th>
                                                                         <?php } ?>
@@ -103,7 +103,7 @@
                                                 <?php foreach ($encours2 as $key => $appro) {
                                                     include($this->rootPath("composants/assets/modals/modal-reglerApproEmballage.php"));
                                                     $appro->actualise();
-                                                    $lots = $appro->fourni("ligneapproemballage"); ?>
+                                                    $lots = $appro->fourni("ligneapprochantierproduit"); ?>
                                                     <tr style="border-bottom: 2px solid black">
                                                         <td class="project-status">
                                                             <span class="label label-<?= $appro->etat->class ?>"><?= $appro->etat->name() ?></span>
@@ -127,9 +127,9 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr class="no">
-                                                                        <?php foreach ($appro->ligneapproemballages as $key => $ligne) {
+                                                                        <?php foreach ($appro->ligneapprochantierproduits as $key => $ligne) {
                                                                             $ligne->actualise(); ?>
-                                                                            <th class="text-center gras"><span class="small"><?= $ligne->emballage->name() ?></span></th>
+                                                                            <th class="text-center gras"><span class="small"><?= $ligne->produit->name() ?></span></th>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </thead>
@@ -143,7 +143,7 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonapproemballage", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonapproproduit", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
                                                                 <button data-toggle="modal" data-target="#modal-reglerApproEmballage<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
@@ -153,7 +153,7 @@
                                                 <?php foreach ($encours3 as $key => $appro) {
                                                     include($this->rootPath("composants/assets/modals/modal-reglerApproEtiquette.php"));
                                                     $appro->actualise();
-                                                    $lots = $appro->fourni("ligneapproetiquette"); ?>
+                                                    $lots = $appro->fourni("ligneapprochantiermateriel"); ?>
                                                     <tr style="border-bottom: 2px solid black">
                                                         <td class="project-status">
                                                             <span class="label label-<?= $appro->etat->class ?>"><?= $appro->etat->name() ?></span>
@@ -177,9 +177,9 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr class="no">
-                                                                        <?php foreach ($appro->ligneapproetiquettes as $key => $ligne) {
+                                                                        <?php foreach ($appro->ligneapprochantiermateriels as $key => $ligne) {
                                                                             $ligne->actualise(); ?>
-                                                                            <th class="text-center gras"><span class="small"><?= $ligne->etiquette->name() ?></span></th>
+                                                                            <th class="text-center gras"><span class="small"><?= $ligne->materiel->name() ?></span></th>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </thead>
@@ -193,7 +193,7 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonapproetiquette", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonappromateriel", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
                                                                 <button data-toggle="modal" data-target="#modal-reglerApproEtiquette<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
@@ -206,7 +206,7 @@
                                                 <?php foreach ($datas1 as $key => $appro) {
                                                     include($this->rootPath("composants/assets/modals/modal-reglerAppro.php"));
                                                     $appro->actualise();
-                                                    $lots = $appro->fourni("ligneapprovisionnement"); ?>
+                                                    $lots = $appro->fourni("ligneapprochantierressource"); ?>
                                                     <tr style="border-bottom: 2px solid black">
                                                         <td class="project-status">
                                                             <span class="label label-<?= $appro->etat->class ?>"><?= $appro->etat->name() ?></span>
@@ -230,7 +230,7 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr class="no">
-                                                                        <?php foreach ($appro->ligneapprovisionnements as $key => $ligne) {
+                                                                        <?php foreach ($appro->ligneapprochantierressources as $key => $ligne) {
                                                                             $ligne->actualise(); ?>
                                                                             <th class="text-center gras"><span class="small"><?= $ligne->ressource->name() ?></span></th>
                                                                         <?php } ?>
@@ -256,7 +256,7 @@
                                                 <?php foreach ($datas2 as $key => $appro) {
                                                     include($this->rootPath("composants/assets/modals/modal-reglerApproEmballage.php"));
                                                     $appro->actualise();
-                                                    $lots = $appro->fourni("ligneapproemballage"); ?>
+                                                    $lots = $appro->fourni("ligneapprochantierproduit"); ?>
                                                     <tr style="border-bottom: 2px solid black">
                                                         <td class="project-status">
                                                             <span class="label label-<?= $appro->etat->class ?>"><?= $appro->etat->name() ?></span>
@@ -280,9 +280,9 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr class="no">
-                                                                        <?php foreach ($appro->ligneapproemballages as $key => $ligne) {
+                                                                        <?php foreach ($appro->ligneapprochantierproduits as $key => $ligne) {
                                                                             $ligne->actualise(); ?>
-                                                                            <th class="text-center gras"><span class="small"><?= $ligne->emballage->name() ?></span></th>
+                                                                            <th class="text-center gras"><span class="small"><?= $ligne->produit->name() ?></span></th>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </thead>
@@ -296,7 +296,7 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonapproemballage", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonapproproduit", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
                                                                 <button data-toggle="modal" data-target="#modal-reglerApproEmballage<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
@@ -306,7 +306,7 @@
                                                 <?php foreach ($datas3 as $key => $appro) {
                                                     include($this->rootPath("composants/assets/modals/modal-reglerApproEtiquette.php"));
                                                     $appro->actualise();
-                                                    $lots = $appro->fourni("ligneapproetiquette"); ?>
+                                                    $lots = $appro->fourni("ligneapprochantiermateriel"); ?>
                                                     <tr style="border-bottom: 2px solid black">
                                                         <td class="project-status">
                                                             <span class="label label-<?= $appro->etat->class ?>"><?= $appro->etat->name() ?></span>
@@ -330,9 +330,9 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr class="no">
-                                                                        <?php foreach ($appro->ligneapproetiquettes as $key => $ligne) {
+                                                                        <?php foreach ($appro->ligneapprochantiermateriels as $key => $ligne) {
                                                                             $ligne->actualise(); ?>
-                                                                            <th class="text-center gras"><span class="small"><?= $ligne->etiquette->name() ?></span></th>
+                                                                            <th class="text-center gras"><span class="small"><?= $ligne->materiel->name() ?></span></th>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </thead>
@@ -346,7 +346,7 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonapproetiquette", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonappromateriel", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
                                                                 <button data-toggle="modal" data-target="#modal-reglerApproEtiquette<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
@@ -425,7 +425,7 @@
                     <h2><?= $fournisseur->name() ?> 
 
                     <?php if ($employe->isAutoriser("modifier-supprimer")) { ?>
-                        <i onclick="modification('fournisseur', <?= $fournisseur->id ?>)" data-toggle="modal" data-target="#modal-fournisseur" class="pull-right fa fa-pencil cursor"></i>
+                        <i onclick="modification('fournisseurchantier', <?= $fournisseur->id ?>)" data-toggle="modal" data-target="#modal-fournisseur" class="pull-right fa fa-pencil cursor"></i>
                     <?php } ?>
                 </h2>
                 <address>

@@ -12,13 +12,13 @@ $reste = $tricycle->resteAPayer();
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label>Montant à payer<span1>*</span1></label>
+                            <label>Montant à payer</label>
                             <div class="form-group">
                                 <input type="number" number class="form-control" name="montant" value="<?= $reste  ?>" max="<?= $reste  ?>" required>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label>Mode de payement <span1>*</span1></label>
+                            <label>Mode de payement </label>
                             <div class="form-group">
                                 <?php Native\BINDING::html("select", "modepayement"); ?>
                             </div>
