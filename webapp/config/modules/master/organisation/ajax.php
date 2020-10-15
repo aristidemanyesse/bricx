@@ -9,15 +9,15 @@ extract($_POST);
 
 
 if ($action == "autoriserAgence") {
-	$datas = ACCES_AGENCE::findBy(["employe_id ="=> $employe_id, "agence_id ="=> $agence_id]);
+	$datas = ACCES_CHANTIER::findBy(["employe_id ="=> $employe_id, "chantier_id ="=> $chantier_id]);
 	if ($etat == "true") {
 		if (count($datas) == 0) {
-			$rem = new ACCES_AGENCE();
+			$rem = new ACCES_CHANTIER();
 			$rem->hydrater($_POST);
 			$data = $rem->enregistre();
 		}else{
 			$data->status = false;
-			$data->message = "L'employé à déjà accès à cette agence !";
+			$data->message = "L'employé à déjà accès à cette chantier !";
 		}
 	}else{
 		if (count($datas) == 1) {

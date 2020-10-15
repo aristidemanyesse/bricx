@@ -108,7 +108,7 @@
                                             <div class="ibox-content">
                                                 <div class="row">
                                                     <div class="col-9">
-                                                        <h3 class="text-uppercase gras text-navy">Unité d'organisation</h3>
+                                                        <h3 class="text-uppercase gras text-navy">Organisation de chantiers</h3>
                                                         <h5 class="no-margins text-muted">Agences, stocks initiaux</h5>
                                                     </div>
                                                     <div class="col-3 text-right">
@@ -125,8 +125,8 @@
                                             <div class="ibox-content">
                                                 <div class="row">
                                                     <div class="col-9">
-                                                        <h3 class="text-uppercase gras text-navy">Elements de production</h3>
-                                                        <h5 class="no-margins text-muted">Produits, ressources, Exigence de production</h5>
+                                                        <h3 class="text-uppercase gras text-navy">Elements de construction</h3>
+                                                        <h5 class="no-margins text-muted">Briques, ressources, matériels</h5>
                                                     </div>
                                                     <div class="col-3 text-right">
                                                         <i class="fa fa-bitbucket fa-5x text-muted"></i>
@@ -136,45 +136,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-lg-3">
-                                    <a href="<?= $this->url("config", "master", "prices")  ?>">
-                                        <div class="ibox">
-                                            <div class="ibox-content">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <h3 class="text-uppercase gras text-navy">Barème des prix</h3>
-                                                        <h5 class="no-margins text-muted">Etablir vos barèmes de prix et de paye</h5>
-                                                    </div>
-                                                    <div class="col-3 text-right">
-                                                        <i class="fa fa-dollar fa-5x text-muted"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3">
-                                    <a href="<?= $this->url("config", "master", "caisse")  ?>">
-                                        <div class="ibox">
-                                            <div class="ibox-content">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <h3 class="text-uppercase gras text-navy">Config de la caisse</h3>
-                                                        <h5 class="no-margins text-muted">Compte en banque, caisse, gestion</h5>
-                                                    </div>
-                                                    <div class="col-3 text-right">
-                                                        <i class="fa fa-stack-overflow fa-5x text-muted"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div><br>
-
-
-
-                            <div class="row justify-content-center">
+                         
                                 <div class="col-lg-3">
                                     <a href="<?= $this->url("config", "master", "Historiques")  ?>">
                                         <div class="ibox">

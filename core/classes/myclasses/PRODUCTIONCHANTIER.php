@@ -42,11 +42,6 @@ class PRODUCTIONCHANTIER extends TABLE
 			$data = $pro->enregistre();
 
 			foreach (PRODUIT::getAll() as $key => $produit) {
-				$ligne = new LIGNEPRODUCTION();
-				$ligne->production_id = $pro->id;
-				$ligne->produit_id = $produit->id;
-				$ligne->enregistre();
-
 				$ligne = new LIGNEPRODUCTIONCHANTIER();
 				$ligne->productionchantier_id = $pro->id;
 				$ligne->produit_id = $produit->id;
@@ -54,11 +49,6 @@ class PRODUCTIONCHANTIER extends TABLE
 			}
 			
 			foreach (RESSOURCE::getAll() as $key => $ressource) {
-				$ligne = new LIGNECONSOMMATION();
-				$ligne->production_id = $pro->id;
-				$ligne->ressource_id = $ressource->id;
-				$ligne->enregistre();
-
 				$ligne = new LIGNECONSOMMATIONCHANTIER();
 				$ligne->productionchantier_id = $pro->id;
 				$ligne->ressource_id = $ressource->id;

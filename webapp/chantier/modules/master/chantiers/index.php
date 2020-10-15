@@ -48,14 +48,11 @@
 
             <div class="wrapper wrapper-content">
                 <div class="text-center animated fadeInRightBig">
-
-                    <div class="text-right">
-                        <button data-toggle="modal" data-target="#modal-chantier" class="btn btn-primary btn-sm dim"><i class="fa fa-home"></i> Ajouter Nouveau chantier</button>
-                    </div><br>
-
                     <div class="row">
 
-                        <?php foreach ($chantiers as $key => $chantier) { ?>
+                        <?php foreach ($chantiers as $key => $item) {
+                            $item->actualise();
+                            $chantier = $item->chantier; ?>
                             <div class="col-sm-6 col-md-4">
                                 <div class="ibox">
                                     <div class="ibox-content product-box">

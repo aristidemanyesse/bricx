@@ -87,7 +87,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="typeapprovisionnement_id" value="<?= Home\TYPEAPPROVISIONNEMENT::RESSOURCE ?>">
                         </form><br>
                         <h2 class="font-bold total text-right total">0 Fcfa</h2>
                         <hr/>

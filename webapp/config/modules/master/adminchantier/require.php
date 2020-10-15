@@ -2,10 +2,10 @@
 namespace Home;
 
 if ($this->id != null) {
-	$datas = AGENCE::findBy(["id ="=>$this->id]);
+	$datas = CHANTIER::findBy(["id ="=>$this->id]);
 	if (count($datas) > 0) {
-		$agence = $datas[0];
-		$agence->actualise();
+		$chantier = $datas[0];
+		$chantier->actualise();
 		
 		$produits = PRODUIT::findBy(["isActive ="=>TABLE::OUI]);
 		$ressources = RESSOURCE::getAll([], [], ["name"=>"ASC"]);

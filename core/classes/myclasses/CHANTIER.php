@@ -71,7 +71,6 @@ class CHANTIER extends TABLE
 					$tache->name = "Contruction du chantier '$this->name' ";
 					$tache->chantier_id = $this->id;
 					$tache->duree = dateDiffe($this->started, $this->finished);
-					$tache->typeduree_id = TYPEDUREE::JOUR;
 					$tache->etatchantier_id = $this->etatchantier_id;
 					$tache->enregistre();
 

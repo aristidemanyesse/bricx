@@ -20,7 +20,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <?php foreach ($mats as $key => $mat) {
+                        <?php foreach ($materiels as $key => $mat) {
                             $mat->actualise();
                             $materiel = $mat->materiel;
                             $stock = $materiel->stock(Home\PARAMS::DATE_DEFAULT, dateAjoute(1), $chantier->id); ?>

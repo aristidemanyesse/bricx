@@ -39,12 +39,12 @@
 
 
                             <div class="row">
-                                <div class="col-sm-8 bloc">
+                                <div class="col-sm-12 bloc">
                                     <div class="ibox border">
                                         <div class="ibox-title">
-                                            <h5 class="text-uppercase">Liste de vos Agences</h5>
+                                            <h5 class="text-uppercase">Liste de vos Chantiers</h5>
                                             <div class="ibox-tools">
-                                                <a class="btn_modal btn btn-xs btn-white" data-toggle="modal" data-target="#modal-agence">
+                                                <a class="btn_modal btn btn-xs btn-white" data-toggle="modal" data-target="#modal-chantier">
                                                     <i class="fa fa-plus"></i> Ajouter
                                                 </a>
                                             </div>
@@ -53,28 +53,34 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th>Etat du chantier</th>
                                                         <th>Nom</th>
                                                         <th>Lieu</th>
-                                                         <th>Compte attribué</th>
-                                                        <th></th>
+                                                        <th>Début & Fin estimée</th>
+                                                        <th>Compte & Budget prévisionnel</th>
                                                         <th></th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $i =0; foreach (Home\AGENCE::findBy([], [], ["name"=>"ASC"]) as $key => $item) {
+                                                    <?php $i =0; foreach (Home\CHANTIER::findBy([], [], ["name"=>"ASC"]) as $key => $item) {
                                                         $item->actualise(); ?>
                                                         <tr>
+                                                            <td class="gras"><small class="label label-<?= $item->etatchantier->class; ?>"><?= $item->etatchantier->name(); ?></small></td>
                                                             <td class="gras"><?= $item->name(); ?></td>
                                                             <td><?= $item->lieu; ?></td>
-                                                            <td class="gras"><?= $item->comptebanque->name(); ?></td>
+                                                            <td class="gras"><?= datecourt($item->started); ?> - <?= datecourt($item->finished); ?></td>
+                                                            <td class="gras">
+                                                                <span><?= $item->budgetchantier->name(); ?></span><br>
+                                                                <small><?= money($item->previsionnel); ?> <?= $params->devise ?></small>
+                                                            </td>
                                                             <td>
-                                                                <a href="<?= $this->url("config", "master", "adminagence", $item->id)  ?>" class="btn_modal btn btn-xs btn-white">
-                                                                    <i class="fa fa-wrench"></i> Admin
+                                                                <a href="<?= $this->url("config", "master", "adminchantier", $item->id)  ?>" class="btn_modal btn btn-xs btn-white">
+                                                                    <i class="fa fa-wrench"></i> Configurer
                                                                 </a>
                                                             </td>
-                                                            <td data-toggle="modal" data-target="#modal-agence" title="modifier la categorie" onclick="modification('agence', <?= $item->id ?>)"><i class="fa fa-pencil text-blue cursor"></i></td>
-                                                            <td title="supprimer la categorie" onclick="suppressionWithPassword('agence', <?= $item->id ?>)"><i class="fa fa-close cursor text-danger"></i></td>
+                                                            <td data-toggle="modal" data-target="#modal-chantier" title="modifier la categorie" onclick="modification('chantier', <?= $item->id ?>)"><i class="fa fa-pencil text-blue cursor"></i></td>
+                                                            <td title="supprimer la categorie" onclick="suppressionWithPassword('chantier', <?= $item->id ?>)"><i class="fa fa-close cursor text-danger"></i></td>
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -90,9 +96,9 @@
 
                             <div class="ibox border">
                                 <div class="ibox-title">
-                                    <h5 class="text-uppercase">Attribution des accès des agences</h5>
+                                    <h5 class="text-uppercase">Attribution des accès des chantiers</h5>
                                     <div class="ibox-tools">
-                                       
+
                                     </div>
                                 </div>
                                 <div class="ibox-content">
@@ -113,20 +119,20 @@
                                                     </td>
                                                     <td class="" >
                                                         <div class="row">
-                                                            <?php $datas = $item->fourni("acces_agence");
+                                                            <?php $datas = $item->fourni("acces_chantier");
                                                             $lots = [];
                                                             foreach ($datas as $key => $rem) {
                                                                 $rem->actualise();
-                                                                $lots[] = $rem->agence->id; ?>
-                                                                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                                                                    <label class="cursor"><input type="checkbox" class="i-checks agence" employe_id="<?= $rem->employe_id ?>" agence_id="<?= $rem->agence->id ?>" checked name="<?= $rem->agence->name() ?>"> <?= $rem->agence->name() ?></label>
+                                                                $lots[] = $rem->chantier->id; ?>
+                                                                <div class="col-6 col-sm-4 col-md-3">
+                                                                    <label class="cursor"><input type="checkbox" class="i-checks chantier" employe_id="<?= $rem->employe_id ?>" chantier_id="<?= $rem->chantier->id ?>" checked name="<?= $rem->chantier->name() ?>"> <?= $rem->chantier->name() ?></label>
                                                                 </div>
                                                             <?php } ?>
-                                                            <?php foreach (Home\AGENCE::getAll() as $key => $agence) {
-                                                                if (!in_array($agence->id, $lots)) {
+                                                            <?php foreach (Home\CHANTIER::getAll() as $key => $chantier) {
+                                                                if (!in_array($chantier->id, $lots)) {
                                                                     ?>
-                                                                    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                                                                        <label class="cursor"><input type="checkbox" class="i-checks agence" employe_id="<?= $item->id ?>" agence_id="<?= $agence->id ?>" name="<?= $agence->name() ?>"> <?= $agence->name() ?></label>
+                                                                    <div class="col-6 col-sm-4 col-md-3">
+                                                                        <label class="cursor"><input type="checkbox" class="i-checks chantier" employe_id="<?= $item->id ?>" chantier_id="<?= $chantier->id ?>" name="<?= $chantier->name() ?>"> <?= $chantier->name() ?></label>
                                                                     </div>
                                                                 <?php } 
                                                             } ?>  
@@ -154,9 +160,7 @@
 
             <?php include($this->rootPath("webapp/config/elements/templates/script.php")); ?>
 
-            <?php include($this->rootPath("composants/assets/modals/modal-params.php") );  ?>
-            <?php include($this->rootPath("composants/assets/modals/modal-agence.php") );  ?>
-            <?php include($this->rootPath("composants/assets/modals/modal-entrepot.php") );  ?>
+            <?php include($this->rootPath("composants/assets/modals/modal-chantier.php") );  ?>
 
 
         </body>

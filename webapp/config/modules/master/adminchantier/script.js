@@ -4,7 +4,7 @@ $(function(){
 
     
     $("input.maj").change(function(){
-        var url = "../../webapp/config/modules/master/adminagence/ajax.php";
+        var url = "../../webapp/config/modules/master/adminchantier/ajax.php";
         var id = $(this).attr("id")
         var name = $(this).attr("name")
         var val = $(this).val()

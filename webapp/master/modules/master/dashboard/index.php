@@ -50,15 +50,15 @@
                                     <div class="col-md-9 border-left">
                                         <div class="row text-center">
                                             <div class="col-sm-4 border-left border-bottom">
-                                                <div class="p-xs">
+                                                <div class="p-lg">
                                                     <i class="fa fa-hospital-o fa-4x text-orange"></i>
-                                                    <h1 class="m-xs"><?= start0(count(Home\AGENCE::getAll()))  ?></h1>
-                                                    <h4 class="no-margins text-uppercase gras">Agences</h4>
+                                                    <h1 class="m-xs"><?= start0(count(Home\CHANTIER::getAll()))  ?></h1>
+                                                    <h4 class="no-margins text-uppercase gras">Chantiers</h4>
                                                     <small><?= $params->societe ?></small>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 border-left border-bottom">
-                                                <div class="p-xs">
+                                                <div class="p-lg">
                                                     <i class="fa fa-bank fa-4x text-green"></i>
                                                     <h1 class="m-xs"><?= start0(count(Home\AGENCE::getAll()))  ?></h1>
                                                     <h4 class="no-margins text-uppercase gras">Entrepôts</h4>
@@ -66,7 +66,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 border-left border-bottom">
-                                                <div class="p-xs">
+                                                <div class="p-lg">
                                                     <i class="fa fa-cube fa-4x text-orange"></i>
                                                     <h1 class="m-xs"><?= start0(count(Home\PRODUIT::findBy(["isActive ="=>Home\TABLE::OUI])))  ?></h1>
                                                     <h4 class="no-margins text-uppercase gras">Produits</h4>
@@ -74,15 +74,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 border-left">
-                                                <div class="p-xs">
+                                                <div class="p-lg">
                                                     <i class="fa fa-users fa-4x text-green"></i>
-                                                    <h1 class="m-xs"><?= start0(count(Home\CLIENT::getAll()))  ?></h1>
+                                                    <h1 class="m-xs"><?= start0(count([]))  ?></h1>
                                                     <h4 class="no-margins text-uppercase gras">CLients</h4>
                                                     <small><?= $params->societe ?></small>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 border-left">
-                                                <div class="p-xs">
+                                                <div class="p-lg">
                                                     <i class="fa fa-bicycle fa-4x text-orange"></i>
                                                     <h1 class="m-xs"><?= start0(count(Home\VEHICULE::getAll() ) - 2)  ?></h1>
                                                     <h4 class="no-margins text-uppercase gras">Véhicules de livraisons </h4>
@@ -90,7 +90,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 border-left">
-                                                <div class="p-xs">
+                                                <div class="p-lg">
                                                     <i class="fa fa-male fa-4x text-green"></i>
                                                     <h1 class="m-xs"><?= start0(count(Home\EMPLOYE::getAll()))  ?></h1>
                                                     <h4 class="no-margins text-uppercase gras">Utilisateurs</h4>
@@ -104,45 +104,6 @@
 
 
                             <div class="row justify-content-center">
-                                <?php if ($employe->isAutoriser("entrepot") && $employe->agence_id != null) { ?>
-                                    <div class="col-lg-3">
-                                        <a href="<?= $this->url("entrepot", "master", "dashboard")  ?>">
-                                            <div class="ibox">
-                                                <div class="ibox-content">
-                                                    <div class="row">
-                                                        <div class="col-7">
-                                                            <h5 class="text-uppercase">A la briquetrie</h5>
-                                                            <h4 class="no-margins text-orange">La fabrique</h4>
-                                                        </div>
-                                                        <div class="col-5 text-right">
-                                                            <i class="fa fa-steam fa-4x text-green"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-
-                                <?php  if ($employe->isAutoriser("boutique") && $employe->agence_id != null) { ?>
-                                    <div class="col-lg-3">
-                                        <a href="<?= $this->url("boutique", "master", "dashboard")  ?>">
-                                            <div class="ibox">
-                                                <div class="ibox-content">
-                                                    <div class="row">
-                                                        <div class="col-7">
-                                                            <h5 class="text-uppercase">A la briquetrie</h5>
-                                                            <h4 class="no-margins text-orange">La boutique</h4>
-                                                        </div>
-                                                        <div class="col-5 text-right">
-                                                            <i class="fa fa-hospital-o fa-4x text-green"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
 
                                 <?php if ($employe->isAutoriser("chantier") && $employe->agence_id != null) { ?>
                                     <div class="col-lg-3">
@@ -155,7 +116,7 @@
                                                             <h4 class="no-margins text-orange">Mes chantiers</h4>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <i class="fa fa-steam fa-4x text-green"></i>
+                                                            <i class="fa fa-hospital-o fa-4x text-green"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,11 +124,6 @@
                                         </a>
                                     </div>
                                 <?php } ?>
-                            </div>
-
-
-
-                            <div class="row justify-content-center">
 
                                 <?php if ($employe->isAutoriser("manager")) { ?>
                                     <div class="col-lg-3">
@@ -176,7 +132,7 @@
                                                 <div class="ibox-content">
                                                     <div class="row">
                                                         <div class="col-7">
-                                                            <h5 class="text-uppercase">A la briquetrie</h5>
+                                                            <h5 class="text-uppercase">Construction</h5>
                                                             <h4 class="no-margins text-dark">Gestion générale</h4>
                                                         </div>
                                                         <div class="col-5 text-right">

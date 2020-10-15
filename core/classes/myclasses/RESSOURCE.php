@@ -31,14 +31,6 @@ class RESSOURCE extends TABLE
 					$ligne->enregistre();
 				}
 
-				foreach (AGENCE::getAll() as $key => $exi) {
-					$ligne = new INITIALRESSOURCEAGENCE();
-					$ligne->agence_id = $exi->id;
-					$ligne->ressource_id = $this->id;
-					$ligne->quantite = 0;
-					$ligne->enregistre();
-				}
-
 				foreach (CHANTIER::getAll() as $key => $exi) {
 					$ligne = new INITIALRESSOURCECHANTIER();
 					$ligne->chantier_id = $exi->id;
@@ -59,12 +51,12 @@ class RESSOURCE extends TABLE
 
 	public function stockChantier(String $date1, String $date2, int $chantier_id){
 		$item = $this->fourni("initialressourcechantier", ["chantier_id ="=>$chantier_id])[0];
-		return $this->achatChantier($date1, $date2, $chantier_id) - $this->consommeeChantier($date1, $date2, $chantier_id) - $this->perteChantier($date1, $date2, $chantier_id) + $item->quantite;
+		return $this->achat($date1, $date2, $chantier_id) + $this->depot($date1, $date2, $chantier_id) - $this->consommeeChantier($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $item->quantite;
 	}
 
 
 
-	public function achatChantier(string $date1, string $date2, int $chantier_id = null){
+	public function achat(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
 		if ($chantier_id != null) {
 			$paras.= "AND chantier_id = $chantier_id ";
@@ -75,6 +67,18 @@ class RESSOURCE extends TABLE
 		return $item[0]->quantite;
 	}
 
+
+
+	public function depot(string $date1, string $date2, int $chantier_id = null){
+		$paras = "";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
+		}
+		$requette = "SELECT SUM(quantite) as quantite  FROM lignedepotressource, depotressource WHERE lignedepotressource.ressource_id = ?  AND lignedepotressource.depotressource_id = depotressource.id AND depotressource.etat_id = ? AND DATE(depotressource.created) >= ? AND DATE(depotressource.created) <= ? $paras ";
+		$item = LIGNEDEPOTRESSOURCE::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEDEPOTRESSOURCE()]; }
+		return $item[0]->quantite;
+	}
 
 
 	public function consommeeChantier(string $date1, string $date2, int $chantier_id = null){
@@ -90,7 +94,7 @@ class RESSOURCE extends TABLE
 
 
 
-	public function perteChantier(string $date1, string $date2, int $chantier_id = null){
+	public function perte(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
 		if ($chantier_id != null) {
 			$paras.= "AND chantier_id = $chantier_id ";

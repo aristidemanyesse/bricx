@@ -1,7 +1,7 @@
 <?php 
 namespace Home;
 
-$chantiers = CHANTIER::getall();
+$chantiers = $employe->fourni("acces_chantier");
 
 $title = "BRICX | Espace d'Administration ";
 ?>

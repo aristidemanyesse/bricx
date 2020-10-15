@@ -67,11 +67,11 @@
                     </div>
 
                     <hr>
-                    <div class="row">
+                    <div class="row unmodified">
                         <div class="col-md-4 col-sm-6">
                             <label>Nom du client </label>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="client_name" required>
+                                <input type="text" class="form-control" name="client_name">
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">

@@ -4,10 +4,7 @@ namespace Home;
 $produits = PRODUIT::getAll();
 
 
-$title = "BRIXS | Stock de briques en agence ";
+$title = "BRIXS | Stock de briques sur ce chantier ";
 
-
-$productionjour = PRODUCTION::today();
-$productionjour->actualise();
 
 ?>

@@ -43,7 +43,7 @@ class INITIALMATERIELCHANTIER extends TABLE
 		return $this->sentense = "";
 	}
 	public function sentenseUpdate(){
-		return $this->sentense = "Modification du stock initial de ressource : ".$this->ressource->name()." dans ".$this->agence->name();
+		return $this->sentense = "Modification du stock initial de materiel : ".$this->materiel->name()." dans ".$this->chantier->name();
 	}
 	public function sentenseDelete(){
 		return $this->sentense = "Suppression definitive de l'element $this->id :$this->id";

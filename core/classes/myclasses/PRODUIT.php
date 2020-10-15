@@ -24,26 +24,6 @@ class PRODUIT extends TABLE
 			$data = $this->save();
 			if ($data->status) {
 
-				foreach (ZONELIVRAISON::getAll() as $key => $zonelivraison) {
-					$datas = PRIX_ZONELIVRAISON::findBy(["zonelivraison_id ="=>$zonelivraison->id, "produit_id ="=>$data->lastid]);
-					if (count($datas) == 0) {
-						$ligne = new PRIX_ZONELIVRAISON();
-						$ligne->produit_id = $data->lastid;
-						$ligne->zonelivraison_id = $zonelivraison->id;
-						$ligne->price = 0;
-						$ligne->enregistre();
-					}
-				}
-
-				foreach (AGENCE::getAll() as $key => $exi) {
-					$ligne = new INITIALPRODUITAGENCE();
-					$ligne->chantier_id = $exi->id;
-					$ligne->produit_id = $this->id;
-					$ligne->quantite = 0;
-					$ligne->enregistre();
-				}
-
-
 				$ligne = new EXIGENCEPRODUCTION();
 				$ligne->produit_id = $this->id;
 				$ligne->quantite = 0;

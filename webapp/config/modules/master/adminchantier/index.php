@@ -33,15 +33,13 @@
                         </nav>
                     </div>
 
-                    <br>
+
                     <div class="wrapper-content">
                         <div class="animated fadeInRightBig container-fluid">
 
-                            <h1 class="text-center display-4 text-uppercase"><?= $agence->name()  ?></h1><br>
+                            <h1 class="text-center display-4 text-uppercase"><?= $chantier->name()  ?></h1><br>
 
                             <div class="row">
-
-
 
                                 <div class="col-sm-6 bloc">
                                     <div class="ibox border">
@@ -58,14 +56,45 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach (Home\INITIALRESSOURCEAGENCE::findBy(["agence_id ="=>$agence->id]) as $key => $item) {
+                                                    <?php foreach (Home\INITIALRESSOURCECHANTIER::findBy(["chantier_id ="=>$chantier->id]) as $key => $item) {
                                                         $item->actualise(); ?>
                                                         <tr>
                                                             <td class="gras"><?= $item->ressource->name(); ?></td>
                                                             <td><?= $item->ressource->unite; ?></td>
                                                             <td width="110px">
                                                                 <?php if ($item->ressource->isActive()) { ?>
-                                                                    <input type="text" title="Stock initial" number class="form-control input-xs text-center maj" value="<?= $item->quantite ?>" name="initialressourceagence" id="<?= $item->id ?>">
+                                                                    <input type="text" title="Stock initial" number class="form-control input-xs text-center maj" value="<?= $item->quantite ?>" name="initialressourcechantier" id="<?= $item->id ?>">
+                                                                <?php }  ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 bloc">
+                                    <div class="ibox border">
+                                        <div class="ibox-title">
+                                            <h5 class="text-uppercase">Stock initial des matériels engagés</h5>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Libéllé</th>
+                                                        <th>Stock initial</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach (Home\INITIALMATERIELCHANTIER::findBy(["chantier_id ="=>$chantier->id]) as $key => $item) {
+                                                        $item->actualise(); ?>
+                                                        <tr>
+                                                            <td class="gras"><?= $item->materiel->name(); ?></td>
+                                                            <td width="110px">
+                                                                <?php if ($item->materiel->isActive()) { ?>
+                                                                    <input type="text" title="Stock initial" number class="form-control input-xs text-center maj" value="<?= $item->quantite ?>" name="initialmaterielchantier" id="<?= $item->id ?>">
                                                                 <?php }  ?>
                                                             </td>
                                                         </tr>
@@ -78,22 +107,21 @@
 
 
 
-
                                 <div class="col-md-12 bloc">
                                     <div class="ibox border">
                                         <div class="ibox-title">
-                                            <h5 class="text-uppercase">Stock initial par produit dans cette agence</h5>
+                                            <h5 class="text-uppercase">Stock initial par produit dans cette chantier</h5>
                                         </div>
                                         <div class="ibox-content">
                                             <div class="row text-center">
                                                 <?php foreach ($produits as $key => $produit) {
-                                                    $item = $produit->fourni("initialproduitagence", ["agence_id ="=>$agence->id])[0]; ?>
+                                                    $item = $produit->fourni("initialproduitchantier", ["chantier_id ="=>$chantier->id])[0]; ?>
                                                     <div class="col-sm-4 col-md-3 col-lg-2 border-left border-bottom">
                                                         <div class="p-xs">
                                                             <i class="fa fa-cube fa-2x text-dark"></i>
                                                             <h6 class="text-uppercase gras"><?= $produit->name() ?> </h6>
 
-                                                            <input type="text" title="Stock initial" number class="form-control input-xs text-center maj" value="<?= $item->quantite ?>" name="initialproduitagence" id="<?= $item->id ?>">
+                                                            <input type="text" title="Stock initial" number class="form-control input-xs text-center maj" value="<?= $item->quantite ?>" name="initialproduitchantier" id="<?= $item->id ?>">
                                                         </div>
                                                     </div>
                                                 <?php } ?>
@@ -112,16 +140,10 @@
 
                     <?php include($this->rootPath("webapp/config/elements/templates/footer.php")); ?>
 
-
                 </div>
             </div>
 
-
             <?php include($this->rootPath("webapp/config/elements/templates/script.php")); ?>
-            <?php include($this->relativePath("modals.php")); ?>
-
-            <?php include($this->rootPath("composants/assets/modals/modal-params.php") );  ?>
-
 
         </body>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 14 oct. 2020 à 23:30
+-- Généré le : jeu. 15 oct. 2020 à 15:10
 -- Version du serveur :  5.7.19
 -- Version de PHP : 7.1.20
 
@@ -419,8 +419,6 @@ CREATE TABLE `depotproduit` (
   `employe_id` int(11) DEFAULT NULL,
   `datelivraison` datetime DEFAULT NULL,
   `comment` text COLLATE utf8_bin,
-  `chargement` varchar(5) COLLATE utf8_bin DEFAULT NULL,
-  `dechargement` varchar(5) COLLATE utf8_bin DEFAULT NULL,
   `nom_receptionniste` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `contact_receptionniste` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `created` datetime DEFAULT NULL,
@@ -1193,8 +1191,12 @@ CREATE TABLE `location` (
   `id` int(11) NOT NULL,
   `reference` varchar(40) COLLATE utf8_bin DEFAULT NULL,
   `chantier_id` int(11) DEFAULT NULL,
-  `etat_id` int(11) DEFAULT NULL,
+  `engin` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `started` datetime DEFAULT NULL,
+  `finished` datetime DEFAULT NULL,
   `montant` int(11) NOT NULL,
+  `avance` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',

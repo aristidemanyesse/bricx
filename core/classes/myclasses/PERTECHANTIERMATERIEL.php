@@ -1,0 +1,74 @@
+<?php
+namespace Home;
+use Native\RESPONSE;
+
+/**
+ * 
+ */
+class PERTECHANTIERMATERIEL extends TABLE
+{
+	
+	
+	public static $tableName = __CLASS__;
+	public static $namespace = __NAMESPACE__;
+
+
+	public $chantier_id;
+	public $typeperte_id;
+	public $materiel_id;
+	public $quantite;
+	public $comment;
+	public $employe_id;
+	public $etat_id = ETAT::VALIDEE;
+
+
+	public function enregistre(){
+		$data = new RESPONSE;
+			$datas = TYPEPERTE::findBy(["id ="=>$this->typeperte_id]);
+			if (count($datas) == 1) {
+				$datas = PRODUIT::findBy(["id ="=>$this->materiel_id]);
+				if (count($datas) == 1) {
+					$materiel = $datas[0];
+					if ($this->quantite > 0) {
+
+						$stock = $materiel->stock(PARAMS::DATE_DEFAULT, dateAjoute(1), getSession("chantier_connecte_id"));
+						if ($stock >= $this->quantite) {
+							$this->employe_id = getSession("employe_connecte_id");
+							$this->chantier_id = getSession("chantier_connecte_id");
+							$data = $this->save();
+						}else{
+							$data->status = false;
+							$data->message = "La quantité perdue est plus élévé que celle que vous avez effectivement !";
+						}
+						
+					}else{
+						$data->status = false;
+						$data->message = "Une erreur s'est produite lors  de l'opération, veuillez recommencer !";
+					}
+				}else{
+					$data->status = false;
+					$data->message = "Erreur sur la quantité perdue !";
+				}
+			}else{
+				$data->status = false;
+				$data->message = "Une erreur s'est produite lors  de l'opération, veuillez recommencer !";
+			}
+		return $data;
+	}
+
+
+
+
+	public function sentenseCreate(){
+		return $this->sentense = "Nouvelle perte sur le chantier ".$this->chantier->name();
+	}
+	public function sentenseUpdate(){
+		return $this->sentense = "Modification des informations de la perte en entrepot $this->id ";
+	}
+	public function sentenseDelete(){
+		return $this->sentense = "Suppression definitive de la perte en entrepot $this->id";
+	}
+
+}
+
+?>
