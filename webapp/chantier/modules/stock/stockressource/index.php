@@ -80,7 +80,7 @@
                                             $stock = $ressource->stockChantier(Home\PARAMS::DATE_DEFAULT, $index, $chantier->id);
                                             $achat = $ressource->achat($index, $index, $chantier->id);
                                             $depot = $ressource->depot($index, $index, $chantier->id);
-                                            $conso = $ressource->consommeeChantier($index, $index, $chantier->id);
+                                            $conso = $ressource->consommee($index, $index, $chantier->id);
                                             $perte = $ressource->perte($index, $index, $chantier->id);
                                             ?>
                                             <td class="cursor myPopover text-center"

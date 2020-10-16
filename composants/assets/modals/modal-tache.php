@@ -48,7 +48,7 @@
                 <div class="container">
                     <input type="hidden" name="id" >
                     <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
-                    <button class="btn btn-sm btn-danger dim pull-right"><i class="fa fa-money"></i> Enregistrer la perte</button>
+                    <button class="btn btn-sm btn-success dim pull-right"><i class="fa fa-money"></i> Enregistrer la tache</button>
                 </div>
                 <br>
             </form>

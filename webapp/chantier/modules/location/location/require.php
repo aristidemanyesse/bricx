@@ -1,14 +1,14 @@
 <?php 
 namespace Home;
 
-$title = "BRICX | Toutes les pertes de briques sur ce chantier";
+$title = "BRICX | Toutes les locations d'engins pour ce chantier";
 
 unset_session("produits");
 
 
-$encours = $chantier->fourni("pertechantierproduit", ["etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
+$encours = $chantier->fourni("location", ["etat_id ="=>ETAT::ENCOURS], [], ["created"=>"DESC"]);
 
 
-$datas = $chantier->fourni("pertechantierproduit", ["etat_id !="=>ETAT::ENCOURS, "DATE(created) >="=>$date1, "DATE(created) <="=>$date2], [], ["created"=>"DESC"]);
+$datas = $chantier->fourni("location", ["etat_id !="=>ETAT::ENCOURS, "DATE(created) >="=>$date1, "DATE(created) <="=>$date2], [], ["created"=>"DESC"]);
 
 ?>

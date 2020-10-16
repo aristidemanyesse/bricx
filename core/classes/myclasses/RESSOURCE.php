@@ -51,7 +51,7 @@ class RESSOURCE extends TABLE
 
 	public function stockChantier(String $date1, String $date2, int $chantier_id){
 		$item = $this->fourni("initialressourcechantier", ["chantier_id ="=>$chantier_id])[0];
-		return $this->achat($date1, $date2, $chantier_id) + $this->depot($date1, $date2, $chantier_id) - $this->consommeeChantier($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $item->quantite;
+		return $this->achat($date1, $date2, $chantier_id) + $this->depot($date1, $date2, $chantier_id) - $this->consommee($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $item->quantite;
 	}
 
 
@@ -81,7 +81,19 @@ class RESSOURCE extends TABLE
 	}
 
 
-	public function consommeeChantier(string $date1, string $date2, int $chantier_id = null){
+	public function useressource(string $date1, string $date2, int $chantier_id = null){
+		$paras = "";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
+		}
+		$requette = "SELECT SUM(quantite) as quantite  FROM ligneuseressource, useressource WHERE ligneuseressource.ressource_id = ?  AND ligneuseressource.useressource_id = useressource.id AND useressource.etat_id = ?  AND DATE(useressource.created) >= ? AND DATE(useressource.created) <= ? $paras ";
+		$item = LIGNEUSERESSOURCE::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEUSERESSOURCE()]; }
+		return $item[0]->quantite;
+	}
+
+
+	public function consommee(string $date1, string $date2, int $chantier_id = null){
 		$paras = "";
 		if ($chantier_id != null) {
 			$paras.= "AND chantier_id = $chantier_id ";

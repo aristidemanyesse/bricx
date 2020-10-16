@@ -469,7 +469,6 @@ if ($action == "validerCommande") {
 								$payement->client_id = $client_id;
 								$payement->comment = "Réglement de la facture pour la commande N°".$commande->reference;
 								$lot = $payement->enregistre();
-								var_dump($lot);
 								$commande->reglementclient_id = $lot->lastid;
 
 								$client->actualise();

@@ -116,6 +116,19 @@ class PRODUIT extends TABLE
 	}
 
 
+	public function useproduit(string $date1, string $date2, int $chantier_id = null){
+		$paras = "";
+		if ($chantier_id != null) {
+			$paras.= "AND chantier_id = $chantier_id ";
+		}
+		$requette = "SELECT SUM(quantite) as quantite  FROM ligneuseproduit, useproduit WHERE ligneuseproduit.produit_id = ?  AND ligneuseproduit.useproduit_id = useproduit.id AND useproduit.etat_id = ?  AND DATE(useproduit.created) >= ? AND DATE(useproduit.created) <= ? $paras ";
+		$item = LIGNEUSEPRODUIT::execute($requette, [$this->id, ETAT::VALIDEE, $date1, $date2]);
+		if (count($item) < 1) {$item = [new LIGNEUSEPRODUIT()]; }
+		return $item[0]->quantite;
+	}
+
+
+
 	public function perte(string $date1, string $date2, int $chantier_id = null){
 		return $this->perteRangement($date1, $date2, $chantier_id) + $this->perteAutre($date1, $date2, $chantier_id);
 	}
@@ -166,7 +179,7 @@ class PRODUIT extends TABLE
 			$item = $this->fourni("initialproduitchantier");
 			$quantite = comptage($item, "quantite", "somme");
 		}
-		$total = $this->production($date1, $date2, $chantier_id) + $this->achat($date1, $date2, $chantier_id) + $this->depot($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $quantite - $this->attente($chantier_id);
+		$total = $this->production($date1, $date2, $chantier_id) + $this->achat($date1, $date2, $chantier_id) + $this->depot($date1, $date2, $chantier_id) - $this->useproduit($date1, $date2, $chantier_id) - $this->perte($date1, $date2, $chantier_id) + $quantite - $this->attente($chantier_id);
 		return $total;
 	}
 

@@ -12,7 +12,7 @@
                         <div class="col-sm-8">
                             <label>Type d'opération </label>
                             <div class="form-group">
-                                <?php Native\BINDING::html("select-tableau", Home\CATEGORIEOPERATION::entree(), null, "categorieoperation_id"); ?>
+                                <?php Native\BINDING::html("select-tableau", Home\CATEGORIEOPERATIONCHANTIER::entree(), null, "categorieoperation_id"); ?>
                             </div>
                         </div> 
                         <div class="col-sm-4">

@@ -240,6 +240,9 @@ class FOURNISSEURCHANTIER extends AUTH
 		foreach ($this->fourni("approchantiermateriel", ["etat_id !="=>ETAT::ANNULEE]) as $key => $appro) {
 			$total += $appro->reste();	
 		}
+		foreach ($this->fourni("location", ["etat_id !="=>ETAT::ANNULEE]) as $key => $location) {
+			$total += $location->reste();	
+		}
 		return $total;
 	}
 

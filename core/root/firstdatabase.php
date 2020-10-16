@@ -84,7 +84,7 @@ $item->save();
 
 
 $datas = ["master", "manager", "boutique", "entrepot", "chantier", "config",
- "production", "ventes", "stock", "caisse", "rapports", "files",
+ "production", "ventes", "stock", "caisse", "rapports", "files", "Location",
   "modifier-supprimer", "roles", "mycompte"];
 foreach ($datas as $key => $value) {
 	$item = new ROLE();

@@ -22,6 +22,18 @@ if (count($datas) == 1) {
 	}
 
 
+	$datas = $chantier->fourni("approchantierressource", ["DATE(created) >=" => $date1 , "DATE(created) <=" => $date2, "etat_id !="=>ETAT::ANNULEE]);
+	$ressources = comptage($datas, "montant", "somme");
+
+	$datas = $chantier->fourni("approchantierproduit", ["DATE(created) >=" => $date1 , "DATE(created) <=" => $date2, "etat_id !="=>ETAT::ANNULEE]);
+	$produits = comptage($datas, "montant", "somme");
+
+	$materiels = 0;
+	$datas = $chantier->fourni("approchantiermateriel", ["DATE(created) >=" => $date1 , "DATE(created) <=" => $date2, "etat_id !="=>ETAT::ANNULEE]);
+	$materiels += comptage($datas, "montant", "somme");
+	$datas = $chantier->fourni("location", ["DATE(created) >=" => $date1 , "DATE(created) <=" => $date2, "etat_id !="=>ETAT::ANNULEE]);
+	$materiels += comptage($datas, "montant", "somme");
+
 	$stats = $budgetchantier->stats($date1, $date2);
 
 	$title = "BRIXS | Gestion du budget du chantier";

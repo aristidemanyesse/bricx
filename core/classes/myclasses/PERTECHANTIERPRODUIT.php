@@ -60,13 +60,13 @@ class PERTECHANTIERPRODUIT extends TABLE
 
 
 	public function sentenseCreate(){
-		return $this->sentense = "Nouvelle perte dans ".$this->agence->name();
+		return $this->sentense = "Nouvelle perte dans ".$this->chantier->name();
 	}
 	public function sentenseUpdate(){
-		return $this->sentense = "Modification des informations de la perte en entrepot $this->id ";
+		return $this->sentense = "Modification des informations de la perte sur le chantier $this->id ";
 	}
 	public function sentenseDelete(){
-		return $this->sentense = "Suppression definitive de la perte en entrepot $this->id";
+		return $this->sentense = "Suppression definitive de la perte sur le chantier $this->id";
 	}
 
 }

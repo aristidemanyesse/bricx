@@ -136,21 +136,21 @@
                                     <div class="col-lg-3">
                                         <ul class="stat-list">
                                             <li>
-                                                <h2 class="no-margins"><?= money(Home\REGLEMENTCLIENT::total($date1 , $date2, $chantier->id)) ?> <small><?= $params->devise ?></small></h2>
+                                                <h2 class="no-margins"><?= money($ressources) ?> <small><?= $params->devise ?></small></h2>
                                                 <small>Achat de ressources</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 48%;" class="progress-bar"></div>
                                                 </div>
                                             </li>
                                             <li>
-                                                <h2 class="no-margins "><?= money(0) ?> <small><?= $params->devise ?></small></h2>
+                                                <h2 class="no-margins "><?= money($produits) ?> <small><?= $params->devise ?></small></h2>
                                                 <small>Achat de briques</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 60%;" class="progress-bar"></div>
                                                 </div>
                                             </li>
                                             <li>
-                                                <h2 class="no-margins text-danger "><?= money($budgetchantier->getOut($date1, $date2) - comptage($mouvements , "montant", "somme")) ?> <small><?= $params->devise ?></small></h2>
+                                                <h2 class="no-margins text-danger "><?= money($materiels) ?> <small><?= $params->devise ?></small></h2>
                                                 <small>Matériels & locations d'engins</small>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 22%;" class="progress-bar progress-bar-animated progress-bar-danger"></div>
@@ -264,9 +264,7 @@
 
             <?php include($this->rootPath("composants/assets/modals/modal-entree.php")); ?>  
             <?php include($this->rootPath("composants/assets/modals/modal-versement.php")); ?>  
-            <?php include($this->rootPath("composants/assets/modals/modal-depense.php")); ?>  
-            <?php include($this->rootPath("composants/assets/modals/modal-transfertfond2.php")); ?>  
-            <?php include($this->rootPath("composants/assets/modals/modal-operation.php")); ?>  
+            <?php include($this->rootPath("composants/assets/modals/modal-depense.php")); ?>    
 
         </div>
     </div>

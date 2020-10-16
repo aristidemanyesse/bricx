@@ -1,10 +1,10 @@
 
-<div class="modal inmodal fade" id="modal-approvisionnement" style="z-index: 99999999">
+<div class="modal inmodal fade" id="modal-achatbrique" style="z-index: 99999999">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Nouvel approvisionnement de produit</h4>
+            <h4 class="modal-title">Nouvel achat de briques</h4>
             <small class="font-bold">Renseigner ces champs pour enregistrer l'approvisonnement </small>
         </div>
         
@@ -90,7 +90,7 @@
                         </form><br>
                         <h2 class="font-bold total text-right total">0 Fcfa</h2>
                         <hr/>
-                        <button onclick="validerApprovisionnement()" class="btn btn-warning btn-block dim"><i class="fa fa-check"></i> Valider l'approvisionnement</button>
+                        <button onclick="validerApprovisionnement()" class="btn btn-warning btn-block dim"><i class="fa fa-check"></i> Valider l'achat</button>
                     </div>
                 </div>
 

@@ -1,11 +1,12 @@
-<div class="modal inmodal fade" id="modal-reglerApproEmballage<?= $appro->id  ?>">
+
+<div class="modal inmodal fade" id="modal-reglerAchatProduit<?= $appro->id  ?>">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title text-red">Recouvrement</h4>
             </div>
-            <form method="POST" class="formShamman" classname="reglementfournisseur">
+            <form method="POST" class="formShamman" classname="reglementfournisseurchantier">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -29,7 +30,7 @@
                             </div>
                         </div><br>
                         <div class="col-sm-6">
-                            <label>N° numero dédié<span style="color: red">*</span> </label>
+                            <label>N°numero dédié<span style="color: red">*</span> </label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-pencil"></i></span><input type="text" name="numero" class="form-control">
                             </div>
@@ -38,11 +39,11 @@
                 </div><hr>
                 <div class="container">
                     <input type="hidden" name="idd" value="<?= $appro->id ?>">
-                    <input type="hidden" name="approemballage_id" value="<?= $appro->id ?>">
-                    <input type="hidden" name="classe" value="approemballage">
-                    <input type="hidden" name="fournisseur_id" value="<?= $appro->fournisseur->id ?>">
+                    <input type="hidden" name="classe" value="approchantierproduit">
+                    <input type="hidden" name="approchantierproduit_id" value="<?= $appro->id ?>">
+                    <input type="hidden" name="fournisseurchantier_id" value="<?= $appro->fournisseurchantier->id ?>">
                     <input type="hidden" name="recouvrement" value="<?= Home\TABLE::OUI ?>">
-                    <input type="hidden" name="comment" value="Recouvrement d'approvisionnement N°<?= $appro->reference ?>">
+                    <input type="hidden" name="comment" value="Recouvrement d'achat de briques N°<?= $appro->reference ?>">
                     <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
                     <button class="btn btn-sm dim btn-success pull-right"><i class="fa fa-check"></i> Valider le payement</button>
                 </div>

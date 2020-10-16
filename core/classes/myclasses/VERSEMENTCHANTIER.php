@@ -21,7 +21,6 @@ class VERSEMENTCHANTIER extends TABLE
 	public $date_approbation;
 	public $isModified = 0;
 	public $employe_id;
-	public $commande_id ;
 
 	public $image;
 	public $montant;

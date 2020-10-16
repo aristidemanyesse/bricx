@@ -16,87 +16,97 @@
 
 
             <div class="wrapper wrapper-content">
-                <div class="text-center animated fadeInRightBig">
+                <div class="animated fadeInRightBig">
 
-                 <div class="row">
-                    <div class="col-lg-8 animated fadeInRight">
-                        <div class="row">
-                            <?php foreach ($documents as $key => $document) { ?>
-                                <div class=" col-sm-6 col-md-4">
-                                    <div class="file-box">
-                                        <div class="file cursor" url="<?= $this->stockage("documents", "documentschantiers", $document->image) ?>">
-                                            <span class="corner"></span>
-                                            <div class="icon">
-                                                <i class="img-fluid fa fa-files-o"></i>
-                                            </div>
-                                            <div class="file-name">
-                                                <?= $document->name() ?>
-                                                <br/>
-                                                <small>Fichier <?= $document->image ?></small><br>
-                                                <small><?= datelong($document->created) ?></small>
-                                            </div>
-                                        </div>
-                                    </div>                                    
+                    <div class="row">
+                        <div class="col-lg-8 animated fadeInRight">
+                            <div class="ibox">
+                                <div class="ibox-title">
+                                    <h5>Documents du chantier</h5>
+                                    <div class="ibox-tools">
+                                        <button data-toggle="modal" data-target="#modal-document" class="btn btn-xs btn-default dim" style="margin-top: -5%"><i class="fa fa-plus"></i> AJouter nouveau document</button>
+                                    </div>
                                 </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <h5><i class="fa fa-file-pdf-o"></i> Aperçu des fichiers au format pdf</h5>
-                            </div>
-                            <div class="ibox-content" >
-                                <div style="overflow-x: scroll;">
-                                    <canvas id="the-canvas" class="pdfcanvas border-left-right border-top-bottom b-r-md"></canvas>
-                                </div>
-                                <div class="text-center pdf-toolbar">
+                                <div class="">
                                     <div class="row">
-                                        <div class="btn-group col-md-8">
-                                            <button id="prev" class="btn btn-white btn-xs"><i class="fa fa-long-arrow-left"></i> <span class="d-none d-sm-inline"></span></button>
+                                        <?php foreach ($documents as $key => $document) { ?>
+                                            <div class=" col-sm-6 col-md-4">
+                                                <div class="file-box">
+                                                    <div class="file cursor" url="<?= $this->stockage("documents", "documentschantiers", $document->image) ?>">
+                                                        <span class="corner"></span>
+                                                        <div class="icon">
+                                                            <i class="img-fluid fa fa-files-o"></i>
+                                                        </div>
+                                                        <div class="file-name">
+                                                            <?= $document->name() ?>
+                                                            <br/>
+                                                            <small>Fichier <?= $document->image ?></small><br>
+                                                            <small><?= datelong($document->created) ?></small>
+                                                        </div>
+                                                    </div>
+                                                </div>                                    
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                            <button id="zoomout" class="btn btn-white btn-xs"><i class="fa fa-search-minus"></i> <span class="d-none d-sm-inline"></span></button>
-                                            <button id="zoomfit" class="btn btn-white btn-xs"> 100%</button>
-                                            <button id="zoomin" class="btn btn-white btn-xs"><i class="fa fa-search-plus"></i> <span class="d-none d-sm-inline"></span> </button>
+                        <div class="col-lg-4">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5><i class="fa fa-file-pdf-o"></i> Aperçu des fichiers au format pdf</h5>
+                                </div>
+                                <div class="ibox-content" >
+                                    <div style="overflow-x: scroll;">
+                                        <canvas id="the-canvas" class="pdfcanvas border-left-right border-top-bottom b-r-md"></canvas>
+                                    </div>
+                                    <div class="text-center pdf-toolbar">
+                                        <div class="row">
+                                            <div class="btn-group col-md-8">
+                                                <button id="prev" class="btn btn-white btn-xs"><i class="fa fa-long-arrow-left"></i> <span class="d-none d-sm-inline"></span></button>
 
-                                            <button id="next" class="btn btn-white btn-xs"><i class="fa fa-long-arrow-right"></i> <span class="d-none d-sm-inline"></span></button>
-                                        </div>
+                                                <button id="zoomout" class="btn btn-white btn-xs"><i class="fa fa-search-minus"></i> <span class="d-none d-sm-inline"></span></button>
+                                                <button id="zoomfit" class="btn btn-white btn-xs"> 100%</button>
+                                                <button id="zoomin" class="btn btn-white btn-xs"><i class="fa fa-search-plus"></i> <span class="d-none d-sm-inline"></span> </button>
 
-                                        <div class="btn-group col-md-4">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="page_num">
+                                                <button id="next" class="btn btn-white btn-xs"><i class="fa fa-long-arrow-right"></i> <span class="d-none d-sm-inline"></span></button>
+                                            </div>
 
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-white btn-xs" id="page_count">/ 22</button>
+                                            <div class="btn-group col-md-4">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="page_num">
+
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-white btn-xs" id="page_count">/ 22</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>                                    
+                                        </div>                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
+
+
+            <?php include($this->rootPath("webapp/chantier/elements/templates/footer.php")); ?>
+
+
         </div>
-
-
-        <?php include($this->rootPath("webapp/chantier/elements/templates/footer.php")); ?>
-
-
     </div>
-</div>
 
 
-<?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
+    <?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
 
-<?php include($this->rootPath("composants/assets/modals/modal-document.php")); ?>  
+    <?php include($this->rootPath("composants/assets/modals/modal-document.php")); ?>  
 
 
-<script id="script">
+    <script id="script">
         //
         // If absolute URL from the remote server is provided, configure the CORS
         // header on that server.

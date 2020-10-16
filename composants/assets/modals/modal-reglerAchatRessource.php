@@ -1,11 +1,11 @@
-<div class="modal inmodal fade" id="modal-reglerAppro<?= $appro->id  ?>">
+<div class="modal inmodal fade" id="modal-reglerAchatRessource<?= $appro->id  ?>">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title text-red">Recouvrement</h4>
             </div>
-            <form method="POST" class="formShamman" classname="reglementfournisseur">
+            <form method="POST" class="formShamman" classname="reglementfournisseurchantier">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -37,12 +37,12 @@
                     </div>             
                 </div><hr>
                 <div class="container">
-                        <input type="hidden" name="idd" value="<?= $appro->id ?>">
-                    <input type="hidden" name="approvisionnement_id" value="<?= $appro->id ?>">
-                    <input type="hidden" name="classe" value="approvisionnement">
-                    <input type="hidden" name="fournisseur_id" value="<?= $appro->fournisseur->id ?>">
+                    <input type="hidden" name="idd" value="<?= $appro->id ?>">
+                    <input type="hidden" name="classe" value="approchantierressource">
+                    <input type="hidden" name="approchantierressource_id" value="<?= $appro->id ?>">
+                    <input type="hidden" name="fournisseurchantier_id" value="<?= $appro->fournisseurchantier->id ?>">
                     <input type="hidden" name="recouvrement" value="<?= Home\TABLE::OUI ?>">
-                    <input type="hidden" name="comment" value="Recouvrement d'approvisionnement N°<?= $appro->reference ?>">
+                    <input type="hidden" name="comment" value="Recouvrement d'achat de ressource N°<?= $appro->reference ?>">
                     <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
                     <button class="btn btn-sm dim btn-success pull-right"><i class="fa fa-check"></i> Valider le payement</button>
                 </div>
@@ -50,3 +50,5 @@
         </div>
     </div>
 </div>
+
+

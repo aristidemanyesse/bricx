@@ -2,7 +2,7 @@ $(function(){
 
 
 	$("#formAcompte").submit(function(event) {
-		var url = "../../webapp/entrepot/modules/stock/fournisseur/ajax.php";
+		var url = "../../webapp/chantier/modules/production/fournisseur/ajax.php";
 		alerty.confirm("Voulez-vous vraiment créditer ce montant sur ce compte ?", {
 			title: "Créditer l'acompte",
 			cancelLabel : "Non",
@@ -33,7 +33,7 @@ $(function(){
 
 
 	$("#formDette").submit(function(event) {
-		var url = "../../webapp/entrepot/modules/stock/fournisseur/ajax.php";
+		var url = "../../webapp/chantier/modules/production/fournisseur/ajax.php";
 		alerty.confirm("Voulez-vous vraiment faire le réglement de ce montant ?", {
 			title: "Reglement de dette",
 			cancelLabel : "Non",
@@ -71,7 +71,7 @@ $(function(){
 			cancelLabel : "Non",
 			okLabel : "OUI, valider",
 		}, function(){
-			var url = "../../webapp/entrepot/modules/stock/fournisseur/ajax.php";
+			var url = "../../webapp/chantier/modules/production/fournisseur/ajax.php";
 			alerty.prompt("Entrer votre mot de passe pour confirmer l'opération !", {
 				title: 'Récupération du mot de passe !',
 				inputType : "password",
@@ -93,7 +93,7 @@ $(function(){
 
 
 	$("#formRembourser").submit(function(event) {
-		var url = "../../webapp/entrepot/modules/stock/fournisseur/ajax.php";
+		var url = "../../webapp/chantier/modules/production/fournisseur/ajax.php";
 		alerty.confirm("Voulez-vous vraiment rembourser ce montant à ce fournisseur ?", {
 			title: "rembourser l'acompte",
 			cancelLabel : "Non",

@@ -17,6 +17,8 @@ class REGLEMENTFOURNISSEURCHANTIER extends TABLE
 	public $etat_id = ETAT::VALIDEE;
 	public $approchantierressource_id;
 	public $approchantierproduit_id;
+	public $approchantiermateriel_id;
+	public $location_id;
 	public $modepayement_id;
 	public $chantier_id;
 	public $structure;
@@ -102,6 +104,9 @@ class REGLEMENTFOURNISSEURCHANTIER extends TABLE
 		$datas = (TABLE::fullyClassName($this->classe))::findBy(["id = "=>$this->idd]);
 		if (count($datas) > 0) {
 			$appro = $datas[0];
+			$appro->actualise();
+			$fournisseur = $appro->fournisseurchantier;
+
 			if ($appro->reste() >= $this->montant) {
 
 				$this->employe_id = getSession("employe_connecte_id");
@@ -114,7 +119,7 @@ class REGLEMENTFOURNISSEURCHANTIER extends TABLE
 
 				if ($this->modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE) {
 					if (intval($this->montant) > 0) {
-						$datas = AGENCE::findBy(["id ="=>getSession("chantier_connecte_id")]);
+						$datas = CHANTIER::findBy(["id ="=>getSession("chantier_connecte_id")]);
 						if (count($datas) == 1) {
 							$chantier = $datas[0];
 							$chantier->actualise();
@@ -134,6 +139,12 @@ class REGLEMENTFOURNISSEURCHANTIER extends TABLE
 										if (!(isset($this->files) && is_array($this->files))) {
 											$this->files = [];
 										}
+
+										$fournisseur->actualise();
+
+										$this->dette = $fournisseur->resteAPayer();
+										$this->acompte = $fournisseur->acompte;
+										$this->save();
 										$this->uploading($this->files);
 									}
 								}
@@ -159,7 +170,7 @@ class REGLEMENTFOURNISSEURCHANTIER extends TABLE
 			}
 		}else{
 			$data->status = false;
-			$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!";
+			$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!v";
 		}
 		return $data;
 	}
@@ -291,13 +302,13 @@ class REGLEMENTFOURNISSEURCHANTIER extends TABLE
 
 
 	public function sentenseCreate(){
-		$this->sentense = "Nouveau reglement de fournisseur  N°$this->reference pour ".$this->fournisseur ->name()." d'un montant de $this->montant";
+		$this->sentense = "Nouveau reglement de fournisseur  N°$this->reference pour ".$this->fournisseurchantier->name()." d'un montant de $this->montant";
 	}
 	public function sentenseUpdate(){
 		$this->sentense = "Modification des informations du reglement de fournisseur  N°$this->reference ";
 	}
 	public function sentenseDelete(){
-		$this->sentense = "Nouveau reglement de fournisseur  N°$this->reference pour ".$this->fournisseur ->name()." d'un montant de $this->montant";
+		$this->sentense = "Nouveau reglement de fournisseur  N°$this->reference pour ".$this->fournisseurchantier->name()." d'un montant de $this->montant";
 	}
 
 }

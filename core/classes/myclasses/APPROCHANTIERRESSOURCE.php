@@ -62,7 +62,10 @@ class APPROCHANTIERRESSOURCE extends TABLE
 	
 
 	public function reste(){
-		return $this->montant - comptage($this->fourni("reglementfournisseurchantier"), "montant", "somme");
+		if ($this->etat_id != ETAT::ANNULEE) {
+			return $this->montant - comptage($this->fourni("reglementfournisseurchantier"), "montant", "somme");
+		}
+		return 0;
 	}
 
 

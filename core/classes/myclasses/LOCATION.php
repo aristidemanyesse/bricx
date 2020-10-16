@@ -10,84 +10,114 @@ class LOCATION extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $reference;
-	public $groupecommande_id;
+	public $fournisseurchantier_id;
 	public $chantier_id;
-	public $lieu;
-	public $vehicule_id;
-	public $chauffeur_id = 0;
+	public $engin;
+	public $montant;
+	public $avance;
+	public $started;
+	public $finished;
+	public $comment;
 	public $etat_id = ETAT::ENCOURS;
 	public $employe_id = 0;
-	
-	public $isLouer = 0;
-	public $montant_location = 0;
-	public $operation_id = 0;
-	public $nom_tricycle = "";
-	public $paye_tricycle = 0;
-	public $reste = 0;
-	public $chargement;
-	public $dechargement;
-	public $isPayer = 0;
 
-	public $datelivraison;
-	public $comment;
-	public $nom_receptionniste;
-	public $contact_receptionniste;
+	public $modepayement_id ;
+	public $structure;
+	public $numero;
 
-	
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		if ($this->lieu != "") {
-			$datas = ZONELIVRAISON::findBy(["id ="=>$this->chantier_id]);
-			if (count($datas) == 1) {
-				$datas = VEHICULE::findBy(["id ="=>$this->vehicule_id]);
-				if (count($datas) == 1) {
-					if ($this->vehicule_id == VEHICULE::AUTO || ($this->vehicule_id == VEHICULE::TRICYCLE && $this->nom_tricycle != "" && $this->paye_tricycle > 0) || ($this->vehicule_id > VEHICULE::TRICYCLE && $this->chauffeur_id > 0)) {
 
-						if (($this->vehicule_id <= VEHICULE::TRICYCLE) || ($this->vehicule_id > VEHICULE::TRICYCLE && $this->isLouer == 0) || ($this->vehicule_id > VEHICULE::TRICYCLE && $this->isLouer == 1 && $this->montant_location > 0)) {
-							
-							$this->employe_id = getSession("employe_connecte_id");
-							$this->reference = "BLI/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
-							$this->reste = $this->paye_tricycle;
-							$data = $this->save();
+		if ($this->engin != "") {
+			if ($this->montant > 0) {
+				if ($this->started <= $this->finished) {
+					if ($this->montant >= $this->avance) {
 
+						$datas = CHANTIER::findBy(["id ="=>getSession("chantier_connecte_id")]);
+						if (count($datas) == 1) {
+							$chantier = $datas[0];
+							$chantier->actualise();
+							$datas = FOURNISSEURCHANTIER::findBy(["id ="=>$this->fournisseurchantier_id]);
+							if (count($datas) == 1) {
+								$fournisseur = $datas[0];
+
+
+								if (($this->modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE && $this->avance > 0) || ($this->modepayement_id == MODEPAYEMENT::PRELEVEMENT_ACOMPTE)) {
+									$data->status = true;
+									if ($this->modepayement_id == MODEPAYEMENT::PRELEVEMENT_ACOMPTE){
+										$this->avance = 0;
+									}
+									if ($this->modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE){
+
+										if ($this->montant > intval($this->avance)) {
+											$fournisseur->dette($this->montant - intval($this->avance));
+										}
+
+										$payement = new REGLEMENTFOURNISSEURCHANTIER();
+										$payement->cloner($this);
+										$payement->id = null;
+										$payement->montant = $this->avance;
+										$payement->comment = "Réglement de la facture pour la location N°".$this->reference;
+										$data = $payement->enregistre();
+										if ($data->status) {
+											$fournisseur->actualise();
+											$payement->acompteClient = $fournisseur->acompte;
+											$payement->detteClient = $fournisseur->resteAPayer();
+											$payement->save();
+										}
+									}
+									if ($data->status) {
+										$this->chantier_id = getSession("chantier_connecte_id");
+										$this->employe_id = getSession("employe_connecte_id");
+										$this->reference = "LOC/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
+										$data = $this->save();
+										if ($data->status && $this->modepayement_id != MODEPAYEMENT::PRELEVEMENT_ACOMPTE) {
+											$payement->location_id = $this->id;
+											$data = $payement->save();
+										}
+									}
+
+								}else{
+									$data->status = false;
+									$data->message = "Le montant de l'avance pour cette location est incorrecte, veuillez recommencer !";
+								}
+							}else{
+								$data->status = false;
+								$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer 2 !!";
+							}
 						}else{
 							$data->status = false;
-							$data->message = "Veuillez renseigner le montant de la location ";
+							$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer 1 !!";
 						}
 					}else{
 						$data->status = false;
-						$data->message = "Veuillez renseigner tous les champs pour valider la livraison !";
+						$data->message = "Le montant de l'avance ne doit pas être plus élévé que le montant de la location !";
 					}
 				}else{
 					$data->status = false;
-					$data->message = "veuillez selectionner un véhicule pour la livraison!";
+					$data->message = "Les dates mentionnées pour la location ne sont pas correctes !";
 				}
 			}else{
 				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'enregistrement de la livraison!";
+				$data->message = "Le montant de la location n'est pas correcte !";
 			}
 		}else{
 			$data->status = false;
-			$data->message = "veuillez indiquer la destination précise de la livraison *!";
+			$data->message = "veuillez indiquer le nom de l'engin à louer !";
 		}
 		return $data;
 	}
 
 
 
-	//les livraions programmées du jour
-	public static function programmee(String $date){
-		$array1 = static::findBy(["DATE(datelivraison) ="=>$date]);
-		$array2 = static::findBy(["etat_id ="=>ETAT::ENCOURS]);
-		return array_merge($array1, $array2);
+	public function reste(){
+		if ($this->etat_id != ETAT::ANNULEE) {
+			return $this->montant - comptage($this->fourni("reglementfournisseurchantier"), "montant", "somme");
+		}
+		return 0;
 	}
 
-
-	//les livraions effectuéez du jour
-	public static function effectuee(String $date){
-		return static::findBy(["DATE(datelivraison) ="=>$date, "etat_id ="=>ETAT::VALIDEE]);
-	}
 
 
 	// Supprimer toutes les livraisons programmée qui n'ont pu etre effectuée...

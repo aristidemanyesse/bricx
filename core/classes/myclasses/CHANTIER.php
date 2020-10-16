@@ -119,7 +119,7 @@ class CHANTIER extends TABLE
 
 
 	public function tachesEncours(){
-		return $this->fourni("tache", ["etatchantier_id = "=> ETATCHANTIER::ENCOURS], [], ["rang"=>"ASC"]);
+		return $this->fourni("tache", ["etatchantier_id = "=> ETATCHANTIER::ENCOURS]);
 	}
 
 

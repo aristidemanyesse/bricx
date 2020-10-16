@@ -93,15 +93,15 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonapprovisonnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonachatressource", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
-                                                                <button data-toggle="modal" data-target="#modal-reglerAppro<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
+                                                                <button data-toggle="modal" data-target="#modal-reglerAchatRessource<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>
                                                 <?php foreach ($encours2 as $key => $appro) {
-                                                    include($this->rootPath("composants/assets/modals/modal-reglerApproEmballage.php"));
+                                                    include($this->rootPath("composants/assets/modals/modal-reglerAchatProduit.php"));
                                                     $appro->actualise();
                                                     $lots = $appro->fourni("ligneapprochantierproduit"); ?>
                                                     <tr style="border-bottom: 2px solid black">
@@ -143,15 +143,15 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonapproproduit", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonachatbrique", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
-                                                                <button data-toggle="modal" data-target="#modal-reglerApproEmballage<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
+                                                                <button data-toggle="modal" data-target="#modal-reglerAchatProduit<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>
                                                 <?php foreach ($encours3 as $key => $appro) {
-                                                    include($this->rootPath("composants/assets/modals/modal-reglerApproEtiquette.php"));
+                                                    include($this->rootPath("composants/assets/modals/modal-reglerAchatMateriel.php"));
                                                     $appro->actualise();
                                                     $lots = $appro->fourni("ligneapprochantiermateriel"); ?>
                                                     <tr style="border-bottom: 2px solid black">
@@ -193,9 +193,9 @@
                                                             </table>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= $this->url("fiches", "master", "bonappromateriel", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                                            <a href="<?= $this->url("fiches", "master", "bonachatmateriel", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
-                                                                <button data-toggle="modal" data-target="#modal-reglerApproEtiquette<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
+                                                                <button data-toggle="modal" data-target="#modal-reglerAchatMateriel<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
@@ -204,7 +204,7 @@
 
                                                 <tr />
                                                 <?php foreach ($datas1 as $key => $appro) {
-                                                    include($this->rootPath("composants/assets/modals/modal-reglerAppro.php"));
+                                                    include($this->rootPath("composants/assets/modals/modal-reglerAchatRessource.php"));
                                                     $appro->actualise();
                                                     $lots = $appro->fourni("ligneapprochantierressource"); ?>
                                                     <tr style="border-bottom: 2px solid black">
@@ -248,13 +248,13 @@
                                                         <td>
                                                             <a href="<?= $this->url("fiches", "master", "bonapprovisonnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
-                                                                <button data-toggle="modal" data-target="#modal-reglerAppro<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
+                                                                <button data-toggle="modal" data-target="#modal-reglerAchatRessource<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>
                                                 <?php foreach ($datas2 as $key => $appro) {
-                                                    include($this->rootPath("composants/assets/modals/modal-reglerApproEmballage.php"));
+                                                    include($this->rootPath("composants/assets/modals/modal-reglerAchatProduit.php"));
                                                     $appro->actualise();
                                                     $lots = $appro->fourni("ligneapprochantierproduit"); ?>
                                                     <tr style="border-bottom: 2px solid black">
@@ -298,13 +298,13 @@
                                                         <td>
                                                             <a href="<?= $this->url("fiches", "master", "bonapproproduit", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
-                                                                <button data-toggle="modal" data-target="#modal-reglerApproEmballage<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
+                                                                <button data-toggle="modal" data-target="#modal-reglerAchatProduit<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>
                                                 <?php foreach ($datas3 as $key => $appro) {
-                                                    include($this->rootPath("composants/assets/modals/modal-reglerApproEtiquette.php"));
+                                                    include($this->rootPath("composants/assets/modals/modal-reglerAchatMateriel.php"));
                                                     $appro->actualise();
                                                     $lots = $appro->fourni("ligneapprochantiermateriel"); ?>
                                                     <tr style="border-bottom: 2px solid black">
@@ -348,12 +348,11 @@
                                                         <td>
                                                             <a href="<?= $this->url("fiches", "master", "bonappromateriel", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                                             <?php if ($appro->reste() > 0) { ?>
-                                                                <button data-toggle="modal" data-target="#modal-reglerApproEtiquette<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
+                                                                <button data-toggle="modal" data-target="#modal-reglerAchatMateriel<?= $appro->id  ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i> Payer</button>
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>
-
 
                                             </tbody>
                                             <tfoot>
@@ -481,7 +480,6 @@
 
 
 <?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
-<script type="text/javascript" src="<?= $this->relativePath("../../production/approvisionnements/script.js") ?>"></script>
 
 
 </body>

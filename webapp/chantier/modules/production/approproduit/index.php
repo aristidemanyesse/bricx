@@ -16,17 +16,17 @@
 
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-9">
-                <h2 class="text-uppercase text-warning gras">Les approvisionnements en cours</h2>
+                <h2 class="text-uppercase text-warning gras">Les achats de briques en cours</h2>
             </div>
             <div class="col-sm-3">
-                <button style="margin-top: 5%" data-toggle='modal' data-target="#modal-approvisionnement" class="btn btn-warning dim"><i class="fa fa-plus"></i> Appro de produits</button>
+                <button style="margin-top: 5%" data-toggle='modal' data-target="#modal-achatbrique" class="btn btn-warning dim"><i class="fa fa-plus"></i> Achat de briques</button>
             </div>
         </div>
 
         <div class="wrapper wrapper-content">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Tous les approvisionnements</h5>
+                    <h5>Tous les achats de briques</h5>
                     <div class="ibox-tools">
                         <form id="formFiltrer" method="POST">
                             <div class="row" style="margin-top: -1%">
@@ -52,12 +52,11 @@
 
                                     <th data-toggle="true">Status</th>
                                     <th>Reference</th>
-                                    <th>Entrepôt</th>
-                                    <th>Enregistré par</th>
                                     <th>Montant</th>
                                     <th>Reste à payer</th>
                                     <th>Fournisseur</th>
                                     <th data-hide="all"></th>
+                                    <th>Enregistré par</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -74,10 +73,6 @@
                                             <span class="text-uppercase gras">Appro N°<?= $appro->reference ?></span><br>
                                             <small><?= depuis($appro->created) ?></small>
                                         </td>
-                                        <td>
-                                            <h6 class="text-uppercase text-muted gras" style="margin: 0"><?= $appro->chantier->name() ?></h6>
-                                        </td>
-                                        <td><i class="fa fa-user"></i> <?= $appro->employe->name() ?></td>
                                         <td>
                                             <h4>
                                                 <span class="gras text-orange"><?= money($appro->montant) ?> <?= $params->devise  ?></span>
@@ -108,8 +103,9 @@
                                                 </tbody>  
                                             </table>
                                         </td>
+                                        <td><i class="fa fa-user"></i> <?= $appro->employe->name() ?></td>
                                         <td>
-                                            <a href="<?= $this->url("fiches", "master", "bonapprovisionnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                            <a href="<?= $this->url("fiches", "master", "bonachatbrique", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
                                             <?php if ($appro->etat_id == Home\ETAT::ENCOURS) { ?>
                                                 <button onclick="terminer(<?= $appro->id ?>)" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Valider</button>
                                             <?php } ?>
@@ -133,10 +129,6 @@
                                             <small><?= depuis($appro->created) ?></small>
                                         </td>
                                         <td>
-                                            <h6 class="text-uppercase text-muted gras" style="margin: 0"><?= $appro->chantier->name() ?></h6>
-                                        </td>
-                                        <td><i class="fa fa-user"></i> <?= $appro->fournisseurchantier->name() ?></td>
-                                        <td>
                                             <h4>
                                                 <span class="gras text-orange"><?= money($appro->montant) ?> <?= $params->devise  ?></span>
                                             </h4>
@@ -166,8 +158,9 @@
                                                 </tbody>  
                                             </table>
                                         </td>
+                                        <td><i class="fa fa-user"></i> <?= $appro->fournisseurchantier->name() ?></td>
                                         <td>
-                                            <a href="<?= $this->url("fiches", "master", "bonapprovisionnement", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
+                                            <a href="<?= $this->url("fiches", "master", "bonachatbrique", $appro->id) ?>" target="_blank" class="btn btn-white btn-sm"><i class="fa fa-file-text text-blue"></i></a>
 
                                             <?php if ($employe->isAutoriser("modifier-supprimer") && $appro->etat_id != Home\ETAT::ANNULEE) { ?>
                                                 <button onclick="annuler('approproduit', <?= $appro->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-trash text-red"></i></button>
@@ -196,7 +189,7 @@
 
 
         <?php include($this->rootPath("webapp/chantier/elements/templates/footer.php")); ?>
-        <?php include($this->rootPath("composants/assets/modals/modal-approvisionnement1.php")); ?> 
+        <?php include($this->rootPath("composants/assets/modals/modal-achatbrique.php")); ?> 
 
 
 
@@ -211,7 +204,6 @@
 
 
 <?php include($this->rootPath("webapp/chantier/elements/templates/script.php")); ?>
-<script type="text/javascript" src="<?= $this->relativePath("../client/script.js") ?>"></script>
 
 
 </body>

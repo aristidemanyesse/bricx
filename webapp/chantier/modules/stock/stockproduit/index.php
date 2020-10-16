@@ -28,7 +28,7 @@
                                 <div class="p-xs">
                                     <i class="fa fa-cube fa-2x text-dark"></i>
                                     <h5 class="m-xs gras <?= ($stock > $params->ruptureStock)?"":"clignote" ?>"><?= round($stock, 2) ?> unités</h5>
-                                    <h6 class="no-margins text-uppercase gras <?= ($stock > $params->ruptureStock)?"":"clignote" ?>"><?= $produit->name() ?> </h6>
+                                    <h6 class="no-margins text-uppercase gras"><?= $produit->name() ?> </h6>
                                 </div>
                             </div>
                         <?php } ?>
@@ -80,7 +80,7 @@
                                                 $production = $produit->production($index, $index, $chantier->id);
                                                 $depot = $produit->depot($index, $index, $chantier->id);
                                                 $achat = $produit->achat($index, $index, $chantier->id);
-                                                $use = $produit->achat($index, $index, $chantier->id);
+                                                $use = $produit->useproduit($index, $index, $chantier->id);
                                                 $perte = $produit->perteAutre($index, $index, $chantier->id);
                                                 ?>
                                                 <td class="cursor myPopover text-center"
@@ -90,14 +90,14 @@
                                                 data-trigger="hover"
                                                 data-html="true"
                                                 data-content="
-                                                <span>quantité produite : <b><?= round($production, 2) ?> </b></span><br>
-                                                <span>quantité déposée : <b><?= round($depot, 2) ?> </b></span><br>
-                                                <span>quantité achetée : <b><?= round($achat, 2) ?> </b></span><br>
-                                                <span>quantité utilisée : <b><?= round($use, 2) ?> </b></span><br>
-                                                <span class='text-red'>Perte du jour: <b><?= round($perte, 2) ?> </b></span>
+                                                <span>quantité produite : <b><?= round($production) ?> </b></span><br>
+                                                <span>quantité déposée : <b><?= round($depot) ?> </b></span><br>
+                                                <span>quantité achetée : <b><?= round($achat) ?> </b></span><br>
+                                                <span>quantité utilisée : <b><?= round($use) ?> </b></span><br>
+                                                <span class='text-red'>Perte du jour: <b><?= round($perte) ?> </b></span>
                                                 <hr style='margin:1.5%'>
-                                                <span>En stock à ce jour : <b><?= round($stock, 2) ?> </b></span><br> <span>">
-                                                    <?= round($stock, 2) ?> 
+                                                <span>En stock à ce jour : <b><?= round($stock) ?> </b></span><br> <span>">
+                                                    <?= round($stock) ?> 
                                                 </td>
                                             <?php } ?>
                                         </tr>
