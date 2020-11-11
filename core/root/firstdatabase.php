@@ -2,12 +2,11 @@
 namespace Home;
 
 
-$item = new AGENCE();
-$item->name = "Agence principale";
-$item->comptebanque_id = COMPTEBANQUE::COURANT;
-$item->setProtected(1);
-$item->enregistre();
-
+// $item = new AGENCE();
+// $item->name = "Agence principale";
+// $item->comptebanque_id = COMPTEBANQUE::COURANT;
+// $item->setProtected(1);
+// $item->enregistre();
 
 
 $datas = ["Entrée de caisse", "Sortie de caisse"];
@@ -38,7 +37,6 @@ foreach ($datas as $key => $value) {
 }
 
 
-
 $datas = ["Sable", "Ciment", "Terre", "Gravier"];
 foreach ($datas as $key => $value) {
 	$item = new RESSOURCE();
@@ -60,15 +58,14 @@ foreach ($datas as $key => $value) {
 }
 
 
+// $datas = ["Entreprise", "Particulier", "Personnel"];
+// foreach ($datas as $key => $value) {
+// 	$item = new TYPECLIENT();
+// 	$item->name = $value;
+// 	$item->setProtected(1);
+// 	$item->save();
+// }
 
-
-$datas = ["Entreprise", "Particulier", "Personnel"];
-foreach ($datas as $key => $value) {
-	$item = new TYPECLIENT();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
 
 $item = new SEXE();
 $item->name = "Homme";
@@ -241,76 +238,76 @@ $item->save();
 
 
 
-$item = new CATEGORIEOPERATION();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+// $item->name = "Retour de fonds par le fournisseur";
+// $item->setProtected(1);
+// $item->save();
+
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+// $item->name = "Autre entrée en caisse";
+// $item->setProtected(1);
+// $item->save();
+
+
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Frais de Transport";
+// $item->setProtected(1);
+// $item->save();
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Main d'oeuvre de production";
+// $item->setProtected(1);
+// $item->save();
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Paye du loyer des locaux";
+// $item->setProtected(1);
+// $item->save();
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Réglement de facture CIE / SODECI";
+// $item->setProtected(1);
+// $item->save();
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Retour de fonds au client";
+// $item->setProtected(1);
+// $item->save();
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Réglement d'autres factures";
+// $item->setProtected(1);
+// $item->save();
+
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Autre dépense";
+// $item->setProtected(1);
+// $item->save();
+
+
+
+
+
+
+$item = new CATEGORIEOPERATIONCHANTIER();
 $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
 $item->name = "Retour de fonds par le fournisseur";
 $item->setProtected(1);
 $item->save();
 
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-$item->name = "Autre entrée en caisse";
-$item->setProtected(1);
-$item->save();
-
-
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Frais de Transport";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Main d'oeuvre de production";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Paye du loyer des locaux";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Réglement de facture CIE / SODECI";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Retour de fonds au client";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Réglement d'autres factures";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Autre dépense";
-$item->setProtected(1);
-$item->save();
-
-
-
-
-
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-$item->name = "Retour de fonds par le fournisseur";
-$item->setProtected(1);
-$item->save();
-
-
-$item = new CATEGORIEOPERATION();
+$item = new CATEGORIEOPERATIONCHANTIER();
 $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
 $item->name = "Autre entrée en caisse";
 $item->setProtected(1);

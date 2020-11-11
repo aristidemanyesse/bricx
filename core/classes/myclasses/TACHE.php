@@ -25,7 +25,9 @@ class TACHE extends TABLE
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->name != "") {
-			$this->chantier_id = getSession("chantier_connecte_id");
+			if (is_null($this->chantier_id)) {
+				$this->chantier_id = getSession("chantier_connecte_id");
+			}
 			$data = $this->save();
 		}else{
 			$data->status = false;

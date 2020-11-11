@@ -52,12 +52,38 @@
 
                         <?php foreach ($chantiers as $key => $item) {
                             $item->actualise();
-                            $chantier = $item->chantier; ?>
+                            $chantier = $item->chantier;
+                            $images = $chantier->fourni("imagechantier", [], [], ["created"=>"DESC"], 3); ?>
                             <div class="col-sm-6 col-md-4">
                                 <div class="ibox">
                                     <div class="ibox-content product-box">
-                                        <div class="product-imitation">
-                                            [ image chantier ]
+                                        <div class="">
+                                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                                    <?php for ($i=1; $i < count($images) ; $i++) { ?>
+                                                        <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>"></li>
+                                                    <?php } ?>
+                                                </ol>
+                                                <div class="carousel-inner">
+                                                    <?php foreach ($images as $key => $image) { ?>
+                                                        <div class="carousel-item">
+                                                            <img class="d-block w-100 img-thumbnail" style="height: 200px" src="<?= $this->stockage("images", "imageschantiers", $image->image) ?>" alt="<?= $image->name() ?>">
+                                                            <div class="carousel-caption d-none d-md-block">
+                                                                <p><?= $image->name() ?></p>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="product-desc">
                                             <small class="text-muted">Autorisation N°<?= $chantier->autorisation ?></small>

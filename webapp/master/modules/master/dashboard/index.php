@@ -105,7 +105,7 @@
 
                             <div class="row justify-content-center">
 
-                                <?php if ($employe->isAutoriser("chantier") && $employe->agence_id != null) { ?>
+                                <?php if ($employe->isAutoriser("chantier")) { ?>
                                     <div class="col-lg-3">
                                         <a href="<?= $this->url("chantier", "master", "chantiers")  ?>">
                                             <div class="ibox">
